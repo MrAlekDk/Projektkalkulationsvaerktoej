@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<header class="header">
+    <img class="image" src="images/Logo2.png">
+    <nav class="nav-bar">
+        <ul class="ul1">
+            <li class="li"><a th:href="@{/}">Startside</a></li>
+            <li class="li"><a th:href="@{/projekt-form}">Nyt projekt</a></li>
+            <li class="li"><a th:href="@{/create-user}">Liste af projekter</a></li>
+        </ul>
+    </nav>
+</header>
 </html>

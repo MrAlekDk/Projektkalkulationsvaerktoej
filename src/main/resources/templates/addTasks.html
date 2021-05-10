@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head.html(currentPage='Add tasks',stylesheet='styles/opretprojekt.css')"></head>
+<body>
+<header th:replace="fragments/header.html"></header>
+
+<h1>Hej</h1>
+<section class="wishlist">
+    <form action="/create-tasks" method="post" class="submitField">
+    <ul class="tasks">
+        <li th:each="task : ${tasks}" >
+            <p th:text="|Task: ${task}|"></p>
+
+            <label for="task-name" >Task-titel</label><br>
+            <input type="text" id="task-name" name="task" placeholder="Navn på task" required><br>
+
+
+        </li>
+    </ul>
+        <button>Opret tasks</button>
+    </form>
+
+</section>
+
+</body>
+</html>

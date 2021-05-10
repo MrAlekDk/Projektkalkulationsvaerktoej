@@ -1,0 +1,69 @@
+html {
+    scroll-behavior: smooth;
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.welcome-box{
+    background-color: rgb(62, 127, 165);
+    width:70%;
+    height: 700px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+h1{
+    display: flex;
+    justify-self: flex-end;
+    align-self: center;
+    font-family: "Malgun Gothic";
+    font-size: 75px;
+    font-weight: bold;
+    color:white;
+    padding-left: 80px;
+}
+
+.nav-bar {
+    display: flex;
+    align-self: flex-end;
+}
+
+.nav-bar li {
+    list-style: none;
+}
+
+.nav-bar a {
+    font-family: "Malgun Gothic";
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+    text-decoration-line: none;
+}
+
+.nav-bar ul{
+    display: flex;
+    justify-content: space-around;
+}
+.nav-bar li{
+    display: flex;
+    justify-content: flex-end;
+    opacity: 85%;
+    list-style-type: none;
+    border-radius: 5px;
+    margin-right: 30px;
+    height: 100%;
+}
+
+.image {
+    display: flex;
+    justify-self: start;
+    height: 91.57px;
+    width: 252.42px;
+
+}

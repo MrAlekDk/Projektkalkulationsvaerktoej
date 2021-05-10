@@ -22,6 +22,11 @@ public class Project {
         this.Tasks = tasks;
     }
 
+    public Project(String name, String desc, Date deadline) {
+        this.name = name;
+        this.desc = desc;
+        this.deadline = deadline;
+    }
     // ----------------------------|| Getters ||---------------------------- //
 
     public String getName() {

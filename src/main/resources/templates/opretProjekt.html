@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head.html(currentPage='Opret projekt',stylesheet='styles/opretprojekt.css')"></head>
+<body>
+<header th:replace="fragments/header.html"></header>
+
+<section class="create-a-project">
+    <form action="/opretProjekt" method="post" class="submitField">
+        <label for="projectName" >Projekt-titel</label><br>
+        <input type="text" id="projectName" name="projectName" placeholder="Navn på projektet" required><br>
+
+        <label for="project-description" >Beskrivelse</label><br>
+        <input type="text" id="project-description" name="project-description" placeholder="Beskrivelse af projekt" required><br>
+
+        <label for="deadline">Dato for projektets deadline</label><br>
+        <input type="date" id="deadline" name="deadline" required><br>
+
+        <label for="nr-of-tasks">Antal opgaver</label><br>
+        <input type="number" id="nr-of-tasks" name="nr-of-tasks" required><br>
+
+        <button>Opret nyt projekt</button>
+    </form>
+</section>
+
+
+</body>
+</html>
