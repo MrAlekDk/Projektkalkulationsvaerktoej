@@ -1,7 +1,7 @@
 package com.example.webapp.repository;
 
-import com.example.webapp.models.Task;
-import com.example.webapp.models.Worker;
+
+import com.example.webapp.models.Project;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -9,12 +9,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
-public class ProjectRep {
-
+public class ProjectRep{
     private String url;
     private String user;
     private String password;
@@ -31,19 +29,16 @@ public class ProjectRep {
         }
     }
 
-    public void createProject(String projectTitle, String desc, Date deadline, int worker_ID, int nrOfParticipants, int nrOfHours, int task_ID){
+    public void createProject(Project newProject){
         try {
             Connection conn = DriverManager.getConnection(url,user,password);
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Project (Title,Desc,Deadline,Worker_ID, NrOfParticipants, NrOfHours, Task_ID) VALUES (?,?,?,?,?,?,?,?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Project (Title,Narrative,Deadline,Price ) VALUES (?,?,?,?)");
 
-            pstmt.setString(1, projectTitle);
-            pstmt.setString(2, desc);
-            pstmt.setDate(3, (java.sql.Date) deadline);
-            pstmt.setInt(4, worker_ID);
-            pstmt.setInt(5, nrOfParticipants);
-            pstmt.setInt(6, nrOfHours);
-            pstmt.setInt(7, task_ID);
-            pstmt.executeUpdate();
+            stmt.setString(1, newProject.getName());
+            stmt.setString(2, newProject.getDesc());
+            stmt.setDate(3, (java.sql.Date) newProject.getDeadline());
+            stmt.setDouble(4, newProject.getProjectPrice());
+            stmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());

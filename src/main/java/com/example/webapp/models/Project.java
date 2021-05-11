@@ -11,6 +11,7 @@ public class Project {
     private int nrOfParticipants;
     private int nrOfHours;
     private ArrayList<Task> tasks = new ArrayList<>();
+    private double projectPrice;
 
     public Project(String name, String desc, Date deadline, ArrayList<Worker> participants, int nrOfParticipants, int nrOfHours, ArrayList<Task> tasks){
         this.title = name;
@@ -53,9 +54,14 @@ public class Project {
         return nrOfHours;
     }
 
+    public double getProjectPrice(){
+        return this.projectPrice;
+    }
+
     public ArrayList<Task> getTasks() {
         return tasks;
     }
+
 
     // ----------------------------|| Setters ||---------------------------- //
 
@@ -87,11 +93,15 @@ public class Project {
         tasks = tasks;
     }
 
-    public void addTask(Task newTask) {
+    public void setProjectPrice(double price){
+        this.projectPrice=price;
+    }
+
+    public void setTask(Task newTask) {
         this.tasks.add(newTask);
     }
 
-    public void addSubtask(SubTask newSubTask,String taskName) {
+    public void setSubtask(SubTask newSubTask, String taskName) {
 
         for (int i = 0; i < tasks.size(); i++) {
             if(tasks.get(i).getName().equals(taskName)){

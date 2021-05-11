@@ -1,4 +1,4 @@
-package com.example.webapp.Services;
+package com.example.webapp.services;
 
 import com.example.webapp.models.Project;
 import com.example.webapp.models.Task;
@@ -13,17 +13,21 @@ public class ProjectService {
     private ProjectRep projectRep;
     private TaskRep taskRep;
 
-    public void makeProject(int project_ID, String title, String desc, Date deadline, int worker_ID, int nrOfParticipants, int nrOfHours, int task_ID){
-        projectRep.createProject(title, desc, deadline, worker_ID, nrOfParticipants, nrOfHours, task_ID);
-         //osv...
-    };
+    public void makeProject(Project newProject){
+        double projectPrice=calculateProjectPrice(newProject);
+        newProject.setProjectPrice(projectPrice);
+        projectRep.createProject(newProject);
+
+    }
 
     public void makeTask(String title, String desc, int worker_ID, Date startDate, int nrOfHours, Date taskDeadline){
 
     }
 
-    public int calculateProjectPrice(Project project, int project_ID){
+    public int calculateProjectPrice(Project projectToCalculate){
         int hours = taskRep.calculateTime(project_ID);
+
+
         // Ved ikke helt hvordan vi finder ud af hvor mange der er af hver position, måske fra workerRep?
         int nrOfParticipants = project.getNrOfParticipants();
         int salary = 0;
