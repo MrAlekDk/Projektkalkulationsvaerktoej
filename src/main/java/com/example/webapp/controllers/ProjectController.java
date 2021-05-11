@@ -47,12 +47,28 @@ public class ProjectController {
         return "redirect:/renderProject";
     }
 
+    @GetMapping(value="/render-all-projects")
+    public String renderAllProjects(Model model, HttpServletRequest request) {
+
+        ProjectService projSer = new ProjectService();
+
+        model.addAttribute("projectList",projSer.getAllProjectS());
+
+
+        return "allProjectsView.html";
+    }
+
+
     @GetMapping(value = "/renderProject")
     public String renderProject(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        model.addAttribute("project", (Project) session.getAttribute("newProject"));
 
-        Project tmpProject = (Project) session.getAttribute("newProject");
+
+        ProjectService projSer = new ProjectService();
+        Project tmpProject = projSer.getAllProjectS().get(0);
+
+        model.addAttribute("project",tmpProject);
+
         model.addAttribute("tasklist", tmpProject.getTasks());
 
         return "projectview.html";

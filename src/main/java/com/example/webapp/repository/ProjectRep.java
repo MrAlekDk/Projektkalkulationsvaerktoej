@@ -5,10 +5,8 @@ import com.example.webapp.models.Project;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
@@ -52,9 +50,41 @@ public class ProjectRep{
             stmt.setDouble(4, newProject.getProjectPrice());
             stmt.executeUpdate();
 
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
+    public ArrayList<Project> getAllProjects() {
+        ArrayList<Project> allProjects = new ArrayList<Project>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Where is your MySQL JDBC Driver?");
+            e.printStackTrace();
+        }
+
+        try {
+            Connection conn = DriverManager.getConnection(url,user,password);
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Project");
+
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                Project tmp = new Project(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDate(4)
+                );
+                allProjects.add(tmp);
+            }
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return allProjects;
+
+    }
 }

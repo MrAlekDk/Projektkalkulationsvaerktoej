@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Project {
+    private int projectID;
     private String title;
     private String desc;
     private Date deadline;
@@ -28,6 +29,13 @@ public class Project {
         this.desc = desc;
         this.deadline = deadline;
     }
+
+    public Project(int projectID, String name, String desc, Date deadline) {
+        this.projectID=projectID;
+        this.title = name;
+        this.desc = desc;
+        this.deadline = deadline;
+    }
     // ----------------------------|| Getters ||---------------------------- //
 
     public String getName() {
@@ -35,7 +43,8 @@ public class Project {
     }
 
     public String getDesc() {
-        return desc;
+        System.out.println(desc);
+        return this.desc;
     }
 
     public Date getDeadline() {

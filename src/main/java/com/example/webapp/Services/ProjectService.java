@@ -1,8 +1,6 @@
 package com.example.webapp.services;
 
 import com.example.webapp.models.Project;
-import com.example.webapp.models.Task;
-import com.example.webapp.models.Worker;
 import com.example.webapp.repository.ProjectRep;
 import com.example.webapp.repository.TaskRep;
 
@@ -45,4 +43,7 @@ public class ProjectService {
         return 1;
     }
 
+    public ArrayList<Project> getAllProjectS() {
+        return projectRep.getAllProjects();
+    }
 }
