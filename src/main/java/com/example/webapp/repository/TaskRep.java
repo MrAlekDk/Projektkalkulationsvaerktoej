@@ -46,9 +46,8 @@ public class TaskRep {
         int totalNrOfHours = 0;
         try {
             Connection conn = DriverManager.getConnection(url,user,password);
-            PreparedStatement pstmt = (PreparedStatement) conn.createStatement();
-            ResultSet rs = pstmt.executeQuery("SELECT SUM(NrOfHours) AS HoursForProject FROM TaskTable WHERE Project_ID=?");
-
+            PreparedStatement pstmt = conn.prepareStatement("SELECT SUM(NrOfHours) AS HoursForProject FROM TaskTable WHERE Project_ID=?");
+            ResultSet rs = pstmt.executeQuery();
             pstmt.setInt(1, project_ID);
             pstmt.executeUpdate();
 

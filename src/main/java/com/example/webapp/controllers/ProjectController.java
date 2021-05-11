@@ -1,7 +1,7 @@
 package com.example.webapp.controllers;
 
 import com.example.webapp.models.Project;
-import com.example.webapp.services.ProjectService;
+import com.example.webapp.Services.ProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

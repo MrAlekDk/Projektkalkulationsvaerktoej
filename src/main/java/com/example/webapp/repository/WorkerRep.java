@@ -30,7 +30,7 @@ public class WorkerRep {
 
         try {
             Connection conn = DriverManager.getConnection(url,user,password);
-            PreparedStatement pstmt = conn.prepareStatement("SELECT Worker (Position,HourlyRate) VALUES (?,?)");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT Worker (Position,HourlyRate) WHERE Position=? & HourlyRate=?)");
             ResultSet rs = pstmt.executeQuery();
 
             pstmt.executeUpdate();

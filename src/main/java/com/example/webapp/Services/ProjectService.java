@@ -1,4 +1,4 @@
-package com.example.webapp.services;
+package com.example.webapp.Services;
 
 import com.example.webapp.models.Project;
 import com.example.webapp.repository.ProjectRep;

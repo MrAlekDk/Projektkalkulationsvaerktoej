@@ -31,15 +31,15 @@ public class SubTaskRep {
         }
     }
 
-    public void createSubTask(int Subtask_ID, String title, String desc, int worker_ID, Date subtaskStart, int duration, Date subtaskEnd){
+    public void createSubTask(int Subtask_ID, String title, String desc, int task_ID, Date subtaskStart, int duration, Date subtaskEnd){
         try {
             Connection conn = DriverManager.getConnection(url,user,password);
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO SubTask (SubtaskID, Title, Desc, Worker_ID, SubtaskStart, Duration, SubtaskEnd) VALUES (?,?,?,?,?,?,?)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO SubTask (SubtaskID, Title, Desc, Task_ID, SubtaskStart, Duration, SubtaskEnd) VALUES (?,?,?,?,?,?,?)");
 
             pstmt.setInt(1, Subtask_ID);
             pstmt.setString(2, title);
             pstmt.setString(3, desc);
-            pstmt.setInt(4, worker_ID);
+            pstmt.setInt(4, task_ID);
             pstmt.setDate(5, (java.sql.Date) subtaskStart);
             pstmt.setInt(6, duration);
             pstmt.setDate(7,(java.sql.Date) subtaskEnd);

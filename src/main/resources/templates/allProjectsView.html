@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="fragments/head.html(currentPage='Index',stylesheet='styles/standardstyle.css')"></head>
+<head th:replace="fragments/head.html(currentPage='Index',stylesheet='styles/projektliststyles.css')"></head>
 <body>
 <header th:replace="fragments/header.html"></header>
 
-<ul th:each="project : ${projectList}" class="task">
-
-    <li th:text="|Projekt navn: ${project.getName()}|"></li>
-    <li th:text="|Beskrivelse: ${project.getDesc()}|"></li>
-    <li th:text="|Deadline: ${project.getDeadline()}|"></li>
-    <li th:text="|Pris: ${project.getProjectPrice()}|"></li>
+<section class="projectlist">
+<ul th:each="project : ${projectList}">
+<li class="line">
+    <h2 th:text="|Projekt navn: ${project.getName()}|"></h2>
+    <p th:text="|Beskrivelse: ${project.getDesc()}|"></p>
+    <p th:text="|Deadline: ${project.getDeadline()}|"></p>
+    <p th:text="|Pris: ${project.getProjectPrice()}|"></p>
+    </li>
 </ul>
-
+</section>
 </body>
 </html>
