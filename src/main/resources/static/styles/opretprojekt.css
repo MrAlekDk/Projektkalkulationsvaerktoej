@@ -1,7 +1,44 @@
 .create-a-project{
-
+    background-color: rgba(63,148,165,0.51);
+    display: flex;
+    flex-direction: row;
 }
 
 .submitField{
 
+}
+
+label{
+    font-family: "Malgun Gothic";
+    font-size: 40px;
+    font-weight: bold;
+    color:white;
+    padding-left: 20px;
+}
+
+::placeholder{
+    margin-top: 0;
+    font-family: "Malgun Gothic";
+}
+
+input{
+    margin-left:20px;
+    margin-top: 20px;
+    margin-bottom:20px;
+}
+
+.description{
+    justify-self: start;
+    display: inline-block;
+    border: solid 1px black;
+    min-width: 50px;
+    max-width: 200px;
+}
+
+.create-project-button{
+    justify-self: center;
+    align-self: center;
+    font-family: "Malgun Gothic";
+    font-size: 40px;
+    font-weight: bold;
 }

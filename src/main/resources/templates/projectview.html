@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head.html(currentPage='Opret projekt',stylesheet='styles/projectstyle.css')"></head>
+<body>
+<header th:replace="fragments/header.html"></header>
+
+<section class="project-overview">
+    <h2>Project information:</h2>
+    <div class="element">
+        <h3>Name of project:</h3>
+        <p th:text="${project.getName()}"></p>
+        <h3>Projektets deadline:</h3>
+    <p th:text="${project.getDeadline()}"></p>
+        </div>
+        <h3>Project description</h3>
+        <p th:text="${project.getDesc()}"></p>
+</section>
+<section class="task-overview">
+    <h3>List of tasks for the project</h3>
+    <ul th:each="task : ${tasklist}" class="wish">
+        <li data-icon="">
+            <h3 th:text="|${task.getName()}|"></h3>
+            <h3 th:text="|${task.getDesc()}|"></h3>
+        </li>
+
+    </ul>
+</section>
+
+
+<form action="/render-task-form" class="inline">
+    <button>Add new task to project</button>
+</form>
+
+</body>
+</html>

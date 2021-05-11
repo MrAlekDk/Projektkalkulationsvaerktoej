@@ -19,6 +19,11 @@ public class Task {
         this.taskDeadline = taskDeadline;
     }
 
+    public Task(String taskName, String taskDesc) {
+        this.name=taskName;
+        this.desc=taskDesc;
+    }
+
     // ----------------------------|| Getters ||---------------------------- //
 
     public String getName() {

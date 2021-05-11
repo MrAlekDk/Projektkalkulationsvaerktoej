@@ -10,15 +10,12 @@
         <input type="text" id="projectName" name="projectName" placeholder="Navn på projektet" required><br>
 
         <label for="project-description" >Beskrivelse</label><br>
-        <input type="text" id="project-description" name="project-description" placeholder="Beskrivelse af projekt" required><br>
+        <input class="description" type="text" id="project-description" name="project-description" placeholder="Beskrivelse af projekt" required><br>
 
         <label for="deadline">Dato for projektets deadline</label><br>
-        <input type="date" id="deadline" name="deadline" required><br>
+        <input type="datetime-local" id="deadline" name="deadline" required><br>
 
-        <label for="nr-of-tasks">Antal opgaver</label><br>
-        <input type="number" id="nr-of-tasks" name="nr-of-tasks" required><br>
-
-        <button>Opret nyt projekt</button>
+        <button class="create-project-button">Opret nyt projekt</button>
     </form>
 </section>
 

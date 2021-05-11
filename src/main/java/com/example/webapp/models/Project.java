@@ -10,7 +10,7 @@ public class Project {
     private ArrayList<Worker> participants;
     private int nrOfParticipants;
     private int nrOfHours;
-    private ArrayList<Task> Tasks;
+    private ArrayList<Task> tasks = new ArrayList<>();
 
     public Project(String name, String desc, Date deadline, ArrayList<Worker> participants, int nrOfParticipants, int nrOfHours, ArrayList<Task> tasks){
         this.name = name;
@@ -19,7 +19,7 @@ public class Project {
         this.participants = participants;
         this.nrOfParticipants = nrOfParticipants;
         this.nrOfHours = nrOfHours;
-        this.Tasks = tasks;
+        this.tasks = tasks;
     }
 
     public Project(String name, String desc, Date deadline) {
@@ -54,7 +54,7 @@ public class Project {
     }
 
     public ArrayList<Task> getTasks() {
-        return Tasks;
+        return tasks;
     }
 
     // ----------------------------|| Setters ||---------------------------- //
@@ -84,6 +84,10 @@ public class Project {
     }
 
     public void setTasks(ArrayList<Task> tasks) {
-        Tasks = tasks;
+        tasks = tasks;
+    }
+
+    public void addTask(Task newTask) {
+        this.tasks.add(newTask);
     }
 }

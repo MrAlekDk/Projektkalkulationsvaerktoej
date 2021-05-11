@@ -1,6 +1,7 @@
 package com.example.webapp.controllers;
 
 import com.example.webapp.models.Project;
+import com.example.webapp.models.Task;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,20 +18,19 @@ import java.util.Date;
 public class Controller {
 
 
-    @GetMapping(value="/")
-    public String index(){
+    @GetMapping(value = "/")
+    public String index() {
         return "index.html";
     }
 
-    @GetMapping(value="/projekt-form")
-    public String renderProjectForm(){
+    @GetMapping(value = "/projekt-form")
+    public String renderProjectForm() {
         return "opretProjekt.html";
     }
 
-    @PostMapping(value="/opretProjekt")
-    public String opretProjekt(@RequestParam("projectName") String projectName, @RequestParam("project-description")String description,
-                               @RequestParam("deadline") String deadline,
-                               @RequestParam("nr-of-tasks") int numberOfTasks, HttpServletRequest request){
+    @PostMapping(value = "/opretProjekt")
+    public String opretProjekt(@RequestParam("projectName") String projectName, @RequestParam("project-description") String description,
+                               @RequestParam("deadline") String deadline, HttpServletRequest request) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date parsed = null;
         try {
@@ -40,33 +40,38 @@ public class Controller {
         }
 
         HttpSession session = request.getSession();
-        Project newProject = new Project(projectName,description,parsed);
-        session.setAttribute("newProject",newProject);
-        session.setAttribute("number-of-tasks",numberOfTasks);
+        Project newProject = new Project(projectName, description, parsed);
+        session.setAttribute("newProject", newProject);
 
-            return "redirect:/render-task-form";
+        return "redirect:/renderProject";
 
     }
 
-    @GetMapping(value="/render-task-form")
-    public String renderTaskForm(Model tasks,HttpServletRequest request){
+    @GetMapping(value = "/renderProject")
+    public String renderProject(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        int[] nrOfTasks = new int[(int) session.getAttribute("number-of-tasks")];
-        for (int i = 0; i < nrOfTasks.length; i++) {
-            nrOfTasks[i] = i+1;
-        }
+        model.addAttribute("project", (Project) session.getAttribute("newProject"));
 
-        tasks.addAttribute("tasks",nrOfTasks);
-        return "addTasks.html";
+        Project tmpProject = (Project) session.getAttribute("newProject");
+        model.addAttribute("tasklist",tmpProject.getTasks());
+
+        return "projectview.html";
     }
 
-   @PostMapping(value="/create-tasks")
-    public String createTasks(@RequestParam("task")String[] names,HttpServletRequest request){
-       HttpSession session = request.getSession();
+    @GetMapping(value = "/render-task-form")
+    public String renderTaskForm() {
+        return "taskForm.html";
+    }
 
-       Project newProj = (Project) session.getAttribute("newProject");
+    @PostMapping(value = "/create-task")
+    public String createTasks(@RequestParam("task-name") String taskName,@RequestParam("task-description") String taskDesc, HttpServletRequest request) {
+        HttpSession session = request.getSession();
 
+        Task newTask = new Task(taskName,taskDesc);
 
-       return "redirect:/";
+        Project newProj = (Project) session.getAttribute("newProject");
+        newProj.addTask(newTask);
+
+        return "redirect:/renderProject";
     }
 }
