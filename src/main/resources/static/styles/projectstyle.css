@@ -1,58 +1,116 @@
+.headline{
+    background-color:rgb(62, 127, 165);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 80%;
+    margin:0 auto;
+    margin-top: 30px;
+}
 
-.project-overview{
+.boxes{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.box-element{
     background-color: rgb(62, 127, 165);
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    width:95%
+    justify-content: center;
+    max-height: 450px;
 }
-
-.element{
-    background-color: rgba(63,148,165,0.51);
+.box-element-tasks{
+    background-color: rgb(62, 127, 165);
     display: flex;
-    width: fit-content;
-    flex-direction: row;
-    border-radius: 10px;
-    border: solid 1px black;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-
+    flex-direction: column;
+    justify-content: center;
 }
 
-h2{
+.project-overview {
+    background-color: rgb(62, 127, 165);
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    margin: 0 auto;
+    width: 95%
+}
+
+h2 {
     display: flex;
     align-self: start;
     font-family: "Malgun Gothic";
     font-size: 60px;
     font-weight: bold;
-    color:white;
+    color: white;
     padding-left: 30px;
 }
 
-h3{
-    background-color: rgba(63,148,165,0.51);
+h3 {
+    background-color: rgb(62, 127, 165);
     display: flex;
     align-self: start;
     font-family: "Malgun Gothic";
     font-size: 35px;
     font-weight: bold;
-    color:white;
+    color: white;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 50px;
 }
 
-p{
+p {
     font-family: "Malgun Gothic";
     font-weight: bold;
     font-size: 20px;
-    color:white;
+    color: #ffffff;
     padding-right: 40px;
     padding-top: 7px;
     align-self: center;
     padding-left: 20px;
 }
 
-.task-overview{
+.task-overview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-self: center;
+    align-items: center;
 
+}
+
+.task{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left:5px;
+    margin-right:5px;
+    border: solid 1px black;
+    border-radius: 10px;
+}
+
+h4{
+    background-color: rgb(62, 127, 165);
+    font-family: "Malgun Gothic";
+    font-size: 35px;
+    font-weight: bold;
+    color: white;
+    margin:0 auto;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 50px;
+    margin-top: 5px;
+}
+
+.add-task-button{
+    align-self: center;
+    margin-bottom: 10px;
+}
+
+.box-element-tasks li{
+    list-style-type: none;
 }
 
