@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head.html(currentPage='Opret projekt',stylesheet='styles/opretprojekt.css')"></head>
+<body>
+<header th:replace="fragments/header.html"></header>
+
+<form action="/create-subtask" method="post" class="submitField">
+    <label for="subtask-name" >Subtask-titel</label><br>
+    <input type="text" id="subtask-name" name="subtask-name" placeholder="Subtask titel" required><br>
+
+    <label for="subtask-description">Task-beskrivelse</label><br>
+    <input type="text" id="subtask-description" name="subtask-description" placeholder="Beskrivelse af subtask" required>
+    <button>Add subtask</button>
+</form>
+
+</body>
+</html>

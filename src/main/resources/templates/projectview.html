@@ -18,10 +18,16 @@
         <h3>List of tasks for the project</h3>
         <ul th:each="task : ${tasklist}" class="task">
             <li>
-                <h4 th:text="|${task.getName()}|">Overskrift</h4>
-                <p th:text="|${task.getDesc()}|">Mindre tekst</p>
+                <h4 th:text="|Task: ${task.getName()}|"></h4>
+                <ul th:each="subtask : ${task.getSubtasks()}" class="task">
+                    <p th:text="|SubTask: ${subtask.getName()}|"></p>
+                    <p th:text="|Beskrivelse: ${subtask.getDesc()}|"></p>
+                </ul>
             </li>
-
+            <form th:action="@{/render-subtask-form}" method="Get">
+                <input type="hidden" name="create-subtask" th:value="${task.getName()}" />
+                <input type="submit" value="Add new subtask to task" class="add-subtask-button" />
+            </form>
         </ul>
         <form action="/render-task-form" class="add-task-button">
             <button>Add new task to project</button>

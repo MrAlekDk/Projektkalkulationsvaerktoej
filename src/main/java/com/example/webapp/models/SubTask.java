@@ -20,6 +20,11 @@ public class SubTask {
         this.end = end;
     }
 
+    public SubTask(String name, String desc){
+        this.name = name;
+        this.desc = desc;
+    }
+
     // ----------------------------|| Getters ||---------------------------- //
 
     public String getName() {
