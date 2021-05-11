@@ -86,9 +86,6 @@ public class Controller {
     @PostMapping(value="create-subtask")
     public String createSubtask(@RequestParam("subtask-name") String subtaskName, @RequestParam("subtask-description") String subtaskDesc,HttpServletRequest request){
         HttpSession session = request.getSession();
-        System.out.println((String)session.getAttribute("task-editing"));
-        System.out.println(subtaskName);
-        System.out.println(subtaskDesc);
 
         SubTask newSubTask = new SubTask(subtaskName, subtaskDesc);
         Project newProj = (Project) session.getAttribute("newProject");
