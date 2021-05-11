@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Project {
-    private String name;
+    private String title;
     private String desc;
     private Date deadline;
     private ArrayList<Worker> participants;
@@ -13,7 +13,7 @@ public class Project {
     private ArrayList<Task> tasks = new ArrayList<>();
 
     public Project(String name, String desc, Date deadline, ArrayList<Worker> participants, int nrOfParticipants, int nrOfHours, ArrayList<Task> tasks){
-        this.name = name;
+        this.title = name;
         this.desc = desc;
         this.deadline = deadline;
         this.participants = participants;
@@ -23,14 +23,14 @@ public class Project {
     }
 
     public Project(String name, String desc, Date deadline) {
-        this.name = name;
+        this.title = name;
         this.desc = desc;
         this.deadline = deadline;
     }
     // ----------------------------|| Getters ||---------------------------- //
 
     public String getName() {
-        return name;
+        return title;
     }
 
     public String getDesc() {
@@ -60,7 +60,7 @@ public class Project {
     // ----------------------------|| Setters ||---------------------------- //
 
     public void setName(String name) {
-        this.name = name;
+        this.title = name;
     }
 
     public void setDesc(String desc) {
