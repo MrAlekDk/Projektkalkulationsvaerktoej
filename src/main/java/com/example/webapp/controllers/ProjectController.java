@@ -1,7 +1,7 @@
 package com.example.webapp.controllers;
 
 import com.example.webapp.models.Project;
-import com.example.webapp.Services.ProjectService;
+import com.example.webapp.services.ProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,12 +60,12 @@ public class ProjectController {
 
 
     @GetMapping(value = "/renderProject")
-    public String renderProject(Model model, HttpServletRequest request) {
+    public String renderProject(@RequestParam("selected-project")int projectID, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
 
 
         ProjectService projSer = new ProjectService();
-        Project tmpProject = projSer.getAllProjectS().get(0);
+        Project tmpProject = projSer.getSpecificProject(projectID);
 
         model.addAttribute("project",tmpProject);
 

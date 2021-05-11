@@ -12,6 +12,10 @@
     <p th:text="|Deadline: ${project.getDeadline()}|"></p>
     <p th:text="|Pris: ${project.getProjectPrice()}|"></p>
     </li>
+    <form th:action="@{/renderProject}" method="Get">
+        <input type="hidden" name="selected-project" th:value="${project.getProjectID()}" />
+        <input type="submit" value="select-project" class="add-subtask-button" />
+    </form>
 </ul>
 </section>
 </body>

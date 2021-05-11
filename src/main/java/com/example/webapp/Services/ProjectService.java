@@ -1,4 +1,4 @@
-package com.example.webapp.Services;
+package com.example.webapp.services;
 
 import com.example.webapp.models.Project;
 import com.example.webapp.repository.ProjectRep;
@@ -45,5 +45,10 @@ public class ProjectService {
 
     public ArrayList<Project> getAllProjectS() {
         return projectRep.getAllProjects();
+    }
+
+    public Project getSpecificProject(int projectID) {
+
+        return projectRep.getSpecificProject(projectID);
     }
 }

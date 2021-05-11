@@ -38,12 +38,15 @@ public class Project {
     }
     // ----------------------------|| Getters ||---------------------------- //
 
+    public int getProjectID(){
+        return this.projectID;
+    }
+
     public String getName() {
         return title;
     }
 
     public String getDesc() {
-        System.out.println(desc);
         return this.desc;
     }
 
