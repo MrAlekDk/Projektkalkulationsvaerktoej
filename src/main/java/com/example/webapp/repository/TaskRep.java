@@ -2,10 +2,7 @@ package com.example.webapp.repository;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Date;
 import java.util.Properties;
 
@@ -37,11 +34,30 @@ public class TaskRep {
             pstmt.setInt(4, worker_ID);
             pstmt.setDate(5, (java.sql.Date) startDate);
             pstmt.setInt(6, nrOfHours);
-            pstmt.setDate(7,(java.sql.Date) taskDeadline);
+            pstmt.setDate(7, (java.sql.Date) taskDeadline);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public int calculateTime(int project_ID){
+        int totalNrOfHours = 0;
+        try {
+            Connection conn = DriverManager.getConnection(url,user,password);
+            PreparedStatement pstmt = (PreparedStatement) conn.createStatement();
+            ResultSet rs = pstmt.executeQuery("SELECT SUM(NrOfHours) AS HoursForProject FROM TaskTable WHERE Project_ID=?");
+
+            pstmt.setInt(1, project_ID);
+            pstmt.executeUpdate();
+
+            while (rs.next()){
+                totalNrOfHours = rs.getInt("HoursForProject");
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return totalNrOfHours;
     }
 }

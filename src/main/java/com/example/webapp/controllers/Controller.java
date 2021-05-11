@@ -45,7 +45,6 @@ public class Controller {
         session.setAttribute("newProject", newProject);
 
         return "redirect:/renderProject";
-
     }
 
     @GetMapping(value = "/renderProject")
