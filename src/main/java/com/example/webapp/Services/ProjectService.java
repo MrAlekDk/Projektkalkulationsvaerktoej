@@ -13,27 +13,29 @@ public class ProjectService {
     private ProjectRep projectRep;
     private TaskRep taskRep;
 
-    public void makeProject(Project newProject){
-        double projectPrice=calculateProjectPrice(newProject);
-        newProject.setProjectPrice(projectPrice);
-        projectRep.createProject(newProject);
+    public ProjectService(){
+        this.projectRep = new ProjectRep();
+    }
 
+    public void makeProject(Project newProject){
+        newProject.setProjectPrice(500.00);
+        projectRep.createProject(newProject);
     }
 
     public void makeTask(String title, String desc, int worker_ID, Date startDate, int nrOfHours, Date taskDeadline){
 
     }
 
-    public int calculateProjectPrice(Project projectToCalculate){
-        int hours = taskRep.calculateTime(project_ID);
+    public double calculateProjectPrice(Project projectToCalculate){
+
+        return 500.00;
+        //int hours = taskRep.calculateTime(project_ID);
 
 
         // Ved ikke helt hvordan vi finder ud af hvor mange der er af hver position, måske fra workerRep?
-        int nrOfParticipants = project.getNrOfParticipants();
-        int salary = 0;
-        int projectPrice = salary * hours * nrOfParticipants;
+       //int projectPrice = salary * hours * nrOfParticipants;
         // Når vi har de forskellige posititions med kan vi bruge projectPrice for hver position og pluse det sammen til projektets totale pris.
-        return projectPrice;
+        //return projectPrice;
     }
 
     public int calculateTimeForProject(Project project, int project_ID){

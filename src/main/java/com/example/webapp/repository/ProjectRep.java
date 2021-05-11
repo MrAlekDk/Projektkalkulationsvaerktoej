@@ -31,12 +31,24 @@ public class ProjectRep{
 
     public void createProject(Project newProject){
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Where is your MySQL JDBC Driver?");
+            e.printStackTrace();
+        }
+
+        try {
             Connection conn = DriverManager.getConnection(url,user,password);
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Project (Title,Narrative,Deadline,Price ) VALUES (?,?,?,?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Project (ProjectName,ProjectNarrative,Deadline,Price ) VALUES (?,?,?,?)");
 
             stmt.setString(1, newProject.getName());
             stmt.setString(2, newProject.getDesc());
-            stmt.setDate(3, (java.sql.Date) newProject.getDeadline());
+
+
+            java.util.Date utilStartDate = newProject.getDeadline();
+            java.sql.Date sqlDeadline = new java.sql.Date(utilStartDate.getTime());
+
+            stmt.setDate(3, sqlDeadline);
             stmt.setDouble(4, newProject.getProjectPrice());
             stmt.executeUpdate();
 
