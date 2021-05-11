@@ -1,6 +1,7 @@
 package com.example.webapp.controllers;
 
 import com.example.webapp.models.Project;
+import com.example.webapp.models.SubTask;
 import com.example.webapp.models.Task;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,7 +54,7 @@ public class Controller {
         model.addAttribute("project", (Project) session.getAttribute("newProject"));
 
         Project tmpProject = (Project) session.getAttribute("newProject");
-        model.addAttribute("tasklist",tmpProject.getTasks());
+        model.addAttribute("tasklist", tmpProject.getTasks());
 
         return "projectview.html";
     }
@@ -64,14 +65,37 @@ public class Controller {
     }
 
     @PostMapping(value = "/create-task")
-    public String createTasks(@RequestParam("task-name") String taskName,@RequestParam("task-description") String taskDesc, HttpServletRequest request) {
+    public String createTasks(@RequestParam("task-name") String taskName, @RequestParam("task-description") String taskDesc, HttpServletRequest request) {
         HttpSession session = request.getSession();
 
-        Task newTask = new Task(taskName,taskDesc);
-
+        Task newTask = new Task(taskName, taskDesc);
         Project newProj = (Project) session.getAttribute("newProject");
         newProj.addTask(newTask);
+        return "redirect:/renderProject";
+    }
+
+    @GetMapping(value = "/render-subtask-form")
+    public String renderSubtaskForm(@RequestParam("create-subtask")String taskName,HttpServletRequest request){
+        System.out.println(taskName);
+        HttpSession session = request.getSession();
+        session.setAttribute("task-editing", taskName);
+
+        return "subtaskForm.html";
+    }
+
+    @PostMapping(value="create-subtask")
+    public String createSubtask(@RequestParam("subtask-name") String subtaskName, @RequestParam("subtask-description") String subtaskDesc,HttpServletRequest request){
+        HttpSession session = request.getSession();
+        System.out.println((String)session.getAttribute("task-editing"));
+        System.out.println(subtaskName);
+        System.out.println(subtaskDesc);
+
+        SubTask newSubTask = new SubTask(subtaskName, subtaskDesc);
+        Project newProj = (Project) session.getAttribute("newProject");
+
+        newProj.addSubtask(newSubTask,(String)session.getAttribute("task-editing"));
 
         return "redirect:/renderProject";
     }
+
 }

@@ -1,5 +1,6 @@
 package com.example.webapp.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Task {
@@ -9,6 +10,7 @@ public class Task {
     private Date startDate;
     private int nrOfHours;
     private Date taskDeadline;
+    private ArrayList<SubTask> subtasks = new ArrayList<SubTask>();
 
     public Task (String name, String desc, Worker participant, Date startDate, int nrOfHours, Date taskDeadline){
         this.name = name;
@@ -74,5 +76,13 @@ public class Task {
 
     public void setTaskDeadline(Date taskDeadline) {
         this.taskDeadline = taskDeadline;
+    }
+
+    public void addSubtask(SubTask newSubtask){
+        this.subtasks.add(newSubtask);
+    }
+
+    public ArrayList<SubTask> getSubtasks(){
+        return this.subtasks;
     }
 }

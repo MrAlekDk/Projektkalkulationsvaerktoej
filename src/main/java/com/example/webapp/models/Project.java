@@ -90,4 +90,15 @@ public class Project {
     public void addTask(Task newTask) {
         this.tasks.add(newTask);
     }
+
+    public void addSubtask(SubTask newSubTask,String taskName) {
+
+        for (int i = 0; i < tasks.size(); i++) {
+            if(tasks.get(i).getName().equals(taskName)){
+                tasks.get(i).addSubtask(newSubTask);
+            }
+        }
+
+
+    }
 }
