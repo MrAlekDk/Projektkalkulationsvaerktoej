@@ -47,9 +47,4 @@ public class ProjectService {
     public Project getSpecificProject(int projectID) {
         return projectRep.getSpecificProject(projectID);
     }
-
-    public Project getSpecificProject(int projectID) {
-
-        return projectRep.getSpecificProject(projectID);
-    }
 }

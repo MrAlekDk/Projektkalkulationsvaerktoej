@@ -1,6 +1,7 @@
 package com.example.webapp.controllers;
 
 import com.example.webapp.models.Project;
+import com.example.webapp.models.Task;
 import com.example.webapp.services.ProjectService;
 import com.example.webapp.services.TaskService;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,7 @@ public class ProjectController {
         return "opretProjekt.html";
     }
 
-    @PostMapping(value = "/opretProjekt")
+    @PostMapping(value = "opretProjekt")
     public String opretProjekt(@RequestParam("projectName") String projectName, @RequestParam("project-description") String description,
                                @RequestParam("deadline") String deadline, HttpServletRequest request) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -40,39 +41,37 @@ public class ProjectController {
         HttpSession session = request.getSession();
         Project newProject = new Project(projectName, description, parsed);
 
-
         ProjectService projSer = new ProjectService();
         projSer.makeProject(newProject);
 
-
         session.setAttribute("newProject", newProject);
 
-        return "redirect:/renderProject";
+        return "redirect:/render-all-projects";
     }
 
-    @GetMapping(value="/render-all-projects")
+    @GetMapping(value="render-all-projects")
     public String renderAllProjects(Model model, HttpServletRequest request) {
 
-        ProjectService projSer = new ProjectService();
-
-        model.addAttribute("projectList",projSer.getAllProjectS());
-
+        ProjectService proService = new ProjectService();
+        model.addAttribute("projectList",proService.getAllProjectS());
 
         return "allProjectsView.html";
     }
 
 
-    @GetMapping(value = "/renderProject")
-    public String renderProject(@RequestParam("selected-project")int projectID, Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-
+    @GetMapping(value ="/renderProject/{projectID}")
+    public String renderProject(Model model,@PathVariable("projectID") int projectID) {
 
         ProjectService projSer = new ProjectService();
         Project tmpProject = projSer.getSpecificProject(projectID);
 
-        model.addAttribute("project",tmpProject);
+        TaskService tService = new TaskService();
+        tService.getAllTasks(projectID);
 
-        model.addAttribute("tasklist", tmpProject.getTasks());
+
+        String name = "hej";
+        model.addAttribute("project",tmpProject);
+        model.addAttribute("tasklist", tService.getAllTasks(projectID));
 
         return "projectview.html";
     }

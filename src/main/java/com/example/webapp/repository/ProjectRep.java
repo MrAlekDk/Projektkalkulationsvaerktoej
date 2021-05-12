@@ -88,37 +88,6 @@ public class ProjectRep {
 
     }
 
-    public Project getSpecificProject(int projectID){
-        Project tmp = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Where is your MySQL JDBC Driver?");
-            e.printStackTrace();
-        }
-
-        try {
-            Connection conn = DriverManager.getConnection(url,user,password);
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Project WHERE ProjectID=?");
-            stmt.setInt(1, projectID);
-            ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
-                tmp = new Project(
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getDate(4)
-                );
-
-            }
-            conn.close();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        return tmp;
-    }
-
     public Project getSpecificProject(int projectID) {
 
         try {
