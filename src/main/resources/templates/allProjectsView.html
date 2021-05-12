@@ -11,7 +11,7 @@
     <p th:text="|${project.getDesc()}|"></p>
     <p th:text="|Deadline: ${project.getDeadline()}|"></p>
     <p th:text="|Pris: ${project.getProjectPrice()}|"></p>
-    <a th:href="|/renderProject/${project.getProjectID()}|">Go to this project</a>
+    <a th:href="|/renderProject/${project.getProjectID()}|" class="button">Go to this project</a>
     </li>
 
 </ul>
