@@ -16,7 +16,7 @@ public class TaskService {
 
 
     public void addTask(Task newTask) {
-
+        this.taskRep.addTask(newTask);
     }
 
     public ArrayList<Task> getAllTasks(int projectID) {
