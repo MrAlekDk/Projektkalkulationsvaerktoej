@@ -30,7 +30,7 @@ public class TaskRep {
     public void addTask(Task newTask){
         try {
             Connection conn = DriverManager.getConnection(url,user,password);
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO task (TaskName, TaskNarrative,ProjectID,StartDate, Duration, TaskDeadline) VALUES (?,?,?,?,?,?)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO task (TaskName, TaskNarrative,ProjectID,StartDate, Duration,Deadline) VALUES (?,?,?,?,?,?)");
 
             pstmt.setString(1, newTask.getName());
             pstmt.setString(2, newTask.getDesc());

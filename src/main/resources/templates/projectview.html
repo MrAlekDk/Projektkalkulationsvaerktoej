@@ -24,7 +24,9 @@
                 <input type="submit" value="Add new subtask to task" class="add-subtask-button" />
             </form>
         </ul>
-        <form action="/render-task-form" class="add-task-button">
+        <a th:href="|/render-task-form/${project.getProjectID()}|">Go to create task</a>
+
+        <form action="/render-task-form/${project.getProjectID()}" class="add-task-button">
             <button>Add new task to project</button>
         </form>
     </section>

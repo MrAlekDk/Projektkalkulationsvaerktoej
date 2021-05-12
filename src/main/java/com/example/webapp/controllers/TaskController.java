@@ -7,6 +7,7 @@ import com.example.webapp.services.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -20,19 +21,23 @@ import java.util.Date;
 @Controller
 public class TaskController {
 
-    @GetMapping(value = "/render-task-form")
-    public String renderTaskForm() {
+    @GetMapping(value = "/render-task-form/{projectID}")
+    public String renderTaskForm(@PathVariable("projectID")int projectID,Model model) {
+
+        model.addAttribute("projectID",projectID);
         return "taskForm.html";
     }
 
     @PostMapping(value = "/create-task")
-    public String createTasks(@RequestParam("task-name") String taskName, @RequestParam("task-description") String taskDesc,
-                              @RequestParam("task-start-date") String startDate,
-                              @RequestParam("task-duration")int duration,@RequestParam("task-deadline")String deadline,
-                              HttpServletRequest request) {
+    public String createTasks(@RequestParam("projectID")int projectID,
+                              @RequestParam("task-name") String taskName,
+                              @RequestParam("task-description") String taskDesc,
+                              @RequestParam("task-startdate") String startDate,
+                              @RequestParam("task-duration")int duration,
+                              @RequestParam("task-deadline")String deadline)
+    {
 
-        HttpSession session = request.getSession();
-
+        System.out.println(projectID);
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date parsedStart = null;
@@ -48,15 +53,12 @@ public class TaskController {
             e.printStackTrace();
         }
 
-
-        int projectID = (Integer) session.getAttribute("selected-projectID");
         Task newTask = new Task(taskName, taskDesc, projectID, parsedStart,duration,parsedDeadline);
         TaskService tService = new TaskService();
         tService.addTask(newTask);
 
-        session.setAttribute("projectTasks",tService.getAllTasks(projectID));
 
-        return "redirect:/renderProject";
+        return "redirect:/render-all-projects";
     }
 
     @GetMapping(value = "/render-subtask-form")
