@@ -1,5 +1,6 @@
 package com.example.webapp.repository;
 
+import com.example.webapp.models.Project;
 import com.example.webapp.models.Worker;
 
 import java.io.FileInputStream;
@@ -39,4 +40,35 @@ public class WorkerRep {
             System.out.println(e.getMessage());
         }
     }
+
+    public ArrayList<Worker> getAllWorkers() {
+        ArrayList<Worker> allWorkers = new ArrayList<Worker>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Where is your MySQL JDBC Driver?");
+            e.printStackTrace();
+        }
+
+        try {
+            Connection conn = DriverManager.getConnection(url,user,password);
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Worker");
+
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                Worker tmp = new Worker(
+                        rs.getInt(1),
+                        rs.getString(2)
+                );
+                allWorkers.add(tmp);
+            }
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return allWorkers;
+
+    }
+
 }
