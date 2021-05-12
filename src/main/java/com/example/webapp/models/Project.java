@@ -113,14 +113,4 @@ public class Project {
         this.tasks.add(newTask);
     }
 
-    public void setSubtask(SubTask newSubTask, String taskName) {
-
-        for (int i = 0; i < tasks.size(); i++) {
-            if(tasks.get(i).getName().equals(taskName)){
-                tasks.get(i).addSubtask(newSubTask);
-            }
-        }
-
-
-    }
 }

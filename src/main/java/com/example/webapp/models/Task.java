@@ -47,6 +47,9 @@ public class Task {
         return desc;
     }
 
+    public int getTaskID(){
+        return this.taskID;
+    }
 
     public Date getStartDate() {
         return startDate;
@@ -83,8 +86,8 @@ public class Task {
         this.taskDeadline = taskDeadline;
     }
 
-    public void addSubtask(SubTask newSubtask){
-        this.subtasks.add(newSubtask);
+    public void addSubtask(ArrayList<SubTask> subTasks){
+        this.subtasks.addAll(subTasks);
     }
 
     public ArrayList<SubTask> getSubtasks(){

@@ -3,6 +3,7 @@ package com.example.webapp.controllers;
 import com.example.webapp.models.Project;
 import com.example.webapp.models.SubTask;
 import com.example.webapp.models.Task;
+import com.example.webapp.services.SubTaskService;
 import com.example.webapp.services.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,8 +38,6 @@ public class TaskController {
                               @RequestParam("task-deadline")String deadline)
     {
 
-        System.out.println(projectID);
-
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date parsedStart = null;
         try {
@@ -58,34 +57,44 @@ public class TaskController {
         tService.addTask(newTask);
 
 
-        return "redirect:/render-all-projects";
+        return "redirect:/renderProject";
     }
 
-    @GetMapping(value = "/render-subtask-form")
-    public String renderSubtaskForm(@RequestParam("create-subtask")String taskName,HttpServletRequest request){
+    @GetMapping(value = "/render-subtask-form/{taskID}")
+    public String renderSubtaskForm(@PathVariable("taskID")int taskID,Model model){
 
-        HttpSession session = request.getSession();
-        session.setAttribute("task-editing", taskName);
+        model.addAttribute("taskID",taskID);
 
         return "subtaskForm.html";
     }
 
     @PostMapping(value="create-subtask")
-    public String createSubtask(@RequestParam("subtask-name") String subtaskName, @RequestParam("subtask-description") String subtaskDesc,HttpServletRequest request){
-        HttpSession session = request.getSession();
+    public String createSubtask(@RequestParam("taskID")int projectID,
+                                @RequestParam("subtask-name") String taskName,
+                                @RequestParam("subtask-description") String taskDesc,
+                                @RequestParam("subtask-worker")int workerID,
+                                @RequestParam("subtask-start-date")String startDate,
+                                @RequestParam("subtask-duration")int duration,
+                                @RequestParam("subtask-deadline")String deadline){
 
-        return "redirect:/renderProject";
-    }
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date parsedStart = null;
+        try {
+            parsedStart = format.parse(startDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Date parsedDeadline = null;
+        try {
+            parsedDeadline = format.parse(deadline);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-    @PostMapping(value="/get-all-tasks")
-    public String getAllTasks(@RequestParam("selected-project")int projectID, HttpServletRequest request){
-        HttpSession session = request.getSession();
+        SubTask newSubTask = new SubTask(taskName,taskDesc,workerID,projectID,parsedStart,duration,parsedDeadline);
 
-        TaskService tService = new TaskService();
-
-        session.setAttribute("selected-projectID",projectID);
-        session.setAttribute("projectTasks",tService.getAllTasks(projectID));
-
+        SubTaskService stService = new SubTaskService();
+        stService.addTask(newSubTask);
 
         return "redirect:/renderProject";
     }

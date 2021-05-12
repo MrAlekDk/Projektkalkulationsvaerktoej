@@ -4,20 +4,34 @@ import java.util.Date;
 
 public class SubTask {
 
+    private int subTaskID;
     private String name;
     private String desc;
-    private Worker participant;
+    private int taskID;
+    private int workerID;
     private int duration;
     private Date start;
-    private Date end;
+    private Date deadline;
 
-    public SubTask(String name, String desc, Worker participant, int duration, Date start, Date end) {
+
+    public SubTask(String name, String desc, int workerID, int taskID, Date start,int duration, Date deadline) {
         this.name = name;
         this.desc = desc;
-        this.participant = participant;
+        this.taskID = taskID;
+        this.workerID = workerID;
         this.duration = duration;
         this.start = start;
-        this.end = end;
+        this.deadline = deadline;
+    }
+    public SubTask(int subTaskID,String name, String desc, int workerID, int taskID, Date start,int duration, Date deadline) {
+        this.subTaskID = subTaskID;
+        this.name = name;
+        this.desc = desc;
+        this.taskID = taskID;
+        this.workerID = workerID;
+        this.duration = duration;
+        this.start = start;
+        this.deadline = deadline;
     }
 
     public SubTask(String name, String desc){
@@ -35,8 +49,8 @@ public class SubTask {
         return desc;
     }
 
-    public Worker getParticipant() {
-        return participant;
+    public int getWorkerID() {
+        return this.workerID;
     }
 
     public int getDuration() {
@@ -47,8 +61,12 @@ public class SubTask {
         return start;
     }
 
-    public Date getEnd() {
-        return end;
+    public Date getDeadline() {
+        return this.deadline;
+    }
+
+    public int getTaskID() {
+        return this.taskID;
     }
 
     // ----------------------------|| Setters ||---------------------------- //
@@ -61,9 +79,7 @@ public class SubTask {
         this.desc = desc;
     }
 
-    public void setParticipant(Worker participant) {
-        this.participant = participant;
-    }
+
 
     public void setDuration(int duration) {
         this.duration = duration;
@@ -73,7 +89,8 @@ public class SubTask {
         this.start = start;
     }
 
-    public void setEnd(Date end) {
-        this.end = end;
+    public void setDeadline(Date newDeadline) {
+        this.deadline = newDeadline;
     }
+
 }

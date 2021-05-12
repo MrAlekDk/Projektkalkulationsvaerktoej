@@ -1,8 +1,10 @@
 package com.example.webapp.controllers;
 
 import com.example.webapp.models.Project;
+import com.example.webapp.models.SubTask;
 import com.example.webapp.models.Task;
 import com.example.webapp.services.ProjectService;
+import com.example.webapp.services.SubTaskService;
 import com.example.webapp.services.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Controller
@@ -38,13 +41,12 @@ public class ProjectController {
             e.printStackTrace();
         }
 
-        HttpSession session = request.getSession();
         Project newProject = new Project(projectName, description, parsed);
 
         ProjectService projSer = new ProjectService();
         projSer.makeProject(newProject);
 
-        session.setAttribute("newProject", newProject);
+
 
         return "redirect:/render-all-projects";
     }
@@ -60,18 +62,22 @@ public class ProjectController {
 
 
     @GetMapping(value ="/renderProject/{projectID}")
-    public String renderProject(Model model,@PathVariable("projectID") int projectID) {
+    public String renderProject(Model model, @PathVariable("projectID") int projectID) {
 
         ProjectService projSer = new ProjectService();
         Project tmpProject = projSer.getSpecificProject(projectID);
+        model.addAttribute("project",tmpProject);
 
         TaskService tService = new TaskService();
-        tService.getAllTasks(projectID);
+        ArrayList<Task> allTasks = tService.getAllTasks(projectID);
 
+        SubTaskService stService= new SubTaskService();
+        stService= new SubTaskService();
+        ArrayList<Task> allTasks2 = new ArrayList<>();
+        allTasks2 = stService.getAllSubTasks(allTasks);
 
-        String name = "hej";
-        model.addAttribute("project",tmpProject);
-        model.addAttribute("tasklist", tService.getAllTasks(projectID));
+        model.addAttribute("tasklist", allTasks);
+
 
         return "projectview.html";
     }

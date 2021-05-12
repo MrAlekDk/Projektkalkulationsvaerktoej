@@ -5,11 +5,27 @@
 <header th:replace="fragments/header.html"></header>
 
 <form action="/create-subtask" method="post" class="submitField">
+
+    <label for="taskID" >taskID:</label><br>
+    <input type="number" id="taskID" name="taskID" th:value="${taskID}" hidden>
+
     <label for="subtask-name" >Subtask-titel</label><br>
     <input type="text" id="subtask-name" name="subtask-name" placeholder="Subtask titel" required><br>
 
-    <label for="subtask-description">Task-beskrivelse</label><br>
-    <input type="text" id="subtask-description" name="subtask-description" placeholder="Beskrivelse af subtask" required>
+    <label for="subtask-description" >Subtask-beskrivelse</label><br>
+    <input type="text" id="subtask-description" name="subtask-description" placeholder="Subtask titel" required><br>
+
+    <label for="subtask-worker" >Subtask-worker</label><br>
+    <input type="number" id="subtask-worker" name="subtask-worker" placeholder="WorkerID" required><br>
+
+    <label for="subtask-start-date" >Subtask-startDate</label><br>
+    <input type="Date" id="subtask-start-date" name="subtask-start-date" placeholder="subtask-start-date" required><br>
+
+    <label for="subtask-duration" >Subtask-durationl</label><br>
+    <input type="number" id="subtask-duration" name="subtask-duration" placeholder="Duration in hours" required><br>
+
+    <label for="subtask-deadline" >Subtask-subtaskDeadline</label><br>
+    <input type="Date" id="subtask-deadline" name="subtask-deadline" placeholder="subtask-deadline" required><br>
     <button>Add subtask</button>
 </form>
 

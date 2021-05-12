@@ -19,16 +19,14 @@
                     <p th:text="|Beskrivelse: ${subtask.getDesc()}|"></p>
                 </ul>
             </li>
+            <a th:href="|/render-subtask-form/${task.getTaskID()}|" class="button">Add new subtask</a>
+
             <form th:action="@{/render-subtask-form}" method="Get">
                 <input type="hidden" name="create-subtask" th:value="${task.getName()}" />
                 <input type="submit" value="Add new subtask to task" class="add-subtask-button" />
             </form>
         </ul>
-        <a th:href="|/render-task-form/${project.getProjectID()}|">Go to create task</a>
-
-        <form action="/render-task-form/${project.getProjectID()}" class="add-task-button">
-            <button>Add new task to project</button>
-        </form>
+        <a th:href="|/render-task-form/${project.getProjectID()}|" class="button">Add new task</a>
     </section>
 
     <section class="box-element">

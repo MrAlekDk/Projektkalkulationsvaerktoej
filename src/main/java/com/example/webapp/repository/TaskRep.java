@@ -42,7 +42,7 @@ public class TaskRep {
 
             pstmt.setInt(5, newTask.getNrOfHours());
 
-            java.util.Date utilStartDate2 = newTask.getStartDate();
+            java.util.Date utilStartDate2 = newTask.getTaskDeadline();
             java.sql.Date sqlDeadline2 = new java.sql.Date(utilStartDate2.getTime());
             pstmt.setDate(6, sqlDeadline2);
             pstmt.executeUpdate();

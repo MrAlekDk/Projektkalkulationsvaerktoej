@@ -114,3 +114,25 @@ h4{
     list-style-type: none;
 }
 
+a.button{
+    display:inline-block;
+    padding: 3px 23px;
+    margin:1.5px;
+    margin-bottom: 10px;
+    border:2px solid white;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:"Segoe UI";
+    font-weight:400;
+    color:white;
+    background-color:rgb(62, 127, 165);
+    text-align:center;
+    position:center;
+    margin:0 auto;
+    width: 40%
+}
+
+a.button:active{
+    background-color:dodgerblue;
+}
+
