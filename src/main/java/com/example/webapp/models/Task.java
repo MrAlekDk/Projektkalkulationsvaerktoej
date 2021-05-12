@@ -4,18 +4,29 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Task {
+    private int taskID;
     private String name;
     private String desc;
-    private Worker participant;
+    private int projectID;
     private Date startDate;
     private int nrOfHours;
     private Date taskDeadline;
     private ArrayList<SubTask> subtasks = new ArrayList<SubTask>();
 
-    public Task (String name, String desc, Worker participant, Date startDate, int nrOfHours, Date taskDeadline){
+    public Task (String name, String desc, int projectID, Date startDate, int nrOfHours, Date taskDeadline){
         this.name = name;
         this.desc = desc;
-        this.participant = participant;
+        this.projectID = projectID;
+        this.startDate = startDate;
+        this.nrOfHours = nrOfHours;
+        this.taskDeadline = taskDeadline;
+    }
+
+    public Task (int taskID,String name, String desc, int projectID, Date startDate, int nrOfHours, Date taskDeadline){
+        this.taskID=taskID;
+        this.name = name;
+        this.desc = desc;
+        this.projectID = projectID;
         this.startDate = startDate;
         this.nrOfHours = nrOfHours;
         this.taskDeadline = taskDeadline;
@@ -36,9 +47,6 @@ public class Task {
         return desc;
     }
 
-    public Worker getParticipant() {
-        return participant;
-    }
 
     public Date getStartDate() {
         return startDate;
@@ -62,9 +70,6 @@ public class Task {
         this.desc = desc;
     }
 
-    public void setParticipant(Worker participant) {
-        this.participant = participant;
-    }
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
@@ -84,5 +89,9 @@ public class Task {
 
     public ArrayList<SubTask> getSubtasks(){
         return this.subtasks;
+    }
+
+    public int getProjectID() {
+        return this.projectID;
     }
 }

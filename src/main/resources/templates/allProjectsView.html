@@ -11,10 +11,7 @@
     <p th:text="|${project.getDesc()}|"></p>
     <p th:text="|Deadline: ${project.getDeadline()}|"></p>
     <p th:text="|Pris: ${project.getProjectPrice()}|"></p>
-    <form th:action="@{/renderProject}" method="Get">
-        <input type="hidden" name="selected-project" th:value="${project.getProjectID()}" />
-        <input type="submit" value="select-project" class="button" />
-    </form>
+    <a th:href="|/renderProject/${project.getProjectID()}|">Go to this project</a>
     </li>
 
 </ul>

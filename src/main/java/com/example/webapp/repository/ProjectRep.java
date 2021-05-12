@@ -10,24 +10,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
-public class ProjectRep{
+public class ProjectRep {
     private String url;
     private String user;
     private String password;
 
-    public ProjectRep(){
+    public ProjectRep() {
         Properties prop = new Properties();
-        try{
+        try {
             prop.load(new FileInputStream("src/main/resources/application.properties"));
             this.url = prop.getProperty("url");
             this.user = prop.getProperty("user");
             this.password = prop.getProperty("password");
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void createProject(Project newProject){
+    public void createProject(Project newProject) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -36,7 +36,7 @@ public class ProjectRep{
         }
 
         try {
-            Connection conn = DriverManager.getConnection(url,user,password);
+            Connection conn = DriverManager.getConnection(url, user, password);
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO Project (ProjectName,ProjectNarrative,Deadline,Price ) VALUES (?,?,?,?)");
 
             stmt.setString(1, newProject.getName());
@@ -66,11 +66,11 @@ public class ProjectRep{
         }
 
         try {
-            Connection conn = DriverManager.getConnection(url,user,password);
+            Connection conn = DriverManager.getConnection(url, user, password);
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Project");
 
             ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Project tmp = new Project(
                         rs.getInt(1),
                         rs.getString(2),
@@ -117,5 +117,36 @@ public class ProjectRep{
         }
 
         return tmp;
+    }
+
+    public Project getSpecificProject(int projectID) {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Where is your MySQL JDBC Driver?");
+            e.printStackTrace();
+        }
+
+        try {
+            Connection conn = DriverManager.getConnection(url, user, password);
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Project where ProjectID=?");
+            stmt.setInt(1, projectID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Project tmpProject = new Project(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDate(4)
+                );
+
+                return tmpProject;
+            }
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 }

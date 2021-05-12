@@ -1,8 +1,12 @@
 package com.example.webapp.repository;
 
+import com.example.webapp.models.Project;
+import com.example.webapp.models.Task;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
@@ -23,24 +27,31 @@ public class TaskRep {
         }
     }
 
-    public void createTask(int task_ID, String title, String desc, int worker_ID, Date startDate, int nrOfHours, Date taskDeadline){
+    public void addTask(Task newTask){
         try {
             Connection conn = DriverManager.getConnection(url,user,password);
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Project (Task_ID, Title, Desc, Worker_ID, StartDate, NrOfHours, TaskDeadline) VALUES (?,?,?,?,?,?,?)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO task (TaskName, TaskNarrative,ProjectID,StartDate, Duration, TaskDeadline) VALUES (?,?,?,?,?,?)");
 
-            pstmt.setInt(1, task_ID);
-            pstmt.setString(2, title);
-            pstmt.setString(3, desc);
-            pstmt.setInt(4, worker_ID);
-            pstmt.setDate(5, (java.sql.Date) startDate);
-            pstmt.setInt(6, nrOfHours);
-            pstmt.setDate(7, (java.sql.Date) taskDeadline);
+            pstmt.setString(1, newTask.getName());
+            pstmt.setString(2, newTask.getDesc());
+            pstmt.setInt(3, newTask.getProjectID());
+
+            java.util.Date utilStartDate1 = newTask.getStartDate();
+            java.sql.Date sqlDeadline1 = new java.sql.Date(utilStartDate1.getTime());
+            pstmt.setDate(4,sqlDeadline1);
+
+            pstmt.setInt(5, newTask.getNrOfHours());
+
+            java.util.Date utilStartDate2 = newTask.getStartDate();
+            java.sql.Date sqlDeadline2 = new java.sql.Date(utilStartDate2.getTime());
+            pstmt.setDate(6, sqlDeadline2);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+
 
     public int calculateTime(int project_ID){
         int totalNrOfHours = 0;
@@ -58,5 +69,39 @@ public class TaskRep {
             System.out.println(e.getMessage());
         }
         return totalNrOfHours;
+    }
+
+    public ArrayList<Task> getAllTasks(int projectID) {
+        ArrayList<Task> allTasks = new ArrayList<Task>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Where is your MySQL JDBC Driver?");
+            e.printStackTrace();
+        }
+
+        try {
+            Connection conn = DriverManager.getConnection(url,user,password);
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM task WHERE ProjectID=?");
+            stmt.setInt(1,projectID);
+
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                Task tmp = new Task(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getDate(5),
+                        rs.getInt(6),rs.getDate(7)
+                );
+                allTasks.add(tmp);
+            }
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return allTasks;
     }
 }
