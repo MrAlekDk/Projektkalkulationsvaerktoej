@@ -1,5 +1,6 @@
 package com.example.webapp.controllers;
 
+import com.example.webapp.models.Cache;
 import com.example.webapp.models.Project;
 import com.example.webapp.models.SubTask;
 import com.example.webapp.models.Task;
@@ -24,6 +25,7 @@ import java.util.Date;
 @Controller
 public class ProjectController {
 
+    Cache cache = new Cache();
 
     @GetMapping(value = "/projekt-form")
     public String renderProjectForm() {
@@ -46,8 +48,6 @@ public class ProjectController {
         ProjectService projSer = new ProjectService();
         projSer.makeProject(newProject);
 
-
-
         return "redirect:/render-all-projects";
     }
 
@@ -64,9 +64,19 @@ public class ProjectController {
     @GetMapping(value ="/renderProject/{projectID}")
     public String renderProject(Model model, @PathVariable("projectID") int projectID) {
 
+
         ProjectService projSer = new ProjectService();
         Project tmpProject = projSer.getSpecificProject(projectID);
         model.addAttribute("project",tmpProject);
+        cache.set(projectID, tmpProject);
+
+        if(cache.has(projectID)){
+            return cache.get(projectID);
+        }
+        else {
+            cache.set(projectID, tmpProject);
+            return cache.get(projectID);
+        }
 
         TaskService tService = new TaskService();
         ArrayList<Task> allTasks = tService.getAllTasks(projectID);
@@ -81,6 +91,4 @@ public class ProjectController {
 
         return "projectview.html";
     }
-
-
 }

@@ -48,4 +48,8 @@ public class UserRep {
         }
         return null;
     }
+
+    public String checkLogin(){
+        return "det virker";
+    }
 }
