@@ -58,7 +58,7 @@ public class SubTaskRep {
         }
     }
 
-    public ArrayList<SubTask> getAllSubTasks(int taskID) {
+    public ArrayList<SubTask> getAllSubTasks() {
         ArrayList<SubTask> allSubTasks = new ArrayList<SubTask>();
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -69,8 +69,7 @@ public class SubTaskRep {
 
         try {
             Connection conn = DriverManager.getConnection(url,user,password);
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM subtask WHERE taskID=?");
-            stmt.setInt(1,taskID);
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM subtask");
 
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){

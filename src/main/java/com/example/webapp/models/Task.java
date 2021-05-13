@@ -86,8 +86,8 @@ public class Task {
         this.taskDeadline = taskDeadline;
     }
 
-    public void addSubtask(ArrayList<SubTask> subTasks){
-        this.subtasks.addAll(subTasks);
+    public void addSubtask(SubTask subTasks){
+        this.subtasks.add(subTasks);
     }
 
     public ArrayList<SubTask> getSubtasks(){

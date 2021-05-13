@@ -54,9 +54,16 @@ public class ProjectController {
     @GetMapping(value="render-all-projects")
     public String renderAllProjects(Model model, HttpServletRequest request) {
 
-        ProjectService proService = new ProjectService();
-        model.addAttribute("projectList",proService.getAllProjectS());
+        if(cache.hasProjects()){
+            model.addAttribute("projectList",cache.getAllProjects());
 
+        }
+        else{
+            ProjectService proService = new ProjectService();
+            ArrayList<Project> tmp = proService.getAllProjectS();
+            model.addAttribute("projectList",proService.getAllProjectS());
+            cache.setProjects(tmp);
+        }
         return "allProjectsView.html";
     }
 
