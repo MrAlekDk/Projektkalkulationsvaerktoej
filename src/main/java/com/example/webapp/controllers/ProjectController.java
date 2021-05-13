@@ -64,31 +64,28 @@ public class ProjectController {
     @GetMapping(value ="/renderProject/{projectID}")
     public String renderProject(Model model, @PathVariable("projectID") int projectID) {
 
+        if (cache.has(projectID)) {
+            model.addAttribute("project", cache.get(projectID));
+            model.addAttribute("tasklist", cache.getList(projectID));
+            return "projectview.html";
+        } else {
+            ProjectService projSer = new ProjectService();
+            Project tmpProject = projSer.getSpecificProject(projectID);
+            model.addAttribute("project", tmpProject);
 
-        ProjectService projSer = new ProjectService();
-        Project tmpProject = projSer.getSpecificProject(projectID);
-        model.addAttribute("project",tmpProject);
-        cache.set(projectID, tmpProject);
+            TaskService tService = new TaskService();
+            ArrayList<Task> allTasks = tService.getAllTasks(projectID);
 
-        if(cache.has(projectID)){
-            return cache.get(projectID);
-        }
-        else {
+            SubTaskService stService = new SubTaskService();
+            stService = new SubTaskService();
+            ArrayList<Task> allTasks2 = new ArrayList<>();
+            allTasks2 = stService.getAllSubTasks(allTasks);
+
+            model.addAttribute("tasklist", allTasks);
+
             cache.set(projectID, tmpProject);
-            return cache.get(projectID);
+            cache.setList(projectID, allTasks);
+            return "projectview.html";
         }
-
-        TaskService tService = new TaskService();
-        ArrayList<Task> allTasks = tService.getAllTasks(projectID);
-
-        SubTaskService stService= new SubTaskService();
-        stService= new SubTaskService();
-        ArrayList<Task> allTasks2 = new ArrayList<>();
-        allTasks2 = stService.getAllSubTasks(allTasks);
-
-        model.addAttribute("tasklist", allTasks);
-
-
-        return "projectview.html";
     }
 }

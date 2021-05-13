@@ -88,8 +88,13 @@ p {
     justify-content: center;
     margin-left:5px;
     margin-right:5px;
-    border: solid 1px black;
-    border-radius: 10px;
+    border-bottom: solid 3px black;
+}
+
+.subtask{
+    display: flex;
+    flex-direction: column;
+    border-bottom: solid 1px black;
 }
 
 h4{

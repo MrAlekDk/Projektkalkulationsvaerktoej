@@ -14,7 +14,7 @@
         <ul th:each="task : ${tasklist}" class="task">
             <li>
                 <h4 th:text="|Task: ${task.getName()}|"></h4>
-                <ul th:each="subtask : ${task.getSubtasks()}" class="task">
+                <ul th:each="subtask : ${task.getSubtasks()}" class="subtask">
                     <p th:text="|SubTask: ${subtask.getName()}|"></p>
                     <p th:text="|Beskrivelse: ${subtask.getDesc()}|"></p>
                 </ul>
