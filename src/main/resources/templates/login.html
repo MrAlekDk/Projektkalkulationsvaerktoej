@@ -2,14 +2,16 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/head.html(currentPage='login',stylesheet='styles/login.css')"></head>
 <body>
+
 <section class="login">
   <form action="/check-login" method="post" class="check-login">
+    <img class="image" src="../images/Logo2.png">
 
-    <label for="login-email">Email</label><br>
-    <input type="text" id="login-email" name="username" placeholder="Din email" required><br>
+    <label class="label-text"  for="login-email">Email</label><br>
+    <input class="input-text"  type="text" id="login-email" name="username" placeholder="Din email" required><br>
 
-    <label for="login-kodeord">Kodeord</label><br>
-    <input type="text" id="login-kodeord" name="password" placeholder="Kodeord" required><br>
+    <label class="label-text" for="login-kodeord">Kodeord</label><br>
+    <input class="input-text" type="text" id="login-kodeord" name="password" placeholder="Kodeord" required><br>
 
     <button class="login-button">Login</button>
   </form>
