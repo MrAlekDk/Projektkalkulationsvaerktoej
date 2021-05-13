@@ -1,11 +1,46 @@
-check-login{
+.image {
     display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    background-color: red;
+    justify-self: start;
+    height: 91.57px;
+    width: 252.42px;
 }
 
-login-email{
-    background-color: red;
-    text-decoration-color: chartreuse;
+.check-login{
+    padding: 100px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    border: 12px solid rgb(62, 127, 165);
+}
+
+.label-text{
+    font-family: "Malgun Gothic";
+    margin: auto;
+    margin-right:15px;
+    padding-bottom:5px;
+    margin:0 15px 10px 0;
+    display:inline-block;
+}
+
+.input-text{
+    font-family: "Malgun Gothic";
+    margin-right:15px;
+    padding-bottom:5px;
+    margin:0 15px 10px 0;
+    display:inline-block;
+}
+
+.login-button{
+    font-family: "Malgun Gothic";
+    background-color: rgb(62, 127, 165);
+    text-align: right;
+    color: white;
+    text-transform: uppercase;
+    margin-right:15px;
+    padding-bottom:5px;
+    margin:0 15px 10px 0;
+    display:inline-block;
 }
