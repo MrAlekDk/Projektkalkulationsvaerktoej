@@ -23,7 +23,7 @@ public class SubTask {
         this.start = start;
         this.deadline = deadline;
     }
-    public SubTask(int subTaskID,String name, String desc, int workerID, int taskID, Date start,int duration, Date deadline) {
+    public SubTask(int subTaskID,String name, String desc, int taskID, int workerID, Date start,int duration, Date deadline) {
         this.subTaskID = subTaskID;
         this.name = name;
         this.desc = desc;

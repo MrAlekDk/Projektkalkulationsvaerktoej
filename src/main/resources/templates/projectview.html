@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="fragments/head.html(currentPage='Project',stylesheet='../styles/projectstyle.css')"></head>
+<head th:replace="fragments/head.html(currentPage='Project',stylesheet='../../styles/projectstyle.css')"></head>
 <body>
 <header th:replace="fragments/header.html"></header>
 <section class="headline">
@@ -19,7 +19,7 @@
                     <p th:text="|Beskrivelse: ${subtask.getDesc()}|"></p>
                 </ul>
             </li>
-            <a th:href="|/render-subtask-form/${task.getTaskID()}|" class="button">Add new subtask</a>
+            <a th:href="|/render-subtask-form/${project.getProjectID()}/${task.getTaskID()}|" class="button">Add new subtask</a>
         </ul>
         <a th:href="|/render-task-form/${project.getProjectID()}|" class="button">Add new task</a>
     </section>

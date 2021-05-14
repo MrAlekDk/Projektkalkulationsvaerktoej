@@ -57,19 +57,21 @@ public class TaskController {
         tService.addTask(newTask);
 
 
-        return "redirect:/renderProject";
+        return "redirect:/update-cache/"+projectID;
     }
 
-    @GetMapping(value = "/render-subtask-form/{taskID}")
-    public String renderSubtaskForm(@PathVariable("taskID")int taskID,Model model){
+    @GetMapping(value = "/render-subtask-form/{projectID}/{taskID}")
+    public String renderSubtaskForm(@PathVariable("projectID")int projectID, @PathVariable("taskID")int taskID,Model model){
 
         model.addAttribute("taskID",taskID);
+        model.addAttribute("projectID",projectID);
 
         return "subtaskForm.html";
     }
 
     @PostMapping(value="create-subtask")
-    public String createSubtask(@RequestParam("taskID")int projectID,
+    public String createSubtask(@RequestParam("projectID")int projectID,
+                                @RequestParam("taskID")int taskID,
                                 @RequestParam("subtask-name") String taskName,
                                 @RequestParam("subtask-description") String taskDesc,
                                 @RequestParam("subtask-worker")int workerID,
@@ -91,12 +93,12 @@ public class TaskController {
             e.printStackTrace();
         }
 
-        SubTask newSubTask = new SubTask(taskName,taskDesc,workerID,projectID,parsedStart,duration,parsedDeadline);
+        SubTask newSubTask = new SubTask(taskName,taskDesc,workerID,taskID,parsedStart,duration,parsedDeadline);
 
         SubTaskService stService = new SubTaskService();
         stService.addTask(newSubTask);
 
-        return "redirect:/renderProject";
+        return "redirect:/update-cache/"+projectID;
     }
 
 

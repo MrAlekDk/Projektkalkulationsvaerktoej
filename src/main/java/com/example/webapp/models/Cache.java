@@ -11,10 +11,12 @@ public class Cache {
     Map<Integer, Project> map = new HashMap<Integer, Project>();
     Map<Integer, ArrayList<Task>> test = new HashMap<Integer, ArrayList<Task>>();
     ArrayList<Project> allProjects = new ArrayList<>();
+
     public Project get(int key){
         return map.get(key);
     }
     public ArrayList<Task> getList (int key){return test.get(key);}
+
     public Project set(int key, Project value){
         return map.put(key, value);
     }

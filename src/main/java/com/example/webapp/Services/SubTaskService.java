@@ -26,9 +26,20 @@ public class SubTaskService {
     public ArrayList<Task> getAllSubTasks(ArrayList<Task> allTask) {
 
 
+        ArrayList<SubTask> allSubTasks= subTaskRep.getAllSubTasks();
+        if(allSubTasks.isEmpty()){
+            return allTask;
+        }
+
         for (int i = 0; i < allTask.size(); i++) {
-            int tmpTaskID =allTask.get(i).getTaskID();
-            allTask.get(i).addSubtask(subTaskRep.getAllSubTasks(tmpTaskID));
+            for (int j = 0; j < allSubTasks.size(); j++) {
+                if(allTask.get(i).getTaskID()==allSubTasks.get(j).getTaskID()){
+                    allTask.get(i).addSubtask(allSubTasks.get(j));
+                }
+
+            }
+
+
         }
         return allTask;
     }

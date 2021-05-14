@@ -51,6 +51,26 @@ public class ProjectController {
         return "redirect:/render-all-projects";
     }
 
+    @GetMapping(value="/update-cache/{projectID}")
+    public String updateCache(@PathVariable("projectID")int projectID){
+
+        System.out.println(projectID);
+
+        Project tmpProject = cache.get(projectID);
+
+        TaskService tService = new TaskService();
+        ArrayList<Task> allTasks = tService.getAllTasks(projectID);
+
+        SubTaskService stService = new SubTaskService();
+        allTasks = stService.getAllSubTasks(allTasks);
+
+        cache.set(projectID, tmpProject);
+        cache.setList(projectID, allTasks);
+
+
+        return "redirect:/renderProject/"+projectID;
+    }
+
     @GetMapping(value="render-all-projects")
     public String renderAllProjects(Model model, HttpServletRequest request) {
 
@@ -85,8 +105,8 @@ public class ProjectController {
 
             SubTaskService stService = new SubTaskService();
             stService = new SubTaskService();
-            ArrayList<Task> allTasks2 = new ArrayList<>();
-            allTasks2 = stService.getAllSubTasks(allTasks);
+
+            allTasks = stService.getAllSubTasks(allTasks);
 
             model.addAttribute("tasklist", allTasks);
 
