@@ -92,8 +92,9 @@ public class ProjectController {
     public String renderProject(Model model, @PathVariable("projectID") int projectID) {
 
         if (cache.has(projectID)) {
-            model.addAttribute("project", cache.get(projectID));
+           // model.addAttribute("project", cache.get(projectID));
             model.addAttribute("tasklist", cache.getList(projectID));
+
             return "projectview.html";
         } else {
             ProjectService projSer = new ProjectService();

@@ -8,7 +8,18 @@
     <h2 th:text="${project.getName()}"></h2>
 </section>
 
+
 <section class="boxes">
+    <section class="box-element">
+        <h3>Project description</h3>
+        <p th:text="${project.getDesc()}" class="white"></p>
+        <p class="white">Deltagere: </p>
+        <p th:text="${project.getParticipants()}" class="white"></p>
+        <p th:text="|Deadline: ${project.getDeadline()}|" class="white"></p>
+        <p th:text="|Projekt pris: ${project.getProjectPrice()}|" class="white"></p>
+
+    </section>
+
     <section class="box-element-tasks">
         <h3>List of tasks for the project</h3>
         <ul th:each="task : ${tasklist}" class="task">
@@ -17,18 +28,14 @@
                 <ul th:each="subtask : ${task.getSubtasks()}" class="subtask">
                     <p th:text="|SubTask: ${subtask.getName()}|"></p>
                     <p th:text="|Beskrivelse: ${subtask.getDesc()}|"></p>
+                    <p th:text="|Ansvarlig: ${subtask.getWorkerID()}|"></p>
+                    <p th:text="|Start dato: ${subtask.getStart()} - Deadline: ${subtask.getDeadline()}|"></p>
+                    <p th:text="|Tid til opgaven: ${subtask.getDuration()}|"></p>
                 </ul>
             </li>
             <a th:href="|/render-subtask-form/${project.getProjectID()}/${task.getTaskID()}|" class="button">Add new subtask</a>
         </ul>
         <a th:href="|/render-task-form/${project.getProjectID()}|" class="button">Add new task</a>
-    </section>
-
-    <section class="box-element">
-        <h3>Project description</h3>
-        <p>Projektets deadline:</p>
-        <p th:text="${project.getDeadline()}"></p>
-        <p th:text="${project.getDesc()}"></p>
     </section>
 
 </section>

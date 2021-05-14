@@ -63,6 +63,14 @@ public class Task {
         return taskDeadline;
     }
 
+    public int getProjectID() {
+        return this.projectID;
+    }
+
+    public ArrayList<SubTask> getSubtasks(){
+        return this.subtasks;
+    }
+
     // ----------------------------|| Setters ||---------------------------- //
 
     public void setName(String name) {
@@ -72,7 +80,6 @@ public class Task {
     public void setDesc(String desc) {
         this.desc = desc;
     }
-
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
@@ -90,11 +97,4 @@ public class Task {
         this.subtasks.add(subTasks);
     }
 
-    public ArrayList<SubTask> getSubtasks(){
-        return this.subtasks;
-    }
-
-    public int getProjectID() {
-        return this.projectID;
-    }
 }
