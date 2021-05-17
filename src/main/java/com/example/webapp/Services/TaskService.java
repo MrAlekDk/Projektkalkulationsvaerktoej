@@ -1,4 +1,4 @@
-package com.example.webapp.services;
+package com.example.webapp.Services;
 
 import com.example.webapp.models.Task;
 import com.example.webapp.repository.TaskRep;
@@ -19,14 +19,16 @@ public class TaskService {
         this.taskRep.addTask(newTask);
     }
 
-    public void calculateDuration(ArrayList<Task> taskID){
+    public int calculateDuration(ArrayList<Task> taskID){
 
         int totalDuration = 0;
 
         for (int i = 0; i < taskID.size(); i++) {
-            totalDuration += taskID.get(i).getNrOfHours();
-            System.out.println(totalDuration);
+            for (int j = 0; j < taskID.get(i).getSubtasks().size(); j++) {
+                totalDuration += taskID.get(i).getSubtasks().get(j).getDuration();
+            }
         }
+        return totalDuration;
     }
 
     public ArrayList<Task> getAllTasks(int projectID) {

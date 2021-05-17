@@ -4,6 +4,9 @@ import com.example.webapp.models.Project;
 import com.example.webapp.models.Task;
 
 public class Calculator {
+        private int hourPrice;
+        private int WeeklyWorkHours;
+
 
 
     /*public int calculateProjectPrice(Project projectToCalculate){

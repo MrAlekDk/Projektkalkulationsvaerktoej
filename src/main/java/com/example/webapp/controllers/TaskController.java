@@ -3,7 +3,7 @@ package com.example.webapp.controllers;
 import com.example.webapp.models.SubTask;
 import com.example.webapp.models.Task;
 import com.example.webapp.services.SubTaskService;
-import com.example.webapp.services.TaskService;
+import com.example.webapp.Services.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
