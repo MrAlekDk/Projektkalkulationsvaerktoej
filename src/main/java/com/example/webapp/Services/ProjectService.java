@@ -34,12 +34,6 @@ public class ProjectService {
         //return projectPrice;
     }
 
-    public int calculateTimeForProject(Project project, int project_ID){
-        int nrOfParticipants = project.getNrOfParticipants();
-        //Måske et lille regnestykke her istedet for bare at vise det vil tage 200 timer fx. så også vise dage måske
-        return 1;
-    }
-
     public ArrayList<Project> getAllProjectS() {
         return projectRep.getAllProjects();
     }

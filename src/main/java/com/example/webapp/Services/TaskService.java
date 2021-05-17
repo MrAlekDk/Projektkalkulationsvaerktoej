@@ -19,6 +19,16 @@ public class TaskService {
         this.taskRep.addTask(newTask);
     }
 
+    public void calculateDuration(ArrayList<Task> taskID){
+
+        int totalDuration = 0;
+
+        for (int i = 0; i < taskID.size(); i++) {
+            totalDuration += taskID.get(i).getNrOfHours();
+            System.out.println(totalDuration);
+        }
+    }
+
     public ArrayList<Task> getAllTasks(int projectID) {
         return taskRep.getAllTasks(projectID);
     }

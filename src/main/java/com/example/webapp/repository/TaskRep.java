@@ -1,6 +1,7 @@
 package com.example.webapp.repository;
 
 import com.example.webapp.models.Project;
+import com.example.webapp.models.SubTask;
 import com.example.webapp.models.Task;
 
 import java.io.FileInputStream;
@@ -50,25 +51,6 @@ public class TaskRep {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-    }
-
-
-    public int calculateTime(int project_ID){
-        int totalNrOfHours = 0;
-        try {
-            Connection conn = DriverManager.getConnection(url,user,password);
-            PreparedStatement pstmt = conn.prepareStatement("SELECT SUM(NrOfHours) AS HoursForProject FROM TaskTable WHERE Project_ID=?");
-            ResultSet rs = pstmt.executeQuery();
-            pstmt.setInt(1, project_ID);
-            pstmt.executeUpdate();
-
-            while (rs.next()){
-                totalNrOfHours = rs.getInt("HoursForProject");
-            }
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-        return totalNrOfHours;
     }
 
     public ArrayList<Task> getAllTasks(int projectID) {

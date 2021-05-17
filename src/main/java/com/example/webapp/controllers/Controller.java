@@ -1,12 +1,15 @@
 package com.example.webapp.controllers;
 
 import com.example.webapp.models.User;
+import com.example.webapp.repository.TaskRep;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @org.springframework.stereotype.Controller
 public class Controller {
+
+    TaskRep test = new TaskRep();
 
     @GetMapping(value = "/")
     public String renderLoginPage() {
@@ -18,10 +21,8 @@ public class Controller {
         User tmpUser = new User(mail,password);
 
         if(tmpUser.checkUser(mail,password)){
-            System.out.println("den er her 1");
             return "redirect:/forside";
         }else{
-            System.out.println("nummer 2");
             return "redirect:/";
         }
     }

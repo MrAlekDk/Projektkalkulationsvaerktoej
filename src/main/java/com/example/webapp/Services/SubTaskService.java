@@ -25,7 +25,6 @@ public class SubTaskService {
 
     public ArrayList<Task> getAllSubTasks(ArrayList<Task> allTask) {
 
-
         ArrayList<SubTask> allSubTasks= subTaskRep.getAllSubTasks();
         if(allSubTasks.isEmpty()){
             return allTask;
@@ -36,9 +35,7 @@ public class SubTaskService {
                 if(allTask.get(i).getTaskID()==allSubTasks.get(j).getTaskID()){
                     allTask.get(i).addSubtask(allSubTasks.get(j));
                 }
-
             }
-
 
         }
         return allTask;

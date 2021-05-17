@@ -104,6 +104,7 @@ public class ProjectController {
 
             allTasks = stService.getAllSubTasks(allTasks);
 
+            tService.calculateDuration(allTasks);
             model.addAttribute("tasklist", allTasks);
 
             cache.set(projectID, tmpProject);
