@@ -13,13 +13,29 @@ public class ProjectService {
         this.projectRep = new ProjectRep();
     }
 
-    public void makeProject(Project newProject){
+    public boolean makeProject(Project newProject){
         newProject.setProjectPrice(500.00);
-        projectRep.createProject(newProject);
+
+        if(validateProjectDates(newProject)==true){
+            projectRep.createProject(newProject);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
-    public void makeTask(String title, String desc, int worker_ID, Date startDate, int nrOfHours, Date taskDeadline){
+    private boolean validateProjectDates(Project newProject) {
 
+        Date deadline = newProject.getDeadline();
+        Date dateNow = new Date();
+
+        if(deadline.before(dateNow)){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     public double calculateProjectPrice(Project projectToCalculate){

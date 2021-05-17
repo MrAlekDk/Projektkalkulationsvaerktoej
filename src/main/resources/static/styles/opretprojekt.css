@@ -42,3 +42,7 @@ input{
     font-size: 40px;
     font-weight: bold;
 }
+
+h1{
+    background-color:rgb(62, 127, 165);
+}
