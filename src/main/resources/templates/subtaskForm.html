@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="fragments/head.html(currentPage='Opret projekt',stylesheet=''/styles/opretprojekt.css')"></head>
+<head th:replace="fragments/head.html(currentPage='Opret projekt',stylesheet='/styles/opretprojekt.css')"></head>
 <body>
 <header th:replace="fragments/header.html"></header>
 
@@ -24,8 +24,8 @@
     <label for="subtask-start-date" >Subtask-startDate</label><br>
     <input type="Date" id="subtask-start-date" name="subtask-start-date" placeholder="subtask-start-date" required><br>
 
-    <label for="subtask-duration" >Subtask-durationl</label><br>
-    <input type="number" id="subtask-duration" name="subtask-duration" placeholder="Duration in hours" required><br>
+    <label for="subtask-duration" >Subtask-duration</label><br>
+    <input type="number" id="subtask-duration" name="subtask-duration" placeholder="Duration in hours" required min="1"><br>
 
     <label for="subtask-deadline" >Subtask-subtaskDeadline</label><br>
     <input type="Date" id="subtask-deadline" name="subtask-deadline" placeholder="subtask-deadline" required><br>
