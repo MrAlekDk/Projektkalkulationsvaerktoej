@@ -7,34 +7,35 @@
     <h2>Project: </h2>
     <h2 th:text="${project.getName()}"></h2>
 </section>
-
-
 <section class="boxes">
-    <section class="box-element">
+    <section class="description-box">
         <h3>Project description</h3>
         <p th:text="${project.getDesc()}" class="white"></p>
         <p class="white">Deltagere: </p>
         <p th:text="${project.getParticipants()}" class="white"></p>
         <p th:text="|Deadline: ${project.getDeadline()}|" class="white"></p>
         <p th:text="|Projekt pris: ${project.getProjectPrice()}|" class="white"></p>
-
     </section>
 
     <section class="box-element-tasks">
         <h3>List of tasks for the project</h3>
-        <ul th:each="task : ${tasklist}" class="task">
-            <li>
-                <h4 th:text="|Task: ${task.getName()}|"></h4>
+        <section th:each="task : ${tasklist}" class="task">
+            <ul class="task-header-two">
+                <li th:text="|Task: ${task.getName()}|"></li>
+                <li th:text="|StartDate: ${task.getStartDate()}|"></li>
+                <li th:text="|Deadline: ${task.getTaskDeadline()}|"></li>
+            </ul>
+
+
                 <ul th:each="subtask : ${task.getSubtasks()}" class="subtask">
-                    <p th:text="|SubTask: ${subtask.getName()}|"></p>
-                    <p th:text="|Beskrivelse: ${subtask.getDesc()}|"></p>
-                    <p th:text="|Ansvarlig: ${subtask.getWorkerID()}|"></p>
-                    <p th:text="|Start dato: ${subtask.getStart()} - Deadline: ${subtask.getDeadline()}|"></p>
-                    <p th:text="|Tid til opgaven: ${subtask.getDuration()}|"></p>
+                    <li th:text="|SubTask: ${subtask.getName()}|"></li>
+                    <li th:text="|Beskrivelse: ${subtask.getDesc()}|"></li>
+                    <li th:text="|Ansvarlig: ${subtask.getWorkerID()}|"></li>
+                    <li th:text="|Start dato: ${subtask.getStart()} - Deadline: ${subtask.getDeadline()}|"></li>
+                    <li th:text="|Tid til opgaven: ${subtask.getDuration()}|"></li>
                 </ul>
-            </li>
-            <a th:href="|/render-subtask-form/${project.getProjectID()}/${task.getTaskID()}|" class="button">Add new subtask</a>
-        </ul>
+                <a th:href="|/render-subtask-form/${project.getProjectID()}/${task.getTaskID()}|" class="button">Add new subtask</a>
+        </section>
         <a th:href="|/render-task-form/${project.getProjectID()}|" class="button">Add new task</a>
     </section>
 

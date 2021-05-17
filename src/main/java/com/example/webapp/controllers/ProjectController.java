@@ -29,7 +29,7 @@ public class ProjectController {
         return "opretProjekt.html";
     }
 
-    @PostMapping(value = "opretProjekt")
+    @PostMapping(value = "/opretProjekt")
     public String opretProjekt(@RequestParam("projectName") String projectName, @RequestParam("project-description") String description,
                                @RequestParam("deadline") String deadline, HttpServletRequest request) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -43,9 +43,19 @@ public class ProjectController {
         Project newProject = new Project(projectName, description, parsed);
 
         ProjectService projSer = new ProjectService();
-        projSer.makeProject(newProject);
+        boolean projectCreated= projSer.makeProject(newProject);
 
-        return "redirect:/render-all-projects";
+        if(projectCreated){
+           return "redirect:/render-all-projects";
+        }
+        else{
+            return "redirect:/project-not-created";
+        }
+    }
+
+    @GetMapping(value="/project-not-created")
+    public String projectNotCreated(){
+        return "projectNotCreated.html";
     }
 
     @GetMapping(value="/update-cache/{projectID}")
