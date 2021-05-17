@@ -2,7 +2,6 @@ package com.example.webapp.controllers;
 
 import com.example.webapp.models.Cache;
 import com.example.webapp.models.Project;
-import com.example.webapp.models.SubTask;
 import com.example.webapp.models.Task;
 import com.example.webapp.services.ProjectService;
 import com.example.webapp.services.SubTaskService;
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.websocket.server.PathParam;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,8 +50,6 @@ public class ProjectController {
 
     @GetMapping(value="/update-cache/{projectID}")
     public String updateCache(@PathVariable("projectID")int projectID){
-
-        System.out.println(projectID);
 
         Project tmpProject = cache.get(projectID);
 
@@ -93,7 +88,7 @@ public class ProjectController {
 
         if (cache.has(projectID)) {
            model.addAttribute("project", cache.get(projectID));
-            model.addAttribute("tasklist", cache.getList(projectID));
+           model.addAttribute("tasklist", cache.getList(projectID));
 
             return "projectview.html";
         } else {
