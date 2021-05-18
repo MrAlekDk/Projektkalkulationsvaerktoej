@@ -14,12 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 
 @Controller
 public class ProjectController {
@@ -123,7 +120,7 @@ public class ProjectController {
 
             allTasks = stService.getAllSubTasks(allTasks);
 
-            tService.calculateDuration(allTasks);
+            tService.calculateProjectDuration(allTasks);
             model.addAttribute("tasklist", allTasks);
 
             cache.set(projectID, tmpProject);

@@ -19,6 +19,7 @@ public class Controller {
 
     ProjectRep rep = new ProjectRep();
     Calculator tester = new Calculator();
+    TaskService teststartdate = new TaskService();
 
     @GetMapping(value = "/")
     public String renderLoginPage() {
@@ -39,7 +40,7 @@ public class Controller {
 
     @GetMapping(value = "/forside")
     public String index() {
-        tester.dailyWorkHours(rep.getSpecificProject(1));
+
         return "index.html";
     }
 }

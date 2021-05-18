@@ -5,7 +5,8 @@ import com.example.webapp.models.Task;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.ArrayList;
+
+import static java.util.concurrent.TimeUnit.DAYS;
 
 public class Calculator {
         private int hourPrice = 950;
@@ -26,15 +27,14 @@ public class Calculator {
         }
 
         public int dailyWorkHours(Project project){
-            int projectDuration = tService.calculateDuration(project.getTasks());
-            //int daysForProject = Integer.parseInt(String.valueOf(Duration.between(project.getTasks().get(0).getStartDate(), project.getDeadline()).toDays()));
-            System.out.println(project.getTasks());
-            System.out.println();
-            //int dailyWorkHours = projectDuration/daysForProject;
-           // System.out.println(dailyWorkHours);
-            return 1;
+            int projectDuration = tService.calculateProjectDuration(tService.getAllTasks(1));
+            LocalDate startDate = tService.getTaskStartDate(tService.getAllTasks(project.getProjectID()));
+            LocalDate deadline = project.getDeadline();
+            long daysBetween = Duration.between(startDate.atStartOfDay(), deadline.atStartOfDay()).toDays();
+
+            int dayWorkHours = projectDuration/(int)daysBetween;
+
+            return dayWorkHours;
         }
          //Droppede vi number of participants?
-
-
 }
