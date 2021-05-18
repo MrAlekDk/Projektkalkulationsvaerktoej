@@ -1,0 +1,52 @@
+.form{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+h2{
+    display: block;
+    font-size: 1.45em;
+    font-family: "Malgun Gothic";
+    text-transform: uppercase;
+    align-self: center;
+}
+.submitField{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 12px solid rgb(62, 127, 165);
+    min-width: 200px;
+    width: 20%;
+}
+
+label{
+    display: flex;
+    margin: 0 auto;
+    font-family: "Malgun Gothic";
+}
+
+input{
+    margin: 0 auto;
+    font-family: "Malgun Gothic";
+}
+
+button{
+    font-family:"Malgun Gothic";
+    color: #FF325A;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-decoration: none;
+    width: 100px;
+    margin:0 auto;
+    margin-bottom: 20px;
+}
+
+.button:hover{
+    background-color:white;
+    text-decoration: underline #FF325A;
+}

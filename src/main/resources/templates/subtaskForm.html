@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="fragments/head.html(currentPage='Opret projekt',stylesheet='/styles/opretprojekt.css')"></head>
+<head th:replace="fragments/head.html(currentPage='Opret projekt',stylesheet='/styles/formstyle.css')"></head>
 <body>
 <header th:replace="fragments/header.html"></header>
 
-<form action="/create-subtask" method="post" class="submitField">
 
-    <label for="taskID" >taskID:</label><br>
+<section class="form">
+<form action="/create-subtask" method="post" class="submitField">
+    <h2>Create a subtask</h2>
+    <label for="taskID" ></label><br>
     <input type="number" id="taskID" name="taskID" th:value="${taskID}" hidden>
 
-    <label for="projectID" >taskID:</label><br>
+    <label for="projectID" ></label><br>
     <input type="number" id="projectID" name="projectID" th:value="${projectID}" hidden>
 
     <label for="subtask-name" >Subtask-titel</label><br>
@@ -31,6 +33,7 @@
     <input type="Date" id="subtask-deadline" name="subtask-deadline" placeholder="subtask-deadline" required><br>
     <button>Add subtask</button>
 </form>
+</section>
 
 </body>
 </html>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="fragments/head.html(currentPage='Opret projekt',stylesheet='/styles/opretprojekt.css')"></head>
+<head th:replace="fragments/head.html(currentPage='Opret projekt',stylesheet='/styles/formstyle.css')"></head>
 <body>
 <header th:replace="fragments/header.html"></header>
-
+<section class="form">
 <form action="/create-task" method="post" class="submitField">
-    <label for="projectID" >ProjectID:</label><br>
+    <label for="projectID" ></label><br>
     <input type="number" id="projectID" name="projectID" th:value="${projectID}" hidden>
 
     <label for="task-name" >Task-titel</label><br>
@@ -24,6 +24,6 @@
     <input type="date" id="task-deadline" name="task-deadline" placeholder="deadline" required><br>
     <button>Opret ny task</button>
 </form>
-
+</section>
 </body>
 </html>
