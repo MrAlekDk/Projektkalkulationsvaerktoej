@@ -28,10 +28,10 @@ public class ProjectService {
 
     private boolean validateProjectDates(Project newProject) {
 
-        LocalDate deadline = newProject.getDeadline();
-        LocalDate dateNow = LocalDate.now();
+        Date deadline = newProject.getDeadline();
+        Date dateNow = new Date();
 
-        if(deadline.isBefore(dateNow)){
+        if(deadline.before(dateNow)){
             return false;
         }
         else{

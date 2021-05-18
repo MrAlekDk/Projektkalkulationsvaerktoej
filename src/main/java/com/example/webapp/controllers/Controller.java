@@ -1,6 +1,6 @@
 package com.example.webapp.controllers;
 
-import com.example.webapp.Services.Calculator;
+import com.example.webapp.services.Calculator;
 import com.example.webapp.Services.ProjectService;
 import com.example.webapp.Services.TaskService;
 import com.example.webapp.models.Project;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class Controller {
 
     ProjectRep rep = new ProjectRep();
-    Calculator tester = new Calculator();
+    //Calculator tester = new Calculator();
     TaskService teststartdate = new TaskService();
 
     @GetMapping(value = "/")

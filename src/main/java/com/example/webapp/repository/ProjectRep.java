@@ -45,11 +45,11 @@ public class ProjectRep {
             stmt.setString(2, newProject.getDesc());
 
 
-            java.time.LocalDate utilStartDate = newProject.getDeadline();
-            Date date = Date.from(Instant.from(utilStartDate));
-            java.sql.Date sqlDeadline = new java.sql.Date(date.getTime());
+            java.util.Date utilStartDate1 = newProject.getDeadline();
+            java.sql.Date sqlDeadline1 = new java.sql.Date(utilStartDate1.getTime());
 
-            stmt.setDate(3, sqlDeadline);
+
+            stmt.setDate(3, sqlDeadline1);
             stmt.setDouble(4, newProject.getProjectPrice());
             stmt.executeUpdate();
 
@@ -78,7 +78,7 @@ public class ProjectRep {
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        LocalDate.parse(rs.getString(4))
+                        rs.getDate(4)
                 );
                 allProjects.add(tmp);
             }
@@ -110,7 +110,7 @@ public class ProjectRep {
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getDate(4).toLocalDate()
+                        rs.getDate(4)
                 );
 
                 return tmpProject;

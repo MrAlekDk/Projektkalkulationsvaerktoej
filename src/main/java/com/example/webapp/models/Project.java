@@ -8,14 +8,14 @@ public class Project {
     private int projectID;
     private String title;
     private String desc;
-    private LocalDate deadline;
+    private Date deadline;
     private ArrayList<Worker> participants;
     private int nrOfParticipants;
     private int nrOfHours;
     private ArrayList<Task> tasks = new ArrayList<>();
     private double projectPrice;
 
-    public Project(String name, String desc, LocalDate deadline, ArrayList<Worker> participants, int nrOfParticipants, int nrOfHours, ArrayList<Task> tasks){
+    public Project(String name, String desc, Date deadline, ArrayList<Worker> participants, int nrOfParticipants, int nrOfHours, ArrayList<Task> tasks){
         this.title = name;
         this.desc = desc;
         this.deadline = deadline;
@@ -25,13 +25,13 @@ public class Project {
         this.tasks = tasks;
     }
 
-    public Project(String name, String desc, LocalDate deadline) {
+    public Project(String name, String desc, Date deadline) {
         this.title = name;
         this.desc = desc;
         this.deadline = deadline;
     }
 
-    public Project(int projectID, String name, String desc, LocalDate deadline) {
+    public Project(int projectID, String name, String desc, Date deadline) {
         this.projectID=projectID;
         this.title = name;
         this.desc = desc;
@@ -52,7 +52,7 @@ public class Project {
         return this.desc;
     }
 
-    public LocalDate getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
@@ -87,7 +87,7 @@ public class Project {
         this.desc = desc;
     }
 
-    public void setDeadline(LocalDate deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 
