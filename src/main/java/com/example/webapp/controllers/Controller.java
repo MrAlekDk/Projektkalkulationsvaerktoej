@@ -6,6 +6,7 @@ import com.example.webapp.Services.TaskService;
 import com.example.webapp.models.Project;
 import com.example.webapp.models.Task;
 import com.example.webapp.models.User;
+import com.example.webapp.repository.ProjectRep;
 import com.example.webapp.repository.TaskRep;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 @org.springframework.stereotype.Controller
 public class Controller {
 
-    TaskService test = new TaskService();
+    ProjectRep rep = new ProjectRep();
     Calculator tester = new Calculator();
 
     @GetMapping(value = "/")
@@ -29,6 +30,7 @@ public class Controller {
         User tmpUser = new User(mail,password);
 
         if(tmpUser.checkUser(mail,password)){
+
             return "redirect:/forside";
         }else{
             return "redirect:/";
@@ -37,18 +39,7 @@ public class Controller {
 
     @GetMapping(value = "/forside")
     public String index() {
-
-        TaskService tService = new TaskService();
-        ArrayList<Task> allTasks = tService.getAllTasks(1);
-
-        com.example.webapp.services.SubTaskService stService = new com.example.webapp.services.SubTaskService();
-        stService = new com.example.webapp.services.SubTaskService();
-
-        allTasks = stService.getAllSubTasks(allTasks);
-
-        tService.calculateDuration(allTasks);
-        test.calculateDuration(allTasks);
-        tester.timeForTasks(allTasks.get(13));
+        tester.dailyWorkHours(rep.getSpecificProject(1));
         return "index.html";
     }
 }

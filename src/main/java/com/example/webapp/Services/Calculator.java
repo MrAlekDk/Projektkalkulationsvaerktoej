@@ -25,10 +25,14 @@ public class Calculator {
             return daysForProject;
         }
 
-        public int idk(Project project){
+        public int dailyWorkHours(Project project){
             int projectDuration = tService.calculateDuration(project.getTasks());
-            int daysForProject = Integer.parseInt(String.valueOf(Duration.between(project.getTasks().get(0).getStartDate(), project.getDeadline()).toDays()));
-            return projectDuration/daysForProject;
+            //int daysForProject = Integer.parseInt(String.valueOf(Duration.between(project.getTasks().get(0).getStartDate(), project.getDeadline()).toDays()));
+            System.out.println(project.getTasks());
+            System.out.println();
+            //int dailyWorkHours = projectDuration/daysForProject;
+           // System.out.println(dailyWorkHours);
+            return 1;
         }
          //Droppede vi number of participants?
 

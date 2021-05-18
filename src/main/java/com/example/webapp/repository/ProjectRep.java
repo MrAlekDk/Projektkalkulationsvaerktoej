@@ -78,7 +78,7 @@ public class ProjectRep {
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        LocalDate.parse(rs.getString(5))
+                        LocalDate.parse(rs.getString(4))
                 );
                 allProjects.add(tmp);
             }
@@ -110,7 +110,7 @@ public class ProjectRep {
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        LocalDate.parse(rs.getString(4))
+                        rs.getDate(4).toLocalDate()
                 );
 
                 return tmpProject;
