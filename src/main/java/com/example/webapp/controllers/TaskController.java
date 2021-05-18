@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Controller
@@ -33,20 +35,26 @@ public class TaskController {
                               @RequestParam("task-duration")int duration,
                               @RequestParam("task-deadline")String deadline)
     {
-
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date parsedStart = null;
+
+        LocalDate parsedStart = LocalDate.parse(startDate, formatter);
+        LocalDate parsedDeadline = LocalDate.parse(deadline, formatter);
+        /*
+        Date parsedstart= null;
         try {
-            parsedStart = format.parse(startDate);
+            parsedstart = format.parse(startDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Date parsedDeadline = null;
+        Date parseddeadline = null;
         try {
             parsedDeadline = format.parse(deadline);
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+         */
 
         Task newTask = new Task(taskName, taskDesc, projectID, parsedStart,duration,parsedDeadline);
         TaskService tService = new TaskService();

@@ -3,28 +3,34 @@ package com.example.webapp.Services;
 import com.example.webapp.models.Project;
 import com.example.webapp.models.Task;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 public class Calculator {
-        private int hourPrice;
-        private int WeeklyWorkHours;
+        private int hourPrice = 950;
+        private int WeeklyWorkHours = 37;
+        TaskService tService = new TaskService();
 
+        public int getPriceForProject(int projectHours){
+            int projectPrice = hourPrice * projectHours;
+            return projectPrice;
+        }
 
+        public long timeForTasks(Task task){
+            LocalDate start = task.getStartDate();
+            LocalDate deadline = task.getTaskDeadline();
+            long daysForProject = Duration.between(start, deadline).toDays();
+            System.out.println(daysForProject);
+            return daysForProject;
+        }
 
-    /*public int calculateProjectPrice(Project projectToCalculate){
-        int hours = taskRep.calculateTime(projectToCalculate.getNrOfHours());
-        // Ved ikke helt hvordan vi finder ud af hvor mange der er af hver position, måske fra workerRep?
-        int nrOfParticipants = projectToCalculate.getNrOfParticipants();
-        int salary = 0;
-        int projectPrice = salary * hours * nrOfParticipants;
-        // Når vi har de forskellige posititions med kan vi bruge projectPrice for hver position og pluse det sammen til projektets totale pris.
-        return projectPrice;
-    }
+        public int idk(Project project){
+            int projectDuration = tService.calculateDuration(project.getTasks());
+            int daysForProject = Integer.parseInt(String.valueOf(Duration.between(project.getTasks().get(0).getStartDate(), project.getDeadline()).toDays()));
+            return projectDuration/daysForProject;
+        }
+         //Droppede vi number of participants?
 
-
-    public int calculateTimeForProject(int project_ID){
-        int hoursOfProject = taskRep.calculateTime(project_ID);
-        int nrOfParticipants = project.getNrOfParticipants();
-        //Måske et lille regnestykke her istedet for bare at vise det vil tage 200 timer fx. så også vise dage måske
-        return 1;
-    }*/
 
 }

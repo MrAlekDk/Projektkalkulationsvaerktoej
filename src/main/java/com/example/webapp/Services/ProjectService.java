@@ -3,6 +3,7 @@ package com.example.webapp.Services;
 import com.example.webapp.models.Project;
 import com.example.webapp.repository.ProjectRep;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -27,10 +28,10 @@ public class ProjectService {
 
     private boolean validateProjectDates(Project newProject) {
 
-        Date deadline = newProject.getDeadline();
-        Date dateNow = new Date();
+        LocalDate deadline = newProject.getDeadline();
+        LocalDate dateNow = LocalDate.now();
 
-        if(deadline.before(dateNow)){
+        if(deadline.isBefore(dateNow)){
             return false;
         }
         else{

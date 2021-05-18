@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -32,6 +34,11 @@ public class ProjectController {
     @PostMapping(value = "/opretProjekt")
     public String opretProjekt(@RequestParam("projectName") String projectName, @RequestParam("project-description") String description,
                                @RequestParam("deadline") String deadline, HttpServletRequest request) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        LocalDate parsed = LocalDate.parse(deadline, formatter);
+        /*
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date parsed = null;
         try {
@@ -39,6 +46,8 @@ public class ProjectController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+         */
 
         Project newProject = new Project(projectName, description, parsed);
 

@@ -1,5 +1,6 @@
 package com.example.webapp.controllers;
 
+import com.example.webapp.Services.Calculator;
 import com.example.webapp.Services.ProjectService;
 import com.example.webapp.Services.TaskService;
 import com.example.webapp.models.Project;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class Controller {
 
     TaskService test = new TaskService();
+    Calculator tester = new Calculator();
 
     @GetMapping(value = "/")
     public String renderLoginPage() {
@@ -46,6 +48,7 @@ public class Controller {
 
         tService.calculateDuration(allTasks);
         test.calculateDuration(allTasks);
+        tester.timeForTasks(allTasks.get(13));
         return "index.html";
     }
 }

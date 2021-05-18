@@ -1,5 +1,6 @@
 package com.example.webapp.models;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,12 +9,12 @@ public class Task {
     private String name;
     private String desc;
     private int projectID;
-    private Date startDate;
+    private LocalDate startDate;
     private int nrOfHours;
-    private Date taskDeadline;
+    private LocalDate taskDeadline;
     private ArrayList<SubTask> subtasks = new ArrayList<SubTask>();
 
-    public Task (String name, String desc, int projectID, Date startDate, int nrOfHours, Date taskDeadline){
+    public Task (String name, String desc, int projectID, LocalDate startDate, int nrOfHours, LocalDate taskDeadline){
         this.name = name;
         this.desc = desc;
         this.projectID = projectID;
@@ -22,7 +23,7 @@ public class Task {
         this.taskDeadline = taskDeadline;
     }
 
-    public Task (int taskID,String name, String desc, int projectID, Date startDate, int nrOfHours, Date taskDeadline){
+    public Task (int taskID,String name, String desc, int projectID, LocalDate startDate, int nrOfHours, LocalDate taskDeadline){
         this.taskID=taskID;
         this.name = name;
         this.desc = desc;
@@ -51,7 +52,7 @@ public class Task {
         return this.taskID;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
@@ -59,7 +60,7 @@ public class Task {
         return nrOfHours;
     }
 
-    public Date getTaskDeadline() {
+    public LocalDate getTaskDeadline() {
         return taskDeadline;
     }
 
@@ -81,7 +82,7 @@ public class Task {
         this.desc = desc;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
@@ -89,7 +90,7 @@ public class Task {
         this.nrOfHours = nrOfHours;
     }
 
-    public void setTaskDeadline(Date taskDeadline) {
+    public void setTaskDeadline(LocalDate taskDeadline) {
         this.taskDeadline = taskDeadline;
     }
 

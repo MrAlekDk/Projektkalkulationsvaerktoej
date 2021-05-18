@@ -6,6 +6,8 @@ import com.example.webapp.models.Project;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
@@ -43,8 +45,9 @@ public class ProjectRep {
             stmt.setString(2, newProject.getDesc());
 
 
-            java.util.Date utilStartDate = newProject.getDeadline();
-            java.sql.Date sqlDeadline = new java.sql.Date(utilStartDate.getTime());
+            java.time.LocalDate utilStartDate = newProject.getDeadline();
+            Date date = Date.from(Instant.from(utilStartDate));
+            java.sql.Date sqlDeadline = new java.sql.Date(date.getTime());
 
             stmt.setDate(3, sqlDeadline);
             stmt.setDouble(4, newProject.getProjectPrice());
@@ -75,7 +78,7 @@ public class ProjectRep {
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getDate(4)
+                        LocalDate.parse(rs.getString(5))
                 );
                 allProjects.add(tmp);
             }
@@ -107,7 +110,7 @@ public class ProjectRep {
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getDate(4)
+                        LocalDate.parse(rs.getString(4))
                 );
 
                 return tmpProject;

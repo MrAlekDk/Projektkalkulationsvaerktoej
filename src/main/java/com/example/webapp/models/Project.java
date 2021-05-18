@@ -1,5 +1,6 @@
 package com.example.webapp.models;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -7,14 +8,14 @@ public class Project {
     private int projectID;
     private String title;
     private String desc;
-    private Date deadline;
+    private LocalDate deadline;
     private ArrayList<Worker> participants;
     private int nrOfParticipants;
     private int nrOfHours;
     private ArrayList<Task> tasks = new ArrayList<>();
     private double projectPrice;
 
-    public Project(String name, String desc, Date deadline, ArrayList<Worker> participants, int nrOfParticipants, int nrOfHours, ArrayList<Task> tasks){
+    public Project(String name, String desc, LocalDate deadline, ArrayList<Worker> participants, int nrOfParticipants, int nrOfHours, ArrayList<Task> tasks){
         this.title = name;
         this.desc = desc;
         this.deadline = deadline;
@@ -24,13 +25,13 @@ public class Project {
         this.tasks = tasks;
     }
 
-    public Project(String name, String desc, Date deadline) {
+    public Project(String name, String desc, LocalDate deadline) {
         this.title = name;
         this.desc = desc;
         this.deadline = deadline;
     }
 
-    public Project(int projectID, String name, String desc, Date deadline) {
+    public Project(int projectID, String name, String desc, LocalDate deadline) {
         this.projectID=projectID;
         this.title = name;
         this.desc = desc;
@@ -51,7 +52,7 @@ public class Project {
         return this.desc;
     }
 
-    public Date getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
@@ -86,7 +87,7 @@ public class Project {
         this.desc = desc;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 

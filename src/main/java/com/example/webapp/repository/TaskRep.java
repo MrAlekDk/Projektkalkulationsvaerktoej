@@ -7,6 +7,9 @@ import com.example.webapp.models.Task;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
@@ -37,14 +40,17 @@ public class TaskRep {
             pstmt.setString(2, newTask.getDesc());
             pstmt.setInt(3, newTask.getProjectID());
 
-            java.util.Date utilStartDate1 = newTask.getStartDate();
-            java.sql.Date sqlDeadline1 = new java.sql.Date(utilStartDate1.getTime());
+
+            java.time.LocalDate utilStartDate1 = newTask.getStartDate();
+            Date date = Date.from(Instant.from(utilStartDate1));
+            java.sql.Date sqlDeadline1 = new java.sql.Date(date.getTime());
             pstmt.setDate(4,sqlDeadline1);
 
             pstmt.setInt(5, newTask.getNrOfHours());
 
-            java.util.Date utilStartDate2 = newTask.getTaskDeadline();
-            java.sql.Date sqlDeadline2 = new java.sql.Date(utilStartDate2.getTime());
+            java.time.LocalDate utilStartDate2 = newTask.getTaskDeadline();
+            Date date1 = Date.from(Instant.from(utilStartDate2));
+            java.sql.Date sqlDeadline2 = new java.sql.Date(date1.getTime());
             pstmt.setDate(6, sqlDeadline2);
             pstmt.executeUpdate();
 
@@ -55,6 +61,7 @@ public class TaskRep {
 
     public ArrayList<Task> getAllTasks(int projectID) {
         ArrayList<Task> allTasks = new ArrayList<Task>();
+        Date date;
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -74,8 +81,9 @@ public class TaskRep {
                         rs.getString(2),
                         rs.getString(3),
                         rs.getInt(4),
-                        rs.getDate(5),
-                        rs.getInt(6),rs.getDate(7)
+                        LocalDate.parse(rs.getString(5)),
+                        rs.getInt(6),
+                        LocalDate.parse(rs.getString(7))
                 );
                 allTasks.add(tmp);
             }
