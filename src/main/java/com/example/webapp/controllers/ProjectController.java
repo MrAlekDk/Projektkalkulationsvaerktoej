@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -113,7 +111,6 @@ public class ProjectController {
             ArrayList<Task> allTasks = tService.getAllTasks(projectID);
 
             SubTaskService stService = new SubTaskService();
-            stService = new SubTaskService();
 
             allTasks = stService.getAllSubTasks(allTasks);
 
