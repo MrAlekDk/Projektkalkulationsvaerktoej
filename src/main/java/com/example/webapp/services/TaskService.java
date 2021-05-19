@@ -1,12 +1,8 @@
-package com.example.webapp.Services;
+package com.example.webapp.services;
 
-import com.example.webapp.models.SubTask;
 import com.example.webapp.models.Task;
 import com.example.webapp.repository.TaskRep;
-import com.example.webapp.services.SubTaskService;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -24,7 +20,8 @@ public class TaskService {
     public boolean addTask(String name, String desc, int projectID, String startDate, int duration, String deadline) {
 
         Task newTask = new Task(name, desc, projectID, startDate, duration, deadline);
-        if(newTask.getTaskDeadline().before(newTask.getStartDate())){
+        Date dateNow = new Date();
+        if(newTask.getTaskDeadline().before(newTask.getStartDate())||newTask.getStartDate().before(dateNow)){
             return false;
         }
         else{

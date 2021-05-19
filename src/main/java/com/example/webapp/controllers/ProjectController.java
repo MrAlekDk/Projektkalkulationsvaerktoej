@@ -1,10 +1,10 @@
 package com.example.webapp.controllers;
 
-import com.example.webapp.models.Cache;
 import com.example.webapp.models.Project;
-import com.example.webapp.Services.ProjectService;
+import com.example.webapp.models.Task;
+import com.example.webapp.services.ProjectService;
 import com.example.webapp.services.SubTaskService;
-import com.example.webapp.Services.TaskService;
+import com.example.webapp.services.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
+
 
 @Controller
 public class ProjectController {
@@ -32,17 +31,7 @@ public class ProjectController {
     public String opretProjekt(@RequestParam("projectName") String projectName, @RequestParam("project-description") String description,
                                @RequestParam("deadline") String deadline) {
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date parsed = null;
-        try {
-            parsed = format.parse(deadline);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        Project newProject = new Project(projectName, description, parsed);
-        projectService = new ProjectService();
-        boolean projectCreated = projectService.makeProject(newProject);
+        boolean projectCreated = projectService.makeProject(projectName,description,deadline);
 
         if (projectCreated) {
             return "redirect:/render-all-projects";
@@ -72,8 +61,11 @@ public class ProjectController {
 
     @GetMapping(value = "/renderProject/{projectID}")
     public String renderProject(Model model, @PathVariable("projectID") int projectID) {
-        model.addAttribute("project", projectService.getSpecificProject(projectID));
-        model.addAttribute("tasklist", subTaskService.getAllSubTasks(taskService.getAllTasks(projectID)));
+        Project tmp = projectService.getSpecificProject(projectID);
+        model.addAttribute("project", tmp);
+        ArrayList<Task> allTasks = new ArrayList<>(subTaskService.getAllSubTasks(taskService.getAllTasks(projectID)));
+        model.addAttribute("tasklist", allTasks);
+        model.addAttribute("gnstimer", projectService.getDailyWorkHours(allTasks,tmp.getDeadline()));
 
         return "projectview.html";
     }

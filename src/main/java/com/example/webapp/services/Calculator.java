@@ -1,4 +1,4 @@
-package com.example.webapp.Services;
+package com.example.webapp.services;
 
 import com.example.webapp.models.Project;
 import com.example.webapp.models.Task;
@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import static java.time.Instant.ofEpochMilli;
-
 public class Calculator {
         private int hourPrice = 950;
         private int WeeklyWorkHours = 37;
         TaskService tService = new TaskService();
+        SubTaskService stService = new SubTaskService();
 
         public int getPriceForProject(int projectHours){
             int projectPrice = hourPrice * projectHours;
@@ -21,7 +20,7 @@ public class Calculator {
         }
 
         public int hoursForProject(Project project){
-            Date startDate = tService.orderTaskStartDate(project.getTasks());
+            Date startDate = new Date();
             Date deadline = project.getDeadline();
 
             LocalDate start = Instant.ofEpochMilli(startDate.getTime())
@@ -36,9 +35,10 @@ public class Calculator {
              return days * 8;
         }
 
-        public int dailyWorkHours(Project project){
-            Date startDate = tService.orderTaskStartDate(project.getTasks());
-            Date deadline = project.getDeadline();
+        public int dailyWorkHours(ArrayList<Task> tasks, Date deadline){
+            Date startDate = new Date();
+                    //tService.orderTaskStartDate(tasks);
+            //Date deadline = project.getDeadline();
 
             Calendar start = Calendar.getInstance();
             Calendar dead = Calendar.getInstance();
@@ -46,16 +46,17 @@ public class Calculator {
             start.setTime(startDate);
             dead.setTime(deadline);
             int days = 0;
-
             while (start.before(dead)){
                 if (Calendar.SATURDAY != start.get(Calendar.DAY_OF_WEEK) && Calendar.SUNDAY != start.get(Calendar.DAY_OF_WEEK)){
                     days++;
                 }
+                start.add(Calendar.DATE,1);
             }
 
-            int workHours = tService.calculateProjectDuration(project.getTasks());
+            System.out.println(days);
+            int workHours = tService.calculateProjectDuration(tasks);
 
-           int dailyWorkHours = days/workHours;
+           int dailyWorkHours = workHours/days;
 
             return dailyWorkHours;
         }

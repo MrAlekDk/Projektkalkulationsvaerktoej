@@ -1,26 +1,30 @@
-package com.example.webapp.Services;
+package com.example.webapp.services;
 
 import com.example.webapp.models.Cache;
 import com.example.webapp.models.Project;
+import com.example.webapp.models.Task;
 import com.example.webapp.repository.ProjectRep;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class ProjectService {
     private ProjectRep projectRep;
     private Cache projectCache;
+    Calculator projectCalculator;
 
     public ProjectService(){
         projectCache = new Cache();
         this.projectRep = new ProjectRep();
+        projectCalculator = new Calculator();
     }
 
-    public boolean makeProject(Project newProject){
-        newProject.setProjectPrice(500.00);
+    public boolean makeProject(String name, String description, String deadline){
 
+        Project newProject = new Project(name, description, deadline);
         if(validateProjectDates(newProject)==true){
+            newProject.setNrOfHours(projectCalculator.hoursForProject(newProject));
+            newProject.setProjectPrice(projectCalculator.getPriceForProject(newProject.getNrOfHours()));
             projectRep.createProject(newProject);
             updateCache();
             return true;
@@ -72,5 +76,9 @@ public class ProjectService {
 
     public void updateCache(){
         projectCache.setProjects(projectRep.getAllProjects());
+    }
+
+    public int getDailyWorkHours(ArrayList<Task> tasks, Date deadline) {
+        return projectCalculator.dailyWorkHours(tasks, deadline);
     }
 }

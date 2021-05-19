@@ -1,10 +1,6 @@
 package com.example.webapp.models;
 
-import com.example.webapp.Services.ProjectService;
-import com.example.webapp.Services.TaskService;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;

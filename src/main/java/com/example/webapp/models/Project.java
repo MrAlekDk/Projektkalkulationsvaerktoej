@@ -1,5 +1,7 @@
 package com.example.webapp.models;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,17 +27,30 @@ public class Project {
         this.tasks = tasks;
     }
 
-    public Project(String name, String desc, Date deadline) {
+    public Project(String name, String desc, String deadline) {
         this.title = name;
         this.desc = desc;
-        this.deadline = deadline;
+        this.deadline = convertStringToDate(deadline);
     }
 
-    public Project(int projectID, String name, String desc, Date deadline) {
+    public Project(int projectID, String name, String desc, Date deadline,int nrOfHours,double price) {
         this.projectID=projectID;
         this.title = name;
         this.desc = desc;
         this.deadline = deadline;
+        this.nrOfHours = nrOfHours;
+        this.projectPrice=price;
+    }
+
+    public Date convertStringToDate(String date){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date parsed = null;
+        try {
+           parsed = format.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return parsed;
     }
 
     // ----------------------------|| Getters ||---------------------------- //

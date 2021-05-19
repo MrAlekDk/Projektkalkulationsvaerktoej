@@ -3,10 +3,9 @@ package com.example.webapp.services;
 import com.example.webapp.models.SubTask;
 import com.example.webapp.models.Task;
 import com.example.webapp.repository.SubTaskRep;
-import com.example.webapp.repository.TaskRep;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class SubTaskService {
 
@@ -22,7 +21,8 @@ public class SubTaskService {
     public boolean addTask(String name, String desc, int workerID, int taskID, String startDate,int duration, String deadline) {
 
         SubTask newSubTask = new SubTask(name, desc, workerID, taskID, startDate, duration, deadline);
-        if(newSubTask.getDeadline().before(newSubTask.getStart())){
+        Date dateNow = new Date();
+        if(newSubTask.getDeadline().before(newSubTask.getStart())||newSubTask.getStart().before(dateNow)){
             return false;
         }
         else{

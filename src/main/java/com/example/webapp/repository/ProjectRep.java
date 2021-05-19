@@ -39,7 +39,7 @@ public class ProjectRep {
 
         try {
             Connection conn = DriverManager.getConnection(url, user, password);
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Project (ProjectName,ProjectNarrative,Deadline,Price ) VALUES (?,?,?,?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Project (ProjectName,ProjectNarrative,Deadline,ProjectDuration,Price ) VALUES (?,?,?,?,?)");
 
             stmt.setString(1, newProject.getName());
             stmt.setString(2, newProject.getDesc());
@@ -50,7 +50,8 @@ public class ProjectRep {
 
 
             stmt.setDate(3, sqlDeadline1);
-            stmt.setDouble(4, newProject.getProjectPrice());
+            stmt.setInt(4,newProject.getNrOfHours());
+            stmt.setDouble(5, newProject.getProjectPrice());
             stmt.executeUpdate();
 
             conn.close();
@@ -78,7 +79,9 @@ public class ProjectRep {
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getDate(4)
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getDouble(6)
                 );
                 allProjects.add(tmp);
             }
@@ -110,7 +113,9 @@ public class ProjectRep {
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getDate(4)
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getDouble(6)
                 );
 
                 return tmpProject;
