@@ -8,6 +8,7 @@ import com.example.webapp.models.Task;
 import com.example.webapp.models.User;
 import com.example.webapp.repository.ProjectRep;
 import com.example.webapp.repository.TaskRep;
+import com.example.webapp.services.SubTaskService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,8 @@ public class Controller {
 
     ProjectRep rep = new ProjectRep();
     Calculator tester = new Calculator();
+    TaskService test = new TaskService();
+    com.example.webapp.services.SubTaskService yes = new SubTaskService();
 
     @GetMapping(value = "/")
     public String renderLoginPage() {
