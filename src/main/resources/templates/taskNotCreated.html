@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head.html(currentPage='Opret projekt',stylesheet='/styles/formstyle.css')"></head>
+<body>
+<header th:replace="fragments/header.html"></header>
+
+<section class="form-header">
+    <h1>Sorry, task not created!</h1>
+</section>
+<a th:href="|render-task-form/${projectID}|"><button>Go back to create task</button></a>
+</body>
+</html>

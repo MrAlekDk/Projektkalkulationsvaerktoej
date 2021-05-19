@@ -2,7 +2,6 @@ package com.example.webapp.controllers;
 
 import com.example.webapp.models.Cache;
 import com.example.webapp.models.Project;
-import com.example.webapp.models.Task;
 import com.example.webapp.Services.ProjectService;
 import com.example.webapp.services.SubTaskService;
 import com.example.webapp.Services.TaskService;
@@ -16,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 @Controller
 public class ProjectController {
-
-    Cache cache = new Cache();
+    private ProjectService projectService = new ProjectService();
+    private TaskService taskService = new TaskService();
+    private SubTaskService subTaskService = new SubTaskService();
 
     @GetMapping(value = "/projekt-form")
     public String renderProjectForm() {
@@ -31,7 +30,7 @@ public class ProjectController {
 
     @PostMapping(value = "/opretProjekt")
     public String opretProjekt(@RequestParam("projectName") String projectName, @RequestParam("project-description") String description,
-                               @RequestParam("deadline")String deadline) {
+                               @RequestParam("deadline") String deadline) {
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date parsed = null;
@@ -42,83 +41,41 @@ public class ProjectController {
         }
 
         Project newProject = new Project(projectName, description, parsed);
-        ProjectService projSer = new ProjectService();
-        boolean projectCreated= projSer.makeProject(newProject);
+        projectService = new ProjectService();
+        boolean projectCreated = projectService.makeProject(newProject);
 
-        if(projectCreated){
-           return "redirect:/render-all-projects";
-        }
-        else{
+        if (projectCreated) {
+            return "redirect:/render-all-projects";
+        } else {
             return "redirect:/project-not-created";
         }
     }
 
-    @GetMapping(value="/project-not-created")
-    public String projectNotCreated(){
+    @GetMapping(value = "/project-not-created")
+    public String projectNotCreated() {
         return "projectNotCreated.html";
     }
 
-    @GetMapping(value="/update-cache/{projectID}")
-    public String updateCache(@PathVariable("projectID")int projectID){
+    @GetMapping(value = "/update-cache/{projectID}")
+    public String updateCache(@PathVariable("projectID") int projectID) {
 
-        Project tmpProject = cache.get(projectID);
-
-        TaskService tService = new TaskService();
-        ArrayList<Task> allTasks = tService.getAllTasks(projectID);
-
-        SubTaskService stService = new SubTaskService();
-        allTasks = stService.getAllSubTasks(allTasks);
-
-        cache.set(projectID, tmpProject);
-        cache.setList(projectID, allTasks);
-
-
-        return "redirect:/renderProject/"+projectID;
+        return "redirect:/renderProject/" + projectID;
     }
 
-    @GetMapping(value="render-all-projects")
+    @GetMapping(value = "render-all-projects")
     public String renderAllProjects(Model model, HttpServletRequest request) {
+        model.addAttribute("projectList", projectService.getAllProjects());
 
-        if(cache.hasProjects()){
-            model.addAttribute("projectList",cache.getAllProjects());
-
-        }
-        else{
-            ProjectService proService = new ProjectService();
-            ArrayList<Project> tmp = proService.getAllProjectS();
-            model.addAttribute("projectList",proService.getAllProjectS());
-            cache.setProjects(tmp);
-        }
         return "allProjectsView.html";
     }
 
 
-    @GetMapping(value ="/renderProject/{projectID}")
+    @GetMapping(value = "/renderProject/{projectID}")
     public String renderProject(Model model, @PathVariable("projectID") int projectID) {
+        model.addAttribute("project", projectService.getSpecificProject(projectID));
+        model.addAttribute("tasklist", subTaskService.getAllSubTasks(taskService.getAllTasks(projectID)));
 
-        if (cache.has(projectID)) {
-           model.addAttribute("project", cache.get(projectID));
-           model.addAttribute("tasklist", cache.getList(projectID));
-
-            return "projectview.html";
-        } else {
-            ProjectService projSer = new ProjectService();
-            Project tmpProject = projSer.getSpecificProject(projectID);
-            model.addAttribute("project", tmpProject);
-
-            TaskService tService = new TaskService();
-            ArrayList<Task> allTasks = tService.getAllTasks(projectID);
-
-            SubTaskService stService = new SubTaskService();
-
-            allTasks = stService.getAllSubTasks(allTasks);
-
-            tService.calculateProjectDuration(allTasks);
-            model.addAttribute("tasklist", allTasks);
-
-            cache.set(projectID, tmpProject);
-            cache.setList(projectID, allTasks);
-            return "projectview.html";
-        }
+        return "projectview.html";
     }
+
 }

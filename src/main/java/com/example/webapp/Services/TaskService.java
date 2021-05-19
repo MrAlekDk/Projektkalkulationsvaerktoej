@@ -21,8 +21,16 @@ public class TaskService {
 
     }
 
-    public void addTask(Task newTask) {
-        this.taskRep.addTask(newTask);
+    public boolean addTask(String name, String desc, int projectID, String startDate, int duration, String deadline) {
+
+        Task newTask = new Task(name, desc, projectID, startDate, duration, deadline);
+        if(newTask.getTaskDeadline().before(newTask.getStartDate())){
+            return false;
+        }
+        else{
+            this.taskRep.addTask(newTask);
+            return true;
+        }
     }
 
     public int calculateProjectDuration(ArrayList<Task> taskID){

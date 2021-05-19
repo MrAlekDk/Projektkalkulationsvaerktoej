@@ -19,8 +19,16 @@ public class SubTaskService {
     }
 
 
-    public void addTask(SubTask newSubTask) {
-        this.subTaskRep.addSubTask(newSubTask);
+    public boolean addTask(String name, String desc, int workerID, int taskID, String startDate,int duration, String deadline) {
+
+        SubTask newSubTask = new SubTask(name, desc, workerID, taskID, startDate, duration, deadline);
+        if(newSubTask.getDeadline().before(newSubTask.getStart())){
+            return false;
+        }
+        else{
+            this.subTaskRep.addSubTask(newSubTask);
+            return true;
+        }
     }
 
     public ArrayList<Task> getAllSubTasks(ArrayList<Task> allTask) {
