@@ -14,8 +14,12 @@
         <p class="white">Deltagere: </p>
         <p th:text="${project.getParticipants()}" class="white"></p>
         <p th:text="|Deadline: ${project.getDeadline()}|" class="white"></p>
+        <p th:text="|Deadline: ${#dates.format(project.getDeadline(), 'dd-MM-yyyy')}|" class="white"></p>
+
         <p th:text="|Projekt pris: ${project.getProjectPrice()}|" class="white"></p>
     </section>
+
+
 
     <section class="box-element-tasks">
         <h3>List of tasks for the project</h3>

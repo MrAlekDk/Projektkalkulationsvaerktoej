@@ -19,86 +19,65 @@ import java.util.Date;
 
 @Controller
 public class TaskController {
+    private TaskService taskService = new TaskService();
+    private SubTaskService subTaskService = new SubTaskService();
+
 
     @GetMapping(value = "/render-task-form/{projectID}")
-    public String renderTaskForm(@PathVariable("projectID")int projectID,Model model) {
+    public String renderTaskForm(@PathVariable("projectID") int projectID, Model model) {
 
-        model.addAttribute("projectID",projectID);
+        model.addAttribute("projectID", projectID);
         return "taskForm.html";
     }
 
     @PostMapping(value = "/create-task")
-    public String createTasks(@RequestParam("projectID")int projectID,
+    public String createTasks(@RequestParam("projectID") int projectID,
                               @RequestParam("task-name") String taskName,
                               @RequestParam("task-description") String taskDesc,
                               @RequestParam("task-startdate") String startDate,
-                              @RequestParam("task-duration")int duration,
-                              @RequestParam("task-deadline")String deadline)
-    {
+                              @RequestParam("task-duration") int duration,
+                              @RequestParam("task-deadline") String deadline,Model model) {
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
-        Date parsedStart= null;
-        try {
-            parsedStart = format.parse(startDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Date parsedDeadline = null;
-        try {
-            parsedDeadline = format.parse(deadline);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        boolean taskCreated = taskService.addTask(taskName, taskDesc, projectID, startDate, duration, deadline);
+        if (taskCreated) {
+            return "redirect:/update-cache/" + projectID;
+        } else {
+            model.addAttribute("projectID",projectID);
+            return "taskNotCreated.html";
         }
 
-
-        Task newTask = new Task(taskName, taskDesc, projectID, parsedStart,duration,parsedDeadline);
-        TaskService tService = new TaskService();
-        tService.addTask(newTask);
-
-
-        return "redirect:/update-cache/"+projectID;
     }
 
     @GetMapping(value = "/render-subtask-form/{projectID}/{taskID}")
-    public String renderSubtaskForm(@PathVariable("projectID")int projectID, @PathVariable("taskID")int taskID,Model model){
+    public String renderSubtaskForm(@PathVariable("projectID") int projectID, @PathVariable("taskID") int taskID, Model model) {
 
-        model.addAttribute("taskID",taskID);
-        model.addAttribute("projectID",projectID);
+        model.addAttribute("taskID", taskID);
+        model.addAttribute("projectID", projectID);
 
         return "subtaskForm.html";
     }
 
-    @PostMapping(value="create-subtask")
-    public String createSubtask(@RequestParam("projectID")int projectID,
-                                @RequestParam("taskID")int taskID,
+    @PostMapping(value = "create-subtask")
+    public String createSubtask(@RequestParam("projectID") int projectID,
+                                @RequestParam("taskID") int taskID,
                                 @RequestParam("subtask-name") String taskName,
                                 @RequestParam("subtask-description") String taskDesc,
-                                @RequestParam("subtask-worker")int workerID,
-                                @RequestParam("subtask-start-date")String startDate,
-                                @RequestParam("subtask-duration")int duration,
-                                @RequestParam("subtask-deadline")String deadline){
+                                @RequestParam("subtask-worker") int workerID,
+                                @RequestParam("subtask-start-date") String startDate,
+                                @RequestParam("subtask-duration") int duration,
+                                @RequestParam("subtask-deadline") String deadline, Model model) {
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date parsedStart = null;
-        try {
-            parsedStart = format.parse(startDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        boolean sTaskCreated = subTaskService.addTask(taskName, taskDesc, workerID, taskID, startDate, duration, deadline);
+        if(sTaskCreated){
+            return "redirect:/update-cache/" + projectID;
         }
-        Date parsedDeadline = null;
-        try {
-            parsedDeadline = format.parse(deadline);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        else{
+            model.addAttribute("projectID",projectID);
+            model.addAttribute("taskID",taskID);
+            return "subTaskNotCreated.html";
         }
 
-        SubTask newSubTask = new SubTask(taskName,taskDesc,workerID,taskID,parsedStart,duration,parsedDeadline);
 
-        SubTaskService stService = new SubTaskService();
-        stService.addTask(newSubTask);
-
-        return "redirect:/update-cache/"+projectID;
     }
 
 

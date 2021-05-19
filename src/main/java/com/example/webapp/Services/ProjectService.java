@@ -1,5 +1,6 @@
 package com.example.webapp.Services;
 
+import com.example.webapp.models.Cache;
 import com.example.webapp.models.Project;
 import com.example.webapp.repository.ProjectRep;
 
@@ -9,8 +10,10 @@ import java.util.Date;
 
 public class ProjectService {
     private ProjectRep projectRep;
+    private Cache projectCache;
 
     public ProjectService(){
+        projectCache = new Cache();
         this.projectRep = new ProjectRep();
     }
 
@@ -19,6 +22,7 @@ public class ProjectService {
 
         if(validateProjectDates(newProject)==true){
             projectRep.createProject(newProject);
+            updateCache();
             return true;
         }
         else {
@@ -40,22 +44,33 @@ public class ProjectService {
     }
 
     public double calculateProjectPrice(Project projectToCalculate){
-
         return 500.00;
         //int hours = taskRep.calculateTime(project_ID);
-
-
         // Ved ikke helt hvordan vi finder ud af hvor mange der er af hver position, måske fra workerRep?
         //int projectPrice = salary * hours * nrOfParticipants;
         // Når vi har de forskellige posititions med kan vi bruge projectPrice for hver position og pluse det sammen til projektets totale pris.
         //return projectPrice;
     }
 
-    public ArrayList<Project> getAllProjectS() {
-        return projectRep.getAllProjects();
+    public ArrayList<Project> getAllProjects() {
+        if(projectCache.hasProjects()){
+            return projectCache.getAllProjects();
+        }
+        else{
+            projectCache.setProjects(projectRep.getAllProjects());
+            return projectCache.getAllProjects();
+        }
     }
 
     public Project getSpecificProject(int projectID) {
+        if(projectCache.has(projectID)){
+            return projectCache.getProject(projectID);
+        }
+
         return projectRep.getSpecificProject(projectID);
+    }
+
+    public void updateCache(){
+        projectCache.setProjects(projectRep.getAllProjects());
     }
 }

@@ -3,10 +3,6 @@ package com.example.webapp.Services;
 import com.example.webapp.models.Project;
 import com.example.webapp.models.Task;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 public class Calculator {
         private int hourPrice = 950;
         private int WeeklyWorkHours = 37;
@@ -24,6 +20,7 @@ public class Calculator {
             return daysForProject;
         }
 
+
         public int dailyWorkHours(Project project){
             int projectDuration = tService.calculateDuration(project.getTasks());
             //int daysForProject = Integer.parseInt(String.valueOf(Duration.between(project.getTasks().get(0).getStartDate(), project.getDeadline()).toDays()));
@@ -37,6 +34,7 @@ public class Calculator {
 
  */
          //Droppede vi number of participants?
+
 
 
 }

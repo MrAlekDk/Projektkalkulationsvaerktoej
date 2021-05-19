@@ -13,7 +13,7 @@ public class Cache {
 
     Map<Integer, Project> map = new HashMap<Integer, Project>();
     Map<Integer, ArrayList<Task>> test = new HashMap<Integer, ArrayList<Task>>();
-    ArrayList<Project> allProjects = new ArrayList<>();
+
 
     public Project get(int key){
         return map.get(key);
@@ -24,13 +24,18 @@ public class Cache {
         return map.put(key, value);
     }
     public ArrayList<Task> setList(int key, ArrayList<Task> list){return test.put(key, list);}
-    public Boolean has(int key){
-        return map.containsKey(key);
+
+    public Boolean has(int projectID){
+        return map.containsKey(projectID);
     }
 
     public void setProjects(ArrayList<Project> allProjects){
-        this.allProjects = allProjects;
+
+        for (int i = 0; i < allProjects.size(); i++) {
+            map.put(allProjects.get(i).getProjectID(),allProjects.get(i));
+        }
     }
+
 
     public void delete(int key){
         map.remove(key);
@@ -43,7 +48,7 @@ public class Cache {
     }
 
     public boolean hasProjects() {
-        if (allProjects.isEmpty()) {
+        if (map.isEmpty()) {
             return false;
         } else {
             return true;
@@ -51,26 +56,18 @@ public class Cache {
 
     }
 
-    public Project getProject(int projectID){
-        ProjectService projSer = new ProjectService();
-        Project tmpProject = projSer.getSpecificProject(projectID);
-        return tmpProject;
-    }
 
-    public ArrayList<Task> getAllTasks(int projectID){
-        TaskService tService = new TaskService();
-        ArrayList<Task> allTasks = tService.getAllTasks(projectID);
 
-        com.example.webapp.services.SubTaskService stService = new com.example.webapp.services.SubTaskService();
-        stService = new com.example.webapp.services.SubTaskService();
-
-        allTasks = stService.getAllSubTasks(allTasks);
-
-        return allTasks;
+    public void getAllTasks(int projectID){
+        //return allTasks;
     }
 
 
     public ArrayList<Project> getAllProjects() {
-        return this.allProjects;
+        return new ArrayList<Project>(map.values());
+    }
+
+    public Project getProject(int projectID) {
+        return map.get(projectID);
     }
 }

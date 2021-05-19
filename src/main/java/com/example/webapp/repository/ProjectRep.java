@@ -13,9 +13,9 @@ import java.util.Date;
 import java.util.Properties;
 
 public class ProjectRep {
-    private String url;
-    private String user;
-    private String password;
+    private String url = "jdbc:mysql://den1.mysql6.gear.host:3306/projectcalcdb";
+    private String user = "projectcalcdb";
+    private String password = "Br1499!_QzIc";
 
     public ProjectRep() {
         Properties prop = new Properties();
