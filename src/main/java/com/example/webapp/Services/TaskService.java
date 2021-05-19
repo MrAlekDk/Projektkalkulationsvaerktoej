@@ -7,6 +7,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 public class TaskService {
     private TaskRep taskRep;
@@ -36,15 +37,16 @@ public class TaskService {
     public ArrayList<Task> getAllTasks(int projectID) {
         return taskRep.getAllTasks(projectID);
     }
-    public LocalDate getTaskStartDate(ArrayList<Task> taskID) {
 
-        ArrayList<LocalDate> allStartDates = new ArrayList<>();
+    public Date getTaskStartDate(ArrayList<Task> taskID) {
+
+        ArrayList<Date> allStartDates = new ArrayList<>();
 
         for (int i = 0; i < taskID.size(); i++) {
             allStartDates.add(taskID.get(i).getStartDate());
         }
             Collections.sort(allStartDates);
-            LocalDate firstStartDate = allStartDates.get(0);
+            Date firstStartDate = allStartDates.get(0);
         System.out.println(firstStartDate);
             return firstStartDate;
     }

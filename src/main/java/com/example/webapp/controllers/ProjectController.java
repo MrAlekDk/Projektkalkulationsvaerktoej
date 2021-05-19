@@ -42,7 +42,6 @@ public class ProjectController {
         }
 
         Project newProject = new Project(projectName, description, parsed);
-
         ProjectService projSer = new ProjectService();
         boolean projectCreated= projSer.makeProject(newProject);
 

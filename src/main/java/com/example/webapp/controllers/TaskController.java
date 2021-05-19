@@ -35,26 +35,22 @@ public class TaskController {
                               @RequestParam("task-duration")int duration,
                               @RequestParam("task-deadline")String deadline)
     {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
-        LocalDate parsedStart = LocalDate.parse(startDate, formatter);
-        LocalDate parsedDeadline = LocalDate.parse(deadline, formatter);
-        /*
-        Date parsedstart= null;
+        Date parsedStart= null;
         try {
-            parsedstart = format.parse(startDate);
+            parsedStart = format.parse(startDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Date parseddeadline = null;
+        Date parsedDeadline = null;
         try {
             parsedDeadline = format.parse(deadline);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-         */
 
         Task newTask = new Task(taskName, taskDesc, projectID, parsedStart,duration,parsedDeadline);
         TaskService tService = new TaskService();

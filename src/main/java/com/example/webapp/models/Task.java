@@ -9,12 +9,12 @@ public class Task {
     private String name;
     private String desc;
     private int projectID;
-    private LocalDate startDate;
+    private Date startDate;
     private int nrOfHours;
-    private LocalDate taskDeadline;
+    private Date taskDeadline;
     private ArrayList<SubTask> subtasks = new ArrayList<SubTask>();
 
-    public Task (String name, String desc, int projectID, LocalDate startDate, int nrOfHours, LocalDate taskDeadline){
+    public Task (String name, String desc, int projectID, Date startDate, int nrOfHours, Date taskDeadline){
         this.name = name;
         this.desc = desc;
         this.projectID = projectID;
@@ -23,7 +23,7 @@ public class Task {
         this.taskDeadline = taskDeadline;
     }
 
-    public Task (int taskID,String name, String desc, int projectID, LocalDate startDate, int nrOfHours, LocalDate taskDeadline){
+    public Task (int taskID,String name, String desc, int projectID, Date startDate, int nrOfHours, Date taskDeadline){
         this.taskID=taskID;
         this.name = name;
         this.desc = desc;
@@ -52,7 +52,7 @@ public class Task {
         return this.taskID;
     }
 
-    public LocalDate getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
@@ -60,7 +60,7 @@ public class Task {
         return nrOfHours;
     }
 
-    public LocalDate getTaskDeadline() {
+    public Date getTaskDeadline() {
         return taskDeadline;
     }
 
@@ -82,7 +82,7 @@ public class Task {
         this.desc = desc;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
@@ -90,7 +90,7 @@ public class Task {
         this.nrOfHours = nrOfHours;
     }
 
-    public void setTaskDeadline(LocalDate taskDeadline) {
+    public void setTaskDeadline(Date taskDeadline) {
         this.taskDeadline = taskDeadline;
     }
 

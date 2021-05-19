@@ -10,6 +10,7 @@ import java.sql.*;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
@@ -41,17 +42,16 @@ public class TaskRep {
             pstmt.setInt(3, newTask.getProjectID());
 
 
-            java.time.LocalDate utilStartDate1 = newTask.getStartDate();
-            Date date = Date.from(Instant.from(utilStartDate1));
-            java.sql.Date sqlDeadline1 = new java.sql.Date(date.getTime());
+            java.util.Date utilStartDate1 = newTask.getStartDate();
+            java.sql.Date sqlDeadline1 = new java.sql.Date(utilStartDate1.getTime());
             pstmt.setDate(4,sqlDeadline1);
 
             pstmt.setInt(5, newTask.getNrOfHours());
 
-            java.time.LocalDate utilStartDate2 = newTask.getTaskDeadline();
-            Date date1 = Date.from(Instant.from(utilStartDate2));
-            java.sql.Date sqlDeadline2 = new java.sql.Date(date1.getTime());
+            java.util.Date utilStartDate2 = newTask.getTaskDeadline();
+            java.sql.Date sqlDeadline2 = new java.sql.Date(utilStartDate2.getTime());
             pstmt.setDate(6, sqlDeadline2);
+
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -81,9 +81,9 @@ public class TaskRep {
                         rs.getString(2),
                         rs.getString(3),
                         rs.getInt(4),
-                        LocalDate.parse(rs.getString(5)),
+                        rs.getDate(5),
                         rs.getInt(6),
-                        LocalDate.parse(rs.getString(7))
+                        rs.getDate(7)
                 );
                 allTasks.add(tmp);
             }
