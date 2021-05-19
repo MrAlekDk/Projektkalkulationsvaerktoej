@@ -1,5 +1,8 @@
 package com.example.webapp.models;
 
+import com.example.webapp.Services.ProjectService;
+import com.example.webapp.Services.TaskService;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -47,6 +50,25 @@ public class Cache {
         }
 
     }
+
+    public Project getProject(int projectID){
+        ProjectService projSer = new ProjectService();
+        Project tmpProject = projSer.getSpecificProject(projectID);
+        return tmpProject;
+    }
+
+    public ArrayList<Task> getAllTasks(int projectID){
+        TaskService tService = new TaskService();
+        ArrayList<Task> allTasks = tService.getAllTasks(projectID);
+
+        com.example.webapp.services.SubTaskService stService = new com.example.webapp.services.SubTaskService();
+        stService = new com.example.webapp.services.SubTaskService();
+
+        allTasks = stService.getAllSubTasks(allTasks);
+
+        return allTasks;
+    }
+
 
     public ArrayList<Project> getAllProjects() {
         return this.allProjects;

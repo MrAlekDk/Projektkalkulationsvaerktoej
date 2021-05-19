@@ -61,17 +61,16 @@ public class ProjectController {
     @GetMapping(value="/update-cache/{projectID}")
     public String updateCache(@PathVariable("projectID")int projectID){
 
-        Project tmpProject = cache.get(projectID);
+        /*Project tmpProject = cache.get(projectID);
 
         TaskService tService = new TaskService();
         ArrayList<Task> allTasks = tService.getAllTasks(projectID);
 
         SubTaskService stService = new SubTaskService();
-        allTasks = stService.getAllSubTasks(allTasks);
+        allTasks = stService.getAllSubTasks(allTasks);*/
 
-        cache.set(projectID, tmpProject);
-        cache.setList(projectID, allTasks);
-
+        cache.set(projectID, cache.getProject(projectID));
+        cache.setList(projectID, cache.getAllTasks(projectID));
 
         return "redirect:/renderProject/"+projectID;
     }
@@ -102,9 +101,10 @@ public class ProjectController {
 
             return "projectview.html";
         } else {
-            ProjectService projSer = new ProjectService();
+            model.addAttribute("project", cache.getProject(projectID) );
+            /*ProjectService projSer = new ProjectService();
             Project tmpProject = projSer.getSpecificProject(projectID);
-            model.addAttribute("project", tmpProject);
+            model.addAttribute("project", );
 
             TaskService tService = new TaskService();
             ArrayList<Task> allTasks = tService.getAllTasks(projectID);
@@ -113,11 +113,11 @@ public class ProjectController {
 
             allTasks = stService.getAllSubTasks(allTasks);
 
-            tService.calculateProjectDuration(allTasks);
-            model.addAttribute("tasklist", allTasks);
+            tService.calculateProjectDuration(allTasks);*/
+            model.addAttribute("tasklist", cache.getAllTasks(projectID));
 
-            cache.set(projectID, tmpProject);
-            cache.setList(projectID, allTasks);
+            cache.set(projectID, cache.getProject(projectID));
+            cache.setList(projectID, cache.getAllTasks(projectID));
             return "projectview.html";
         }
     }
