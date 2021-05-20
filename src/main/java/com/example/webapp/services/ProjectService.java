@@ -48,6 +48,9 @@ public class ProjectService {
     }
 
     public int calculateProjectPrice(ArrayList<Task> allTasks){
+        if(allTasks == null){
+            return 0;
+        }
         int hours = projectCalculator.hoursForProject(allTasks);
         return projectCalculator.getPriceForProject(hours);
 
@@ -80,6 +83,14 @@ public class ProjectService {
     }
 
     public int getDailyWorkHours(ArrayList<Task> tasks, Date deadline) {
+        if(tasks == null){
+            return 0;
+        }
         return projectCalculator.dailyWorkHours(tasks, deadline);
+    }
+
+    public String getIfFeasible(int gnsTimer) {
+      return  projectCalculator.feasible(gnsTimer);
+
     }
 }

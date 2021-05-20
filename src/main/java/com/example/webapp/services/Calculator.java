@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class Calculator {
         private int hourPrice = 950;
-        private int WeeklyWorkHours = 37;
+        private int workDayHours = 8;
         TaskService tService = new TaskService();
         SubTaskService stService = new SubTaskService();
 
@@ -32,9 +32,8 @@ public class Calculator {
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate();
             Period period = Period.between(start, dead);
-             int days =period.getDays();
-            System.out.println();
-             return days * 8;
+             int days = period.getDays();
+             return days * workDayHours;
         }
 
         public int dailyWorkHours(ArrayList<Task> tasks, Date deadline){
@@ -68,6 +67,15 @@ public class Calculator {
             }
         }
         return totalDuration;
+    }
+
+    public String feasible(int dailyHours){
+            if (dailyHours > workDayHours){
+                return "This project is not feasible";
+            }
+            else {
+                return "This project is feasible";
+            }
     }
 
 }

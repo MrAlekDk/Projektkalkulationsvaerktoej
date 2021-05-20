@@ -4,7 +4,12 @@ import com.example.webapp.models.SubTask;
 import com.example.webapp.models.Task;
 import com.example.webapp.repository.SubTaskRep;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class SubTaskService {
@@ -23,6 +28,8 @@ public class SubTaskService {
         SubTask newSubTask = new SubTask(name, desc, workerID, taskID, startDate, duration, deadline);
         Date dateNow = new Date();
         if(newSubTask.getDeadline().before(newSubTask.getStart())||newSubTask.getStart().before(dateNow)){
+            return false;
+        } else if(!realisticSubtaskTime(newSubTask)){
             return false;
         }
         else{
@@ -48,5 +55,32 @@ public class SubTaskService {
         }
         return allTask;
     }
+
+    public boolean realisticSubtaskTime(SubTask sub) {
+
+        Calendar start = Calendar.getInstance();
+        Calendar dead = Calendar.getInstance();
+
+        start.setTime(sub.getStart());
+        dead.setTime(sub.getDeadline());
+        int days = 0;
+        while (start.before(dead)) {
+            if (Calendar.SATURDAY != start.get(Calendar.DAY_OF_WEEK) && Calendar.SUNDAY != start.get(Calendar.DAY_OF_WEEK)) {
+                days++;
+            }
+            start.add(Calendar.DATE, 1);
+        }
+
+        int duration = sub.getDuration();
+
+        if (duration > days * 8) {
+            return false;
+        } else {
+
+            return true;
+        }
+    }
+
+
 
 }

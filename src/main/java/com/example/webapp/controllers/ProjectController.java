@@ -65,7 +65,9 @@ public class ProjectController {
     public String renderProject(Model model, @PathVariable("projectID") int projectID) {
         model.addAttribute("project", projectService.getSpecificProject(projectID));
         model.addAttribute("tasklist", taskService.getAllTasks(projectID));
-        model.addAttribute("gnstimer", projectService.getDailyWorkHours(taskService.getAllTasks(projectID),projectService.getSpecificProject(projectID).getDeadline()));
+        int gnsTimer = projectService.getDailyWorkHours(taskService.getAllTasks(projectID),projectService.getSpecificProject(projectID).getDeadline());
+        model.addAttribute("gnstimer", gnsTimer);
+        model.addAttribute("feasible", projectService.getIfFeasible(gnsTimer));
         model.addAttribute("projectprice",projectService.calculateProjectPrice(taskService.getAllTasks(projectID)));
 
         return "projectview.html";
