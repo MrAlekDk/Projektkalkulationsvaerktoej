@@ -3,48 +3,27 @@ package com.example.webapp.models;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class Cache {
 
-    Map<Integer, Project> map = new HashMap<Integer, Project>();
-    Map<Integer, ArrayList<Task>> test = new HashMap<Integer, ArrayList<Task>>();
-
-
-    public Project get(int key){
-        return map.get(key);
-    }
-    public ArrayList<Task> getList (int key){return test.get(key);}
-
-    public Project set(int key, Project value){
-        return map.put(key, value);
-    }
-    public ArrayList<Task> setList(int key, ArrayList<Task> list){return test.put(key, list);}
+    Map<Integer, Project> mapOfProjects = new HashMap<Integer, Project>();
 
     public Boolean has(int projectID){
-        return map.containsKey(projectID);
+        return mapOfProjects.containsKey(projectID);
     }
 
     public void setProjects(ArrayList<Project> allProjects){
-
         for (int i = 0; i < allProjects.size(); i++) {
-            map.put(allProjects.get(i).getProjectID(),allProjects.get(i));
+            mapOfProjects.put(allProjects.get(i).getProjectID(),allProjects.get(i));
         }
     }
 
-
     public void delete(int key){
-        map.remove(key);
-    }
-
-    public void setTTL(int key, long time) {
-        TimeUnit timeUnit = null;
-        timeUnit.toMinutes(time);
-        map.remove(key);
+        mapOfProjects.remove(key);
     }
 
     public boolean hasProjects() {
-        if (map.isEmpty()) {
+        if (mapOfProjects.isEmpty()) {
             return false;
         } else {
             return true;
@@ -53,17 +32,11 @@ public class Cache {
     }
 
 
-
-    public void getAllTasks(int projectID){
-        //return allTasks;
-    }
-
-
     public ArrayList<Project> getAllProjects() {
-        return new ArrayList<Project>(map.values());
+        return new ArrayList<Project>(mapOfProjects.values());
     }
 
     public Project getProject(int projectID) {
-        return map.get(projectID);
+        return mapOfProjects.get(projectID);
     }
 }

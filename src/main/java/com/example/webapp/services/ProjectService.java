@@ -23,8 +23,8 @@ public class ProjectService {
 
         Project newProject = new Project(name, description, deadline);
         if(validateProjectDates(newProject)==true){
-            newProject.setNrOfHours(projectCalculator.hoursForProject(newProject));
-            newProject.setProjectPrice(projectCalculator.getPriceForProject(newProject.getNrOfHours()));
+            //newProject.setNrOfHours(projectCalculator.hoursForProject(newProject));
+            //newProject.setProjectPrice(projectCalculator.getPriceForProject(newProject.getNrOfHours()));
             projectRep.createProject(newProject);
             updateCache();
             return true;
@@ -47,8 +47,10 @@ public class ProjectService {
         }
     }
 
-    public double calculateProjectPrice(Project projectToCalculate){
-        return 500.00;
+    public int calculateProjectPrice(ArrayList<Task> allTasks){
+        int hours = projectCalculator.hoursForProject(allTasks);
+        return projectCalculator.getPriceForProject(hours);
+
         //int hours = taskRep.calculateTime(project_ID);
         // Ved ikke helt hvordan vi finder ud af hvor mange der er af hver position, måske fra workerRep?
         //int projectPrice = salary * hours * nrOfParticipants;
@@ -70,7 +72,6 @@ public class ProjectService {
         if(projectCache.has(projectID)){
             return projectCache.getProject(projectID);
         }
-
         return projectRep.getSpecificProject(projectID);
     }
 

@@ -16,6 +16,7 @@ public class Project {
     private int nrOfHours;
     private ArrayList<Task> tasks = new ArrayList<>();
     private double projectPrice;
+    private int hoursPerDay;
 
     public Project(String name, String desc, Date deadline, ArrayList<Worker> participants, int nrOfParticipants, int nrOfHours, ArrayList<Task> tasks){
         this.title = name;
@@ -55,6 +56,10 @@ public class Project {
 
     // ----------------------------|| Getters ||---------------------------- //
 
+    public int getHoursPerDay(){
+        return this.hoursPerDay;
+    }
+
     public int getProjectID(){
         return this.projectID;
     }
@@ -93,6 +98,10 @@ public class Project {
 
 
     // ----------------------------|| Setters ||---------------------------- //
+
+    public void setHoursPerDay(int hoursPerDay){
+        this.hoursPerDay=hoursPerDay;
+    }
 
     public void setName(String name) {
         this.title = name;

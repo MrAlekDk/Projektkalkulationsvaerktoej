@@ -47,6 +47,8 @@ public class ProjectController {
 
     @GetMapping(value = "/update-cache/{projectID}")
     public String updateCache(@PathVariable("projectID") int projectID) {
+        projectService.updateCache();
+        taskService.updateCache(projectID);
 
         return "redirect:/renderProject/" + projectID;
     }
@@ -61,11 +63,10 @@ public class ProjectController {
 
     @GetMapping(value = "/renderProject/{projectID}")
     public String renderProject(Model model, @PathVariable("projectID") int projectID) {
-        Project tmp = projectService.getSpecificProject(projectID);
-        model.addAttribute("project", tmp);
-        ArrayList<Task> allTasks = new ArrayList<>(subTaskService.getAllSubTasks(taskService.getAllTasks(projectID)));
-        model.addAttribute("tasklist", allTasks);
-        model.addAttribute("gnstimer", projectService.getDailyWorkHours(allTasks,tmp.getDeadline()));
+        model.addAttribute("project", projectService.getSpecificProject(projectID));
+        model.addAttribute("tasklist", taskService.getAllTasks(projectID));
+        model.addAttribute("gnstimer", projectService.getDailyWorkHours(taskService.getAllTasks(projectID),projectService.getSpecificProject(projectID).getDeadline()));
+        model.addAttribute("projectprice",projectService.calculateProjectPrice(taskService.getAllTasks(projectID)));
 
         return "projectview.html";
     }

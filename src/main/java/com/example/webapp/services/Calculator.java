@@ -19,9 +19,10 @@ public class Calculator {
             return projectPrice;
         }
 
-        public int hoursForProject(Project project){
-            Date startDate = new Date();
-            Date deadline = project.getDeadline();
+        public int hoursForProject(ArrayList<Task> allTask){
+
+            Date startDate = allTask.get(0).getStartDate();
+            Date deadline = allTask.get(allTask.size()-1).getTaskDeadline();
 
             LocalDate start = Instant.ofEpochMilli(startDate.getTime())
                     .atZone(ZoneId.systemDefault())
@@ -32,13 +33,12 @@ public class Calculator {
                     .toLocalDate();
             Period period = Period.between(start, dead);
              int days =period.getDays();
+            System.out.println();
              return days * 8;
         }
 
         public int dailyWorkHours(ArrayList<Task> tasks, Date deadline){
             Date startDate = new Date();
-                    //tService.orderTaskStartDate(tasks);
-            //Date deadline = project.getDeadline();
 
             Calendar start = Calendar.getInstance();
             Calendar dead = Calendar.getInstance();
@@ -53,12 +53,21 @@ public class Calculator {
                 start.add(Calendar.DATE,1);
             }
 
-            System.out.println(days);
-            int workHours = tService.calculateProjectDuration(tasks);
+            int workHours = calculateProjectDuration(tasks);
 
            int dailyWorkHours = workHours/days;
 
             return dailyWorkHours;
         }
+
+    public int calculateProjectDuration(ArrayList<Task> taskID){
+        int totalDuration = 0;
+        for (int i = 0; i < taskID.size(); i++) {
+            for (int j = 0; j < taskID.get(i).getSubtasks().size(); j++) {
+                totalDuration += taskID.get(i).getSubtasks().get(j).getDuration();
+            }
+        }
+        return totalDuration;
+    }
 
 }
