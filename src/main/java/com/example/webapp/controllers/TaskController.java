@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class TaskController {
     private TaskService taskService = new TaskService();
@@ -16,10 +19,15 @@ public class TaskController {
 
 
     @GetMapping(value = "/render-task-form/{projectID}")
-    public String renderTaskForm(@PathVariable("projectID") int projectID, Model model) {
+    public String renderTaskForm(@PathVariable("projectID") int projectID, Model model, HttpServletRequest request) {
 
-        model.addAttribute("projectID", projectID);
-        return "taskForm.html";
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            model.addAttribute("projectID", projectID);
+            return "taskForm.html";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @PostMapping(value = "/create-task")
@@ -28,25 +36,29 @@ public class TaskController {
                               @RequestParam("task-description") String taskDesc,
                               @RequestParam("task-startdate") String startDate,
                               @RequestParam("task-duration") int duration,
-                              @RequestParam("task-deadline") String deadline,Model model) {
+                              @RequestParam("task-deadline") String deadline, Model model) {
 
         boolean taskCreated = taskService.addTask(taskName, taskDesc, projectID, startDate, duration, deadline);
         if (taskCreated) {
             return "redirect:/update-cache/" + projectID;
         } else {
-            model.addAttribute("projectID",projectID);
+            model.addAttribute("projectID", projectID);
             return "taskNotCreated.html";
         }
-
     }
 
+
     @GetMapping(value = "/render-subtask-form/{projectID}/{taskID}")
-    public String renderSubtaskForm(@PathVariable("projectID") int projectID, @PathVariable("taskID") int taskID, Model model) {
+    public String renderSubtaskForm(@PathVariable("projectID") int projectID, @PathVariable("taskID") int taskID, Model model, HttpServletRequest request) {
 
-        model.addAttribute("taskID", taskID);
-        model.addAttribute("projectID", projectID);
-
-        return "subtaskForm.html";
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            model.addAttribute("taskID", taskID);
+            model.addAttribute("projectID", projectID);
+            return "subtaskForm.html";
+        } else {
+            return "redirect/";
+        }
     }
 
     @PostMapping(value = "create-subtask")
@@ -59,18 +71,13 @@ public class TaskController {
                                 @RequestParam("subtask-duration") int duration,
                                 @RequestParam("subtask-deadline") String deadline, Model model) {
 
-        boolean sTaskCreated = subTaskService.addTask(taskName, taskDesc, workerID, taskID, startDate, duration, deadline);
-        if(sTaskCreated){
-            return "redirect:/update-cache/" + projectID;
+            boolean sTaskCreated = subTaskService.addTask(taskName, taskDesc, workerID, taskID, startDate, duration, deadline);
+            if (sTaskCreated) {
+                return "redirect:/update-cache/" + projectID;
+            } else {
+                model.addAttribute("projectID", projectID);
+                model.addAttribute("taskID", taskID);
+                return "subTaskNotCreated.html";
+            }
         }
-        else{
-            model.addAttribute("projectID",projectID);
-            model.addAttribute("taskID",taskID);
-            return "subTaskNotCreated.html";
-        }
-
-
     }
-
-
-}
