@@ -1,7 +1,5 @@
 package com.example.webapp.controllers;
 
-import com.example.webapp.models.Project;
-import com.example.webapp.models.Task;
 import com.example.webapp.services.ProjectService;
 import com.example.webapp.services.SubTaskService;
 import com.example.webapp.services.TaskService;
@@ -13,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
+
 
 
 @Controller
@@ -49,7 +47,6 @@ public class ProjectController {
     public String updateCache(@PathVariable("projectID") int projectID) {
         projectService.updateCache();
         taskService.updateCache(projectID);
-
         return "redirect:/renderProject/" + projectID;
     }
 

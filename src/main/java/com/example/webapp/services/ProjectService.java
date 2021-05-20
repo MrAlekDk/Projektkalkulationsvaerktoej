@@ -23,8 +23,6 @@ public class ProjectService {
 
         Project newProject = new Project(name, description, deadline);
         if(validateProjectDates(newProject)==true){
-            //newProject.setNrOfHours(projectCalculator.hoursForProject(newProject));
-            //newProject.setProjectPrice(projectCalculator.getPriceForProject(newProject.getNrOfHours()));
             projectRep.createProject(newProject);
             updateCache();
             return true;
@@ -53,12 +51,6 @@ public class ProjectService {
         }
         int hours = projectCalculator.hoursForProject(allTasks);
         return projectCalculator.getPriceForProject(hours);
-
-        //int hours = taskRep.calculateTime(project_ID);
-        // Ved ikke helt hvordan vi finder ud af hvor mange der er af hver position, måske fra workerRep?
-        //int projectPrice = salary * hours * nrOfParticipants;
-        // Når vi har de forskellige posititions med kan vi bruge projectPrice for hver position og pluse det sammen til projektets totale pris.
-        //return projectPrice;
     }
 
     public ArrayList<Project> getAllProjects() {

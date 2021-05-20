@@ -10,14 +10,14 @@
 <section class="boxes">
     <section class="description-box">
         <h3>Project description</h3>
-        <p th:text="${project.getDesc()}" class="white"></p>
-        <p class="white">Deltagere: </p>
-        <p th:text="${project.getParticipants()}" class="white"></p>
-        <p th:text="|Deadline: ${project.getDeadline()}|" class="white"></p>
-        <p th:text="|Gns. arbejdstimer pr. dag: ${gnstimer}|" class="white"></p>
-        <p th:text="|feasible?: ${feasible}|" class="white"></p>
-
-        <p th:text="|Projekt pris: ${projectprice}|" class="white"></p>
+        <ul class="description-list">
+        <li th:text="|Description: ${project.getDesc()}|"></li>
+        <li th:text="|Deltagere: ${project.getParticipants()}|"></li>
+        <li th:text="|Deadline: ${project.getDeadline()}|"></li>
+        <li th:text="|Gns. arbejdstimer pr. dag: ${gnstimer}|"></li>
+        <li th:text="|Er projektet Feasible? ${feasible}|"></li>
+        <li th:text="|Projekt pris: ${projectprice}|"></li>
+        </ul>
     </section>
 
 
@@ -30,8 +30,6 @@
                 <li th:text="|StartDate: ${task.getStartDate()}|"></li>
                 <li th:text="|Deadline: ${task.getTaskDeadline()}|"></li>
             </ul>
-
-
                 <ul th:each="subtask : ${task.getSubtasks()}" class="subtask">
                     <li th:text="|SubTask: ${subtask.getName()}|"></li>
                     <li th:text="|Beskrivelse: ${subtask.getDesc()}|"></li>
