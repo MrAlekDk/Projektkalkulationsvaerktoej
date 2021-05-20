@@ -33,6 +33,7 @@ public class Calculator {
                     .toLocalDate();
             Period period = Period.between(start, dead);
              int days = period.getDays();
+            System.out.println(days * workDayHours);
              return days * workDayHours;
         }
 
