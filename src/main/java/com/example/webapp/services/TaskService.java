@@ -32,15 +32,6 @@ public class TaskService {
         }
     }
 
-   /* public int calculateProjectDuration(ArrayList<Task> taskID){
-        int totalDuration = 0;
-        for (int i = 0; i < taskID.size(); i++) {
-            for (int j = 0; j < taskID.get(i).getSubtasks().size(); j++) {
-                totalDuration += taskID.get(i).getSubtasks().get(j).getDuration();
-            }
-        }
-        return totalDuration;
-    }*/
 
     public ArrayList<Task> getAllTasks(int projectID) {
 
@@ -50,6 +41,7 @@ public class TaskService {
         else{
             ArrayList<Task> taskListWithSubtasks = taskRep.getAllTasks(projectID);
             if(taskListWithSubtasks.isEmpty()){
+                taskCache.setMapOfTask(taskListWithSubtasks);
                 return null;
             }
             taskListWithSubtasks = stService.getAllSubTasks(taskListWithSubtasks);
@@ -57,18 +49,16 @@ public class TaskService {
             taskCache.setMapOfTask(taskListWithSubtasks);
             return taskCache.getAllTask(projectID);
         }
-        //return taskRep.getAllTasks(projectID);
     }
 
     public ArrayList<Task> orderTaskStartDate(ArrayList<Task> taskID) {
 
+        //todo Jeg er ikke sikker på at den her metode rent faktisk gør noget længere?
         ArrayList<Date> allStartDates = new ArrayList<>();
-
         for (int i = 0; i < taskID.size(); i++) {
             allStartDates.add(taskID.get(i).getStartDate());
         }
             Collections.sort(allStartDates);
-            //Date firstStartDate = allStartDates.get(0);
             return taskID;
     }
 

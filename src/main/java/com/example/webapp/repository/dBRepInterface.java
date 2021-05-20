@@ -6,6 +6,5 @@ public interface dBRepInterface {
 
     public Connection getConnection(String url,String user,String password);
 
-    public void getAll();
 
 }
