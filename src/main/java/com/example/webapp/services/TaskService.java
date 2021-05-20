@@ -1,11 +1,11 @@
 package com.example.webapp.services;
 
+
 import com.example.webapp.models.Task;
 import com.example.webapp.models.TaskCache;
 import com.example.webapp.repository.TaskRep;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 
 public class TaskService {
@@ -45,13 +45,12 @@ public class TaskService {
                 return null;
             }
             taskListWithSubtasks = stService.getAllSubTasks(taskListWithSubtasks);
-            taskListWithSubtasks = orderTaskStartDate(taskListWithSubtasks);
             taskCache.setMapOfTask(taskListWithSubtasks);
             return taskCache.getAllTask(projectID);
         }
     }
 
-    public ArrayList<Task> orderTaskStartDate(ArrayList<Task> taskID) {
+    /*public ArrayList<Task> orderTaskStartDate(ArrayList<Task> taskID) {
 
         //todo Jeg er ikke sikker på at den her metode rent faktisk gør noget længere?
         ArrayList<Date> allStartDates = new ArrayList<>();
@@ -60,12 +59,11 @@ public class TaskService {
         }
             Collections.sort(allStartDates);
             return taskID;
-    }
+    }*/
 
     public void updateCache(int projectID){
         ArrayList<Task> taskListWithSubtasks = taskRep.getAllTasks(projectID);
         taskListWithSubtasks = stService.getAllSubTasks(taskListWithSubtasks);
-        taskListWithSubtasks = orderTaskStartDate(taskListWithSubtasks);
         taskCache.setMapOfTask(taskListWithSubtasks);
     }
 

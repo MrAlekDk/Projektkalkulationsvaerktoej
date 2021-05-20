@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Task {
+public class Task implements Comparable<Task> {
     private int taskID;
     private String name;
     private String desc;
@@ -111,4 +111,19 @@ public class Task {
         this.subtasks.add(subTasks);
     }
 
+    @Override
+    public int compareTo(Task task) {
+
+        if(this.startDate.before(task.getStartDate())){
+            return 1;
+        }else if(this.startDate.after(task.getStartDate())){
+            return -1;
+        }else{
+            return 0;
+        }
+    }
+
+    //It returns the value 0 if the argument Date is equal to this Date.
+    //It returns a value less than 0 if this Date is before the Date argument.
+    //It returns a value greater than 0 if this Date is after the Date argument.
 }

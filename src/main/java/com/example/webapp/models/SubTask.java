@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SubTask {
+public class SubTask implements Comparable<SubTask> {
 
     private int subTaskID;
     private String name;
@@ -106,4 +106,15 @@ public class SubTask {
         this.deadline = newDeadline;
     }
 
+    @Override
+    public int compareTo(SubTask subtask) {
+
+        if(this.start.before(subtask.getStart())){
+            return 1;
+        }else if(this.start.after(subtask.getStart())){
+            return -1;
+        }else{
+            return 0;
+        }
+    }
 }

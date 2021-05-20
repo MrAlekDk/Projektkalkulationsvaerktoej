@@ -41,6 +41,7 @@ public class SubTaskService {
     public ArrayList<Task> getAllSubTasks(ArrayList<Task> allTask) {
 
         ArrayList<SubTask> allSubTasks= subTaskRep.getAllSubTasks();
+        allSubTasks.sort(SubTask::compareTo);
         if(allSubTasks.isEmpty()){
             return allTask;
         }
@@ -53,6 +54,7 @@ public class SubTaskService {
             }
 
         }
+
         return allTask;
     }
 
@@ -80,7 +82,5 @@ public class SubTaskService {
             return true;
         }
     }
-
-
 
 }
