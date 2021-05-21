@@ -49,7 +49,7 @@ public class ProjectService {
         if(allTasks == null){
             return 0;
         }
-        int hours = projectCalculator.hoursForProject(allTasks);
+        int hours = projectCalculator.calculateProjectDuration(allTasks);
         return projectCalculator.getPriceForProject(hours);
     }
 

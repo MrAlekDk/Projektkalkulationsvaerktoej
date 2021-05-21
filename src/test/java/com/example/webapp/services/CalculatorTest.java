@@ -27,7 +27,7 @@ class CalculatorTest {
         assertEquals(676400, priceB);
         assertEquals(380000, priceC);
     }
-
+/*
     @Test
     void hoursForProject() {
         // ----------------------------|| Arrange ||---------------------------- //
@@ -57,6 +57,8 @@ class CalculatorTest {
         assertEquals(24, hours2);
         assertEquals(80, hours3);
     }
+
+ */
 
     @Test
     void dailyWorkHours() {
@@ -94,7 +96,17 @@ class CalculatorTest {
     @Test
     void feasible() {
         // ----------------------------|| Arrange ||---------------------------- //
+        int dailyHours1 = 8;
+        int dailyHours2 = 0;
+        //Not feasible
+        int dailyHours3 = 9;
         // ----------------------------|| Act ||---------------------------- //
+        String feasible1 = cal.feasible(dailyHours1);
+        String feasible2 = cal.feasible(dailyHours2);
+        String feasible3 = cal.feasible(dailyHours3);
         // ----------------------------|| Assert ||---------------------------- //
+        assertEquals("This project is feasible", feasible1);
+        assertEquals("This project is feasible", feasible2);
+        assertEquals("This project is not feasible", feasible3);
     }
 }
