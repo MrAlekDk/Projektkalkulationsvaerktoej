@@ -50,9 +50,9 @@ public class Calculator {
 
     public String feasible(int dailyHours) {
         if (dailyHours > workDayHours) {
-            return "Projektet er ikke feasible";
+            return "Projektet er ikke gennemførligt";
         } else {
-            return "Projektet er feasible";
+            return "Projektet er gennemførligt";
         }
     }
 
