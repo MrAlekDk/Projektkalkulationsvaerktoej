@@ -73,7 +73,7 @@ public class TaskController {
                                 @RequestParam("subtask-duration") int duration,
                                 @RequestParam("subtask-deadline") String deadline, Model model) {
 
-            boolean sTaskCreated = subTaskService.addTask(taskName, taskDesc, workerID, taskID, startDate, duration, deadline);
+            boolean sTaskCreated = subTaskService.addSubtask(taskName, taskDesc, workerID, taskID, startDate, duration, deadline);
             if (sTaskCreated) {
                 return "redirect:/update-cache/" + projectID;
             } else {
