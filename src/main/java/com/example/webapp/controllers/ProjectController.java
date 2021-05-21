@@ -78,11 +78,13 @@ public class ProjectController {
 
     @GetMapping(value = "/renderProject/{projectID}")
     public String renderProject(Model model, @PathVariable("projectID") int projectID, HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
+   /*     HttpSession session = request.getSession(false);
         if (session == null) {
             return "redirect:/";
         }
 
+
+    */
         Project specificProject = projectService.getSpecificProject(projectID);
         ArrayList<Task> allTasksForProject = taskService.getAllTasks(projectID);
         int gnsTimerForProject = projectService.getDailyWorkHours(allTasksForProject, specificProject.getDeadline());

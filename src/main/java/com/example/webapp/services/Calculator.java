@@ -16,7 +16,6 @@ public class Calculator {
         int projectPrice = hourPrice * projectHours;
         return projectPrice;
     }
-
     public int dailyWorkHours(ArrayList<Task> tasks, Date deadline) {
         Date startDate = tasks.get(0).getSubtasks().get(0).getStart();
 
