@@ -1,14 +1,12 @@
 package com.example.webapp.repository;
 
 import com.example.webapp.models.SubTask;
-import com.example.webapp.models.Task;
 import com.example.webapp.models.Worker;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Properties;
 
 public class SubTaskRep {

@@ -1,6 +1,5 @@
 package com.example.webapp.repository;
 
-import com.example.webapp.models.Project;
 import com.example.webapp.models.Worker;
 
 import java.io.FileInputStream;

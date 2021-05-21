@@ -49,7 +49,9 @@ public class TaskController {
 
 
     @GetMapping(value = "/render-subtask-form/{projectID}/{taskID}")
-    public String renderSubtaskForm(@PathVariable("projectID") int projectID, @PathVariable("taskID") int taskID, Model model, HttpServletRequest request) {
+    public String renderSubtaskForm(@PathVariable("projectID") int projectID,
+                                    @PathVariable("taskID") int taskID,
+                                    Model model, HttpServletRequest request) {
 
         HttpSession session = request.getSession(false);
         if (session != null) {

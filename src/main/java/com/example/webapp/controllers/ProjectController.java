@@ -72,23 +72,26 @@ public class ProjectController {
     @GetMapping(value = "render-all-projects")
     public String renderAllProjects(Model model, HttpServletRequest request) {
         model.addAttribute("projectList", projectService.getAllProjects());
-
         return "allProjectsView.html";
     }
 
 
     @GetMapping(value = "/renderProject/{projectID}")
     public String renderProject(Model model, @PathVariable("projectID") int projectID, HttpServletRequest request) {
-        model.addAttribute("project", projectService.getSpecificProject(projectID));
-        model.addAttribute("tasklist", taskService.getAllTasks(projectID));
-        model.addAttribute("gnstimer", projectService.getDailyWorkHours(taskService.getAllTasks(projectID), projectService.getSpecificProject(projectID).getDeadline()));
-        model.addAttribute("projectprice", projectService.calculateProjectPrice(taskService.getAllTasks(projectID)));
-
         HttpSession session = request.getSession(false);
-        if (session != null) {
-            return "projectview.html";
-        } else {
+        if (session == null) {
             return "redirect:/";
         }
+
+        Project specificProject = projectService.getSpecificProject(projectID);
+        ArrayList<Task> allTasksForProject = taskService.getAllTasks(projectID);
+        int gnsTimerForProject = projectService.getDailyWorkHours(allTasksForProject, specificProject.getDeadline());
+
+        model.addAttribute("project", specificProject);
+        model.addAttribute("tasklist", allTasksForProject);
+        model.addAttribute("gnstimer", gnsTimerForProject);
+        model.addAttribute("projectprice", projectService.calculateProjectPrice(allTasksForProject));
+        model.addAttribute("feasible", projectService.getIfFeasible(gnsTimerForProject));
+        return "projectview.html";
     }
 }

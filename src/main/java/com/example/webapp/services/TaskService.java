@@ -50,17 +50,6 @@ public class TaskService {
         }
     }
 
-    /*public ArrayList<Task> orderTaskStartDate(ArrayList<Task> taskID) {
-
-        //todo Jeg er ikke sikker på at den her metode rent faktisk gør noget længere?
-        ArrayList<Date> allStartDates = new ArrayList<>();
-        for (int i = 0; i < taskID.size(); i++) {
-            allStartDates.add(taskID.get(i).getStartDate());
-        }
-            Collections.sort(allStartDates);
-            return taskID;
-    }*/
-
     public void updateCache(int projectID){
         ArrayList<Task> taskListWithSubtasks = taskRep.getAllTasks(projectID);
         taskListWithSubtasks = stService.getAllSubTasks(taskListWithSubtasks);
