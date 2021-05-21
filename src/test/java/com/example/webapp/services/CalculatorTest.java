@@ -1,6 +1,7 @@
 package com.example.webapp.services;
 
 import com.example.webapp.models.Project;
+import com.example.webapp.models.SubTask;
 import com.example.webapp.models.Task;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
     Calculator cal = new Calculator();
-    TaskService tService = new TaskService();
     @Test
     void getPriceForProject() {
         // ----------------------------|| Arrange ||---------------------------- //
@@ -27,38 +27,6 @@ class CalculatorTest {
         assertEquals(676400, priceB);
         assertEquals(380000, priceC);
     }
-/*
-    @Test
-    void hoursForProject() {
-        // ----------------------------|| Arrange ||---------------------------- //
-       // project list of tasks
-        ArrayList<Task> project1 = new ArrayList<>();
-        ArrayList<Task> project2 = new ArrayList<>();
-        ArrayList<Task> project3 = new ArrayList<>();
-        // tasks in each project
-        Task test1 = new Task(1, "testTask1", "testDescription1", 1, new Date(2021,6,21), 6, new Date(2021,6,22));
-        project1.add(test1);
-        Task test2 = new Task(2, "testTask2", "testDescription2", 2, new Date(2021,6,25), 10, new Date(2021,6,26));
-        Task test3 = new Task(3, "testTask3", "testDescription3", 2, new Date(2021,6,27), 10, new Date(2021,6,28));
-        project2.add(test2);
-        project2.add(test3);
-        Task test4 = new Task(4, "testTask4", "testDescription4", 3, new Date(2021,6,28), 10, new Date(2021,6,30));
-        Task test5 = new Task(5, "testTask5", "testDescription5", 3, new Date(2021,7,1), 5, new Date(2021,7,5));
-        Task test6 = new Task(6, "testTask6", "testDescription6", 3, new Date(2021,7,6), 15, new Date(2021,7,7));
-        project3.add(test4);
-        project3.add(test5);
-        project3.add(test6);
-        // ----------------------------|| Act ||---------------------------- //
-        int hours1 = cal.hoursForProject(project1);
-        int hours2 = cal.hoursForProject(project2);
-        int hours3 = cal.hoursForProject(project3);
-        // ----------------------------|| Assert ||---------------------------- //
-        assertEquals(8, hours1);
-        assertEquals(24, hours2);
-        assertEquals(80, hours3);
-    }
-
- */
 
     @Test
     void dailyWorkHours() {
@@ -70,27 +38,54 @@ class CalculatorTest {
         Project testProject = new Project("name", "desc", "2021-06-23");
         // tasks in each project
         Task test1 = new Task(1, "testTask1", "testDescription1", 1, new Date(2021,6,21), 6, new Date(2021,6,22));
-        project1.add(test1);
         Task test2 = new Task(2, "testTask2", "testDescription2", 2, new Date(2021,6,25), 10, new Date(2021,6,26));
-        project2.add(test2);
         Task test3 = new Task(4, "testTask4", "testDescription4", 3, new Date(2021,6,28), 10, new Date(2021,6,30));
         project3.add(test3);
 
+        SubTask subTask1 =  new SubTask("name", "desc",  1 , 1, "2021-06-21",10, "2021-6-22");
+        SubTask subTask2 =  new SubTask("name", "desc",  1 , 1, "2021-06-17",20, "2021-6-21");
+        SubTask subTask3 =  new SubTask("name", "desc",  1 , 1, "2021-06-21",10, "2021-6-22");
+
+        test1.addSubtask(subTask1);
+        project1.add(test1);
+        test2.addSubtask(subTask2);
+        test2.addSubtask(subTask3);
+        project2.add(test2);
         // ----------------------------|| Act ||---------------------------- //
        int dailyTest1 = cal.dailyWorkHours(project1, testProject.getDeadline());
        int dailyTest2 = cal.dailyWorkHours(project2, testProject.getDeadline());
-       int dailyTest3 = cal.dailyWorkHours(project3, project3.get(2).getTaskDeadline());
+       //int dailyTest3 = cal.dailyWorkHours(project3, project3.get(2).getTaskDeadline());
         // ----------------------------|| Assert ||---------------------------- //
-        assertEquals(0, dailyTest1);
-        assertEquals(24, dailyTest2);
-        assertEquals(dailyTest3, 212);
+        assertEquals(5, dailyTest1);
+        assertEquals(7, dailyTest2);
     }
 
     @Test
     void calculateProjectDuration() {
         // ----------------------------|| Arrange ||---------------------------- //
+        // project list of tasks
+        ArrayList<Task> project1 = new ArrayList<>();
+        ArrayList<Task> project2 = new ArrayList<>();
+        // tasks in each project
+        Task test1 = new Task(1, "testTask1", "testDescription1", 1, new Date(2021,6,21), 6, new Date(2021,6,22));
+        Task test2 = new Task(2, "testTask2", "testDescription2", 2, new Date(2021,6,25), 10, new Date(2021,6,26));
+
+        SubTask subTask1 =  new SubTask("name", "desc",  1 , 1, "2021-06-21",220, "2021-6-22");
+        SubTask subTask2 =  new SubTask("name", "desc",  1 , 1, "2021-06-17",200, "2021-6-21");
+        SubTask subTask3 =  new SubTask("name", "desc",  1 , 1, "2021-06-21",34, "2021-6-22");
+        SubTask subTask4 =  new SubTask("name", "desc",  1 , 1, "2021-06-21",35, "2021-6-22");
+        test1.addSubtask(subTask1);
+        test1.addSubtask(subTask2);
+        project1.add(test1);
+        test2.addSubtask(subTask3);
+        test2.addSubtask(subTask4);
+        project2.add(test2);
         // ----------------------------|| Act ||---------------------------- //
+        int duration1 = cal.calculateProjectDuration(project1);
+        int duration2 = cal.calculateProjectDuration(project2);
         // ----------------------------|| Assert ||---------------------------- //
+        assertEquals(420, duration1);
+        assertEquals(69, duration2);
     }
 
     @Test
@@ -105,8 +100,8 @@ class CalculatorTest {
         String feasible2 = cal.feasible(dailyHours2);
         String feasible3 = cal.feasible(dailyHours3);
         // ----------------------------|| Assert ||---------------------------- //
-        assertEquals("This project is feasible", feasible1);
-        assertEquals("This project is feasible", feasible2);
-        assertEquals("This project is not feasible", feasible3);
+        assertEquals("Projektet er feasible", feasible1);
+        assertEquals("Projektet er feasible", feasible2);
+        assertEquals("Projektet er ikke feasible", feasible3);
     }
 }

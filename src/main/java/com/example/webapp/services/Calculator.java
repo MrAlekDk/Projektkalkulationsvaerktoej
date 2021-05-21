@@ -17,26 +17,8 @@ public class Calculator {
         return projectPrice;
     }
 
-    public int hoursForProject(ArrayList<Task> allTask) {
-
-        Date startDate = allTask.get(0).getStartDate();
-        Date deadline = allTask.get(allTask.size() - 1).getTaskDeadline();
-
-        LocalDate start = Instant.ofEpochMilli(startDate.getTime())
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
-
-        LocalDate dead = Instant.ofEpochMilli(deadline.getTime())
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
-        Period period = Period.between(start, dead);
-        int days = period.getDays();
-        System.out.println(days * workDayHours);
-        return days * workDayHours;
-    }
-
     public int dailyWorkHours(ArrayList<Task> tasks, Date deadline) {
-        Date startDate = new Date();
+        Date startDate = tasks.get(0).getSubtasks().get(0).getStart();
 
         Calendar start = Calendar.getInstance();
         Calendar dead = Calendar.getInstance();
@@ -68,9 +50,9 @@ public class Calculator {
 
     public String feasible(int dailyHours) {
         if (dailyHours > workDayHours) {
-            return "This project is not feasible";
+            return "Projektet er ikke feasible";
         } else {
-            return "This project is feasible";
+            return "Projektet er feasible";
         }
     }
 
