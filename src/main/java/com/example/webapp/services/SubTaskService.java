@@ -19,7 +19,7 @@ public class SubTaskService {
     }
 
 
-    public boolean addTask(String name, String desc, int workerID, int taskID, String startDate,int duration, String deadline) {
+    public boolean addSubtask(String name, String desc, int workerID, int taskID, String startDate, int duration, String deadline) {
 
         SubTask newSubTask = new SubTask(name, desc, workerID, taskID, startDate, duration, deadline);
         Date dateNow = new Date();
