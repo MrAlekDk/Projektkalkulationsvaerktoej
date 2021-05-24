@@ -39,4 +39,8 @@ public class Cache {
     public Project getProject(int projectID) {
         return mapOfProjects.get(projectID);
     }
+
+    public void removeProject(int projectID) {
+        mapOfProjects.remove(projectID);
+    }
 }

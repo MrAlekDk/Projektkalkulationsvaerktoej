@@ -36,7 +36,9 @@ public class TaskController {
                               @RequestParam("task-description") String taskDesc,
                               @RequestParam("task-startdate") String startDate,
                               @RequestParam("task-duration") int duration,
-                              @RequestParam("task-deadline") String deadline, Model model) {
+                              @RequestParam("task-deadline") String deadline,
+                                          Model model) {
+
 
         boolean taskCreated = taskService.addTask(taskName, taskDesc, projectID, startDate, duration, deadline);
         if (taskCreated) {

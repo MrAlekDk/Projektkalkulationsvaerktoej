@@ -57,6 +57,15 @@ public class ProjectController {
         }
     }
 
+    @GetMapping(value="/delete-project/{projectID}")
+    public String deleteProject(@PathVariable("projectID")int projectID){
+
+        projectService.deleteProject(projectID);
+        projectService.updateCache();
+        taskService.removeTaskList(projectID);
+        return"redirect:/render-all-projects";
+    }
+
     @GetMapping(value = "/update-cache/{projectID}")
     public String updateCache(@PathVariable("projectID") int projectID, HttpServletRequest request) {
         projectService.updateCache();
@@ -78,11 +87,11 @@ public class ProjectController {
 
     @GetMapping(value = "/renderProject/{projectID}")
     public String renderProject(Model model, @PathVariable("projectID") int projectID, HttpServletRequest request) {
-      HttpSession session = request.getSession(false);
+     /* HttpSession session = request.getSession(false);
         if (session == null) {
             return "redirect:/";
         }
-
+*/
 
         Project specificProject = projectService.getSpecificProject(projectID);
         ArrayList<Task> allTasksForProject = taskService.getAllTasks(projectID);

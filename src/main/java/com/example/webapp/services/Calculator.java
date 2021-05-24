@@ -17,6 +17,9 @@ public class Calculator {
         return projectPrice;
     }
     public int dailyWorkHours(ArrayList<Task> tasks, Date deadline) {
+        if(tasks.isEmpty()||tasks.get(0).getSubtasks().isEmpty()){
+            return 0;
+        }
         Date startDate = tasks.get(0).getSubtasks().get(0).getStart();
 
         Calendar start = Calendar.getInstance();
@@ -32,6 +35,9 @@ public class Calculator {
             start.add(Calendar.DATE, 1);
         }
         int workHours = calculateProjectDuration(tasks);
+        if(days<=0||workHours<=0){
+            return 0;
+        }
         int dailyWorkHours = workHours / days;
 
         return dailyWorkHours;

@@ -56,4 +56,7 @@ public class TaskService {
         taskCache.setMapOfTask(taskListWithSubtasks);
     }
 
+    public void removeTaskList(int projectID) {
+        taskCache.removeTaskList(projectID);
+    }
 }

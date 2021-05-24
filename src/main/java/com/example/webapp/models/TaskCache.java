@@ -31,4 +31,7 @@ public class TaskCache {
         return new ArrayList<Task>(mapOfTask.get(projectID));
     }
 
+    public void removeTaskList(int projectID) {
+        mapOfTask.remove(projectID);
+    }
 }

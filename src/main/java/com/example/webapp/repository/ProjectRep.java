@@ -123,4 +123,24 @@ public class ProjectRep {
         }
         return null;
     }
+
+    public void deleteProject(int projectID) {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Where is your MySQL JDBC Driver?");
+            e.printStackTrace();
+        }
+
+        try {
+            Connection conn = DriverManager.getConnection(url, user, password);
+            PreparedStatement stmt = conn.prepareStatement("Delete FROM Project where ProjectID=?");
+            stmt.setInt(1, projectID);
+            stmt.execute();
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

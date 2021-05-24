@@ -85,4 +85,9 @@ public class ProjectService {
       return  projectCalculator.feasible(gnsTimer);
 
     }
+
+    public void deleteProject(int projectID) {
+        projectRep.deleteProject(projectID);
+        projectCache.removeProject(projectID);
+    }
 }
