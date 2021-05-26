@@ -71,3 +71,9 @@ h1{
 .inline{
     background-color: rgb(62, 127, 165);
 }
+
+footer{
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
