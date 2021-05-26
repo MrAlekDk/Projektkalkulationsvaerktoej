@@ -11,13 +11,13 @@
     <section class="description-box">
         <h3>Projekt information</h3>
         <ul class="description-list">
-        <li th:text="|Beskrivelse: ${project.getDesc()}|"></li>
-        <li th:text="|Deltagere: ${project.getParticipants()}|"></li>
-        <li th:text="|Deadline: ${project.getDeadline()}|"></li>
-        <li th:text="|Gns. arbejdstimer pr. dag: ${gnstimer}|"></li>
-        <li th:text="|${feasible}|"></li>
-        <li th:text="|Projekt pris: ${projectprice},- kr.|"></li>
-        <a th:href="|/delete-project/${project.getProjectID()}|" class="button">Slet projekt</a>
+            <li th:text="|Beskrivelse: ${project.getDesc()}|"></li>
+            <li th:text="|Deltagere: ${project.getParticipants()}|"></li>
+            <li th:text="|Deadline: ${project.getDeadline()}|"></li>
+            <li th:text="|Gns. arbejdstimer pr. dag: ${gnstimer}|"></li>
+            <li th:text="|${feasible}|"></li>
+            <li th:text="|Projekt pris: ${projectprice},- kr.|"></li>
+            <a th:href="|/delete-project/${project.getProjectID()}|" class="button">Slet projekt</a>
         </ul>
     </section>
 
@@ -29,24 +29,19 @@
                 <li th:text="|Start dato: ${task.getStartDate()}|"></li>
                 <li th:text="|Deadline: ${task.getTaskDeadline()}|"></li>
             </ul>
-                <ul th:each="subtask : ${task.getSubtasks()}" class="subtask">
-                    <li th:text="|delopgave: ${subtask.getName()}|"></li>
-                    <li th:text="|Beskrivelse: ${subtask.getDesc()}|"></li>
-                    <li th:text="|Ansvarlig: ${subtask.getWorkerID()}|"></li>
-                    <li th:text="|Start dato: ${subtask.getStart()} - Deadline: ${subtask.getDeadline()}|"></li>
-                    <li th:text="|Tid til opgaven: ${subtask.getDuration()}|"></li>
-                </ul>
-                <a th:href="|/render-subtask-form/${project.getProjectID()}/${task.getTaskID()}|" class="button">Tilføj ny delopgave</a>
+            <ul th:each="subtask : ${task.getSubtasks()}" class="subtask">
+                <li th:text="|delopgave: ${subtask.getName()}|"></li>
+                <li th:text="|Beskrivelse: ${subtask.getDesc()}|"></li>
+                <li th:text="|Ansvarlig: ${subtask.getWorkerID()}|"></li>
+                <li th:text="|Start dato: ${subtask.getStart()} - Deadline: ${subtask.getDeadline()}|"></li>
+                <li th:text="|Tid til opgaven: ${subtask.getDuration()}|"></li>
+            </ul>
+            <a th:href="|/render-subtask-form/${project.getProjectID()}/${task.getTaskID()}|" class="button">Tilføj ny
+                delopgave</a>
         </section>
         <a th:href="|/render-task-form/${project.getProjectID()}|" class="button">Tilføj ny opgave</a>
     </section>
-
-    <section class="gantt-chart">
-
-    </section>
-
 </section>
-
-
+<footer></footer>
 </body>
 </html>

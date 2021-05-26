@@ -2,7 +2,7 @@ package com.example.webapp.services;
 
 
 import com.example.webapp.models.Task;
-import com.example.webapp.models.TaskCache;
+import com.example.webapp.caches.TaskCache;
 import com.example.webapp.repository.TaskRep;
 
 import java.util.ArrayList;

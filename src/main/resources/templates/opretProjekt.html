@@ -4,15 +4,16 @@
 <body>
 <header th:replace="fragments/header.html"></header>
 <section class="form-header">
-<h1>Opret projekt</h1>
+    <h1>Opret projekt</h1>
 </section>
 <section class="form">
     <form action="/opretProjekt" method="post" class="submitField">
-        <label for="projectName" >Projekt-titel</label><br>
+        <label for="projectName">Projekt-titel</label><br>
         <input type="text" id="projectName" name="projectName" placeholder="Navn på projektet" required><br>
 
-        <label for="project-description" >Beskrivelse</label><br>
-        <input class="description" type="text" id="project-description" name="project-description" placeholder="Beskrivelse af projekt" required><br>
+        <label for="project-description">Beskrivelse</label><br>
+        <input class="description" type="text" id="project-description" name="project-description"
+               placeholder="Beskrivelse af projekt" required><br>
 
         <label for="deadline">Dato for projektets deadline</label><br>
         <input type="Date" id="deadline" name="deadline" required><br>

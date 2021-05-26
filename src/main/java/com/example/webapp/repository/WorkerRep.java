@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 public class WorkerRep {
-    private String url;
-    private String user;
-    private String password;
+    private String url = "jdbc:mysql://den1.mysql6.gear.host:3306/projectcalcdb";
+    private String user = "projectcalcdb";
+    private String password = "Br1499!_QzIc";
     private ArrayList<Worker> workers;
 
     public WorkerRep() {

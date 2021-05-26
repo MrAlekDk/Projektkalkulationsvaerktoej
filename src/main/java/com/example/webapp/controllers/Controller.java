@@ -30,9 +30,8 @@ public class Controller {
     @PostMapping(value = "/check-login")
     public String checkLogin(@RequestParam("username") String mail, @RequestParam("password") String password, HttpServletRequest request) {
         User tmpUser = new User(mail,password);
-
+        HttpSession session;
         if(tmp.checkUser(mail,password)){
-            HttpSession session;
             session = request.getSession();
             session.setAttribute("username", tmpUser.getMail());
             session.setAttribute("password", tmpUser.getPassword());

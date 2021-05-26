@@ -10,11 +10,7 @@ public class UserService {
     public boolean checkUser(String mail, String password) {
 
         User tmp = uRep.checkUser(mail, password);
-
-        if (tmp != null) {
-            return true;
-        } else {
-            return false;
-        }
+        System.out.println(tmp != null);
+        return tmp != null;
     }
 }

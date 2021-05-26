@@ -9,9 +9,9 @@ import java.util.Date;
 import java.util.Properties;
 
 public class TaskRep {
-    private String url;
-    private String user;
-    private String password;
+    private String url = "jdbc:mysql://den1.mysql6.gear.host:3306/projectcalcdb";
+    private String user = "projectcalcdb";
+    private String password = "Br1499!_QzIc";
 
     public TaskRep(){
         Properties prop = new Properties();
@@ -54,7 +54,6 @@ public class TaskRep {
 
     public ArrayList<Task> getAllTasks(int projectID) {
         ArrayList<Task> allTasks = new ArrayList<Task>();
-        Date date;
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {

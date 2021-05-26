@@ -1,6 +1,6 @@
 package com.example.webapp.services;
 
-import com.example.webapp.models.Cache;
+import com.example.webapp.caches.Cache;
 import com.example.webapp.models.Project;
 import com.example.webapp.models.Task;
 import com.example.webapp.repository.ProjectRep;
@@ -75,9 +75,6 @@ public class ProjectService {
     }
 
     public int getDailyWorkHours(ArrayList<Task> tasks, Date deadline) {
-        if(tasks == null){
-            return 0;
-        }
         return projectCalculator.dailyWorkHours(tasks, deadline);
     }
 

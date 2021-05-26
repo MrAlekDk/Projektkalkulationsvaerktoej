@@ -33,7 +33,7 @@ public class ProjectRep {
             System.out.println("Where is your MySQL JDBC Driver?");
             e.printStackTrace();
         }
-
+//dbManager evt. ville være godt
         try {
             Connection conn = DriverManager.getConnection(url, user, password);
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO Project (ProjectName,ProjectNarrative,Deadline,ProjectDuration,Price ) VALUES (?,?,?,?,?)");

@@ -1,4 +1,6 @@
-package com.example.webapp.models;
+package com.example.webapp.caches;
+
+import com.example.webapp.models.Project;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +32,6 @@ public class Cache {
         }
 
     }
-
 
     public ArrayList<Project> getAllProjects() {
         return new ArrayList<Project>(mapOfProjects.values());
