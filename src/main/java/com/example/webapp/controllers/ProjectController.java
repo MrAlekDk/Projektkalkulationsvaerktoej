@@ -80,6 +80,10 @@ public class ProjectController {
 
     @GetMapping(value = "render-all-projects")
     public String renderAllProjects(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            return "redirect:/";
+        }
         model.addAttribute("projectList", projectService.getAllProjects());
         return "allProjectsView.html";
     }
