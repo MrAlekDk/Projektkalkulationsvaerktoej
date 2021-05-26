@@ -50,8 +50,13 @@ class SubTaskServiceTest {
 
         SubTask subtask2 = new SubTask("name", "desc", 1,23,"2021-08-23", 3,  "2021-08-27");
 
+        // ----------------------------|| Act ||---------------------------- //
+
         Boolean test1 = subService.realisticSubtaskTime(subtask1);
         Boolean test2 = subService.realisticSubtaskTime(subtask2);
+
+
+        // ----------------------------|| Assert ||---------------------------- //
 
         assertEquals(false, test1);
         assertEquals(true, test2);
