@@ -8,21 +8,21 @@
         <label for="projectID"></label><br>
         <input type="number" id="projectID" name="projectID" th:value="${projectID}" hidden>
 
-        <label for="task-name">Task-titel</label><br>
-        <input type="text" id="task-name" name="task-name" placeholder="Task titel" required><br>
+        <label for="task-name">Titel</label><br>
+        <input type="text" id="task-name" name="task-name" placeholder="Titel" required><br>
 
-        <label for="task-description">Task-beskrivelse</label><br>
-        <input type="text" id="task-description" name="task-description" placeholder="Beskrivelse af task" required><br>
+        <label for="task-description">Beskrivelse</label><br>
+        <input type="text" id="task-description" name="task-description" placeholder="Beskrivelse" required><br>
 
-        <label for="task-startdate">Task-beskrivelse</label><br>
-        <input type="date" id="task-startdate" name="task-startdate" placeholder="Startdate" required><br>
+        <label for="task-startdate">Start dato</label><br>
+        <input type="date" id="task-startdate" name="task-startdate" placeholder="Start dato" required><br>
 
-        <label for="task-duration">Task-beskrivelse</label><br>
+        <label for="task-duration">Timer</label><br>
         <input type="number" id="task-duration" name="task-duration" placeholder="F.ex 10" required min="1"><br>
 
-        <label for="task-deadline">Task-beskrivelse</label><br>
-        <input type="date" id="task-deadline" name="task-deadline" placeholder="deadline" required><br>
-        <button>Opret ny task</button>
+        <label for="task-deadline">Slut dato</label><br>
+        <input type="date" id="task-deadline" name="task-deadline" placeholder="Slut dato" required><br>
+        <button>Bekræft</button>
     </form>
 </section>
 <footer th:replace="fragments/footer.html"></footer>

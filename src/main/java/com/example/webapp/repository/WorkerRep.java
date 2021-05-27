@@ -57,7 +57,8 @@ public class WorkerRep {
             while(rs.next()){
                 Worker tmp = new Worker(
                         rs.getInt(1),
-                        rs.getString(2)
+                        rs.getString(2),
+                        rs.getInt(3)
                 );
                 allWorkers.add(tmp);
             }

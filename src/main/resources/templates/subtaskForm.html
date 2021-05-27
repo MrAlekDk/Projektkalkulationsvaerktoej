@@ -7,33 +7,30 @@
 
 <section class="form">
     <form action="/create-subtask" method="post" class="submitField">
-        <h2>Create a subtask</h2>
+        <h2>Opret en delopgave</h2>
         <label for="taskID"></label><br>
         <input type="number" id="taskID" name="taskID" th:value="${taskID}" hidden>
 
         <label for="projectID"></label><br>
         <input type="number" id="projectID" name="projectID" th:value="${projectID}" hidden>
 
-        <label for="subtask-name">Subtask-titel</label><br>
-        <input type="text" id="subtask-name" name="subtask-name" placeholder="Subtask titel" required><br>
+        <label for="subtask-name">Titel</label><br>
+        <input type="text" id="subtask-name" name="subtask-name" placeholder="Titel" required><br>
 
-        <label for="subtask-description">Subtask-beskrivelse</label><br>
-        <input type="text" id="subtask-description" name="subtask-description" placeholder="Subtask titel" required><br>
+        <label for="subtask-description">Beskrivelse</label><br>
+        <input type="text" id="subtask-description" name="subtask-description" placeholde="Beskrivelse" required><br>
 
-        <label for="subtask-worker">Subtask-worker</label><br>
-        <input type="number" id="subtask-worker" name="subtask-worker" placeholder="WorkerID" required><br>
-
-        <label for="subtask-start-date">Subtask-startDate</label><br>
-        <input type="Date" id="subtask-start-date" name="subtask-start-date" placeholder="subtask-start-date"
+        <label for="subtask-start-date">Start dato</label><br>
+        <input type="Date" id="subtask-start-date" name="subtask-start-date" placeholder="Start dato"
                required><br>
 
-        <label for="subtask-duration">Subtask-duration</label><br>
-        <input type="number" id="subtask-duration" name="subtask-duration" placeholder="Duration in hours" required
+        <label for="subtask-duration">Timer</label><br>
+        <input type="number" id="subtask-duration" name="subtask-duration" placeholder="Timer" required
                min="1"><br>
 
-        <label for="subtask-deadline">Subtask-subtaskDeadline</label><br>
-        <input type="Date" id="subtask-deadline" name="subtask-deadline" placeholder="subtask-deadline" required><br>
-        <button>Add subtask</button>
+        <label for="subtask-deadline">Slut dato</label><br>
+        <input type="Date" id="subtask-deadline" name="subtask-deadline" placeholder="Deadline" required><br>
+        <button>Bekræft</button>
     </form>
 </section>
 <footer th:replace="fragments/footer.html"></footer>
