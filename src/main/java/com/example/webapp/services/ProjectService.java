@@ -1,6 +1,6 @@
 package com.example.webapp.services;
 
-import com.example.webapp.caches.Cache;
+import com.example.webapp.caches.ProjectCache;
 import com.example.webapp.models.Project;
 import com.example.webapp.models.Task;
 import com.example.webapp.repository.ProjectRep;
@@ -10,11 +10,11 @@ import java.util.Date;
 
 public class ProjectService {
     private ProjectRep projectRep;
-    private Cache projectCache;
+    private ProjectCache projectCache;
     Calculator projectCalculator;
 
     public ProjectService(){
-        projectCache = new Cache();
+        projectCache = new ProjectCache();
         this.projectRep = new ProjectRep();
         projectCalculator = new Calculator();
     }

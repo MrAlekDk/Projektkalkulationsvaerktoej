@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Cache {
+public class ProjectCache {
 
     Map<Integer, Project> mapOfProjects = new HashMap<Integer, Project>();
 

@@ -92,4 +92,8 @@ public class SubTaskRep {
 
     }
 
+    public void deleteSubTask (int SubTaskID){
+
+    }
+
 }
