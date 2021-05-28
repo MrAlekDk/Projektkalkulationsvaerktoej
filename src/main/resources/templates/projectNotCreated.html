@@ -3,10 +3,16 @@
 <head th:replace="fragments/head.html(currentPage='Index',stylesheet='/styles/opretProjekt.css')"></head>
 <body>
 <header th:replace="fragments/header.html"></header>
-
-<h1>PROJECT NOT CREATED</h1>
-
-<a th:href="projekt-form">Go back to create project</a>
+<section class="form-header">
+    <h1>PROJEKT IKKE OPRETTET</h1>
+</section>
+<section class="error-message">
+    <p>Der var en fejl med de indtastede oplysninger.</p>
+    <p>Gå venligst tilbage og tjek at deadline er en gyldig dato (Deadlines skal være efter dags dato.)</p>
+    <a th:href="projekt-form">
+        <button class="create-project-button">Gå tilbage til Nyt projekt</button>
+    </a>
+</section>
 <footer th:replace="fragments/footer.html"></footer>
 </body>
 </html>

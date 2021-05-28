@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="fragments/head.html(currentPage='Opret projekt',stylesheet='/styles/formstyle.css')"></head>
+<head th:replace="fragments/head.html(currentPage='Opret projekt',stylesheet='/styles/opretProjekt.css')"></head>
 <body>
 <header th:replace="fragments/header.html"></header>
 <section class="form-header">
     <h1>Sorry, task not created!</h1>
 </section>
-
-<a th:href="|render-subtask-form/${projectID}/${taskID}|">
-    <button>Go back to created subtask</button>
-</a>
+<section class="error-message">
+    <p>Der var en fejl med de indtastede oplysninger.</p>
+    <p>Gå venligst tilbage og tjek at deadline er en gyldig dato (Deadlines skal være efter dags dato.)</p>
+    <a th:href="|render-subtask-form/${projectID}/${taskID}|">
+        <button>Go back to created subtask</button>
+    </a>
+</section>
 <footer th:replace="fragments/footer.html"></footer>
 </body>
 </html>
