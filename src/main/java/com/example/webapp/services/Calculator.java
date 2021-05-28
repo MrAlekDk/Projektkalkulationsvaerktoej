@@ -36,7 +36,7 @@ public class Calculator {
                 return 0;
             }
             dailyWorkHours = workHours / days;
-        }catch(NullPointerException e){
+        }catch(Exception e){
         }
         return dailyWorkHours;
     }
