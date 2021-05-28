@@ -156,6 +156,7 @@ li  {
     justify-content: center;
     border: solid 1px black;
     width: auto;
+    background-color: lightblue;
 }
 
 .task-header-two ul{
