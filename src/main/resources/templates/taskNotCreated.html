@@ -5,13 +5,13 @@
 <header th:replace="fragments/header.html"></header>
 
 <section class="form-header">
-    <h1>Sorry, task not created!</h1>
+    <h1>OBS! Opgaven kunne ikke oprettes</h1>
 </section>
 <section class="error-message">
     <p>Der var en fejl med de indtastede oplysninger.</p>
     <p>Gå venligst tilbage og tjek at deadline er en gyldig dato (Deadlines skal være efter dags dato.)</p>
     <a th:href="|render-task-form/${projectID}|">
-        <button>Go back to create task</button>
+        <button>Tilbage</button>
     </a>
 </section>
 <footer th:replace="fragments/footer.html"></footer>
