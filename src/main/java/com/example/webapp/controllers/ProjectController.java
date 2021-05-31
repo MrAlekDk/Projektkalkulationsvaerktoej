@@ -21,7 +21,6 @@ import java.util.ArrayList;
 public class ProjectController {
     private ProjectService projectService = new ProjectService();
     private TaskService taskService = new TaskService();
-    private SubTaskService subTaskService = new SubTaskService();
 
     @GetMapping(value = "/projekt-form")
     public String renderProjectForm(HttpServletRequest request) {
@@ -98,13 +97,13 @@ public class ProjectController {
 
         Project specificProject = projectService.getSpecificProject(projectID);
         ArrayList<Task> allTasksForProject = taskService.getAllTasks(projectID);
-        int gnsTimerForProject = projectService.getDailyWorkHours(allTasksForProject, specificProject.getDeadline());
+        int avgHoursForProject = projectService.getDailyWorkHours(allTasksForProject, specificProject.getDeadline());
 
         model.addAttribute("project", specificProject);
         model.addAttribute("tasklist", allTasksForProject);
-        model.addAttribute("gnstimer", gnsTimerForProject);
+        model.addAttribute("avghours", avgHoursForProject);
         model.addAttribute("projectprice", projectService.calculateProjectPrice(allTasksForProject));
-        model.addAttribute("feasible", projectService.getIfFeasible(gnsTimerForProject));
+        model.addAttribute("feasible", projectService.getIfFeasible(avgHoursForProject));
         return "projectview.html";
     }
 }

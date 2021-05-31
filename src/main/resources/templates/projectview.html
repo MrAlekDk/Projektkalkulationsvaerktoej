@@ -14,7 +14,7 @@
             <li th:text="|Beskrivelse: ${project.getDesc()}|"></li>
             <li th:text="|Deltagere: ${project.getParticipants()}|"></li>
             <li th:text="|Deadline: ${project.getDeadline()}|"></li>
-            <li th:text="|Gns. arbejdstimer pr. dag: ${gnstimer}|"></li>
+            <li th:text="|Gns. arbejdstimer pr. dag: ${avghours}|"></li>
             <li th:text="|${feasible}|"></li>
             <li th:text="|Projekt pris: ${projectprice},- kr.|"></li>
             <a th:href="|/delete-project/${project.getProjectID()}|" class="button">Slet projekt</a>

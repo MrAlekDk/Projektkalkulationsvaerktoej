@@ -1,10 +1,6 @@
 package com.example.webapp.controllers;
 
-import com.example.webapp.services.Calculator;
-import com.example.webapp.services.TaskService;
 import com.example.webapp.models.User;
-import com.example.webapp.repository.ProjectRep;
-import com.example.webapp.services.SubTaskService;
 import com.example.webapp.services.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,14 +12,10 @@ import javax.servlet.http.HttpSession;
 @org.springframework.stereotype.Controller
 public class Controller {
 
-    ProjectRep rep = new ProjectRep();
-    Calculator tester = new Calculator();
-    TaskService test = new TaskService();
-    com.example.webapp.services.SubTaskService yes = new SubTaskService();
     UserService tmp = new UserService();
 
     @GetMapping(value = "/")
-    public String renderLoginPage(HttpServletRequest request) {
+    public String renderLoginPage() {
             return "login.html";
         }
 
