@@ -1,9 +1,8 @@
 package com.example.webapp.services;
-
-import com.example.webapp.models.Project;
-import com.example.webapp.models.Task;
+//@Author Markus Nørtrander Lauge Jakobsen
+//@Author Mette Marie H. Winther-Sørensen
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.BackgroundPreinitializer;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
