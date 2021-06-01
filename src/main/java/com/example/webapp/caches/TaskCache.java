@@ -1,4 +1,5 @@
 package com.example.webapp.caches;
+// @Author Alexander J.P.M Sørensen
 
 import com.example.webapp.models.Task;
 
@@ -11,7 +12,6 @@ public class TaskCache {
     Map<Integer, ArrayList<Task>> mapOfTask = new HashMap<Integer, ArrayList<Task>>();
 
     public TaskCache(){
-
     }
 
     public boolean hasTasks(int projectID) {
@@ -25,7 +25,6 @@ public class TaskCache {
     public void setMapOfTask(ArrayList<Task> allTasks){
         for (int i = 0; i < allTasks.size(); i++) {
             mapOfTask.put(allTasks.get(i).getProjectID(),allTasks);
-
         }
     }
 

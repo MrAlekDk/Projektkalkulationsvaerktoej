@@ -1,9 +1,8 @@
 package com.example.webapp.controllers;
-
+// @Author Alexander J.P.M Sørensen
 import com.example.webapp.models.Project;
 import com.example.webapp.models.Task;
 import com.example.webapp.services.ProjectService;
-import com.example.webapp.services.SubTaskService;
 import com.example.webapp.services.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

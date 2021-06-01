@@ -1,5 +1,7 @@
 package com.example.webapp.services;
-
+//@Author Alexander J.P.M Sørensen
+//@Author Markus Nørtrander Lauge Jakobsen
+//@Author Mette Marie H. Winther-Sørensen
 
 import com.example.webapp.models.Task;
 import com.example.webapp.caches.TaskCache;

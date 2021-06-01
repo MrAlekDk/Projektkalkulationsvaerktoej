@@ -1,5 +1,5 @@
 package com.example.webapp.repository;
-
+//@Author Markus Nørtrander Lauge Jakobsen
 import com.example.webapp.models.Worker;
 
 import java.io.FileInputStream;

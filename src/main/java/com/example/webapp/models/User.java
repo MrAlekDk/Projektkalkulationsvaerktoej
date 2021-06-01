@@ -1,5 +1,5 @@
 package com.example.webapp.models;
-
+//@Author Mette Marie H. Winther-Sørensen
 
 public class User {
 

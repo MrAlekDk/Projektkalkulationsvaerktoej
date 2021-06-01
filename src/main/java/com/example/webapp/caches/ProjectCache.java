@@ -1,10 +1,11 @@
 package com.example.webapp.caches;
-
+// @Author Alexander J.P.M Sørensen
 import com.example.webapp.models.Project;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 
 public class ProjectCache {
 
@@ -30,7 +31,6 @@ public class ProjectCache {
         } else {
             return true;
         }
-
     }
 
     public ArrayList<Project> getAllProjects() {

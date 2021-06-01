@@ -1,5 +1,5 @@
 package com.example.webapp.controllers;
-
+// @Author Mette Marie H. Winther-Sørensen
 import com.example.webapp.models.User;
 import com.example.webapp.services.UserService;
 import org.springframework.web.bind.annotation.GetMapping;

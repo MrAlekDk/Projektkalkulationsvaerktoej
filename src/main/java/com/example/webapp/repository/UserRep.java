@@ -1,4 +1,6 @@
 package com.example.webapp.repository;
+//@Author Mette Marie H. Winther-Sørensen
+
 
 import com.example.webapp.models.User;
 
@@ -55,7 +57,4 @@ public class UserRep {
         return null;
     }
 
-    public String checkLogin(){
-        return "det virker";
-    }
 }

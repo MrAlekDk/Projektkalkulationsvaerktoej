@@ -1,5 +1,6 @@
 package com.example.webapp.services;
-
+//@Author Markus Nørtrander Lauge Jakobsen
+//@Author Mette Marie H. Winther-Sørensen
 import com.example.webapp.models.Task;
 
 import java.util.ArrayList;

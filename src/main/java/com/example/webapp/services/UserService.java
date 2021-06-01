@@ -1,5 +1,5 @@
 package com.example.webapp.services;
-
+//@Author Mette Marie H. Winther-Sørensen
 import com.example.webapp.models.User;
 import com.example.webapp.repository.UserRep;
 

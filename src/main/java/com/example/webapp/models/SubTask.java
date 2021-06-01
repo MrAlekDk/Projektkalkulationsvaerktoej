@@ -1,5 +1,5 @@
 package com.example.webapp.models;
-
+//@Author Markus Nørtrander Lauge Jakobsen
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,11 +34,6 @@ public class SubTask implements Comparable<SubTask> {
         this.duration = duration;
         this.start = start;
         this.deadline = deadline;
-    }
-
-    public SubTask(String name, String desc){
-        this.name = name;
-        this.desc = desc;
     }
 
     public Date convertStringToDate(String date){

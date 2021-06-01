@@ -1,5 +1,5 @@
 package com.example.webapp.models;
-
+//@Author Markus Nørtrander Lauge Jakobsen
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

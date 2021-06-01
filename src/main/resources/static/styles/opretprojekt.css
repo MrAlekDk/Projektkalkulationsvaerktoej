@@ -76,16 +76,16 @@ button{
     text-decoration: underline #FF325A;
 }
 
-
-
-h1{
-    background-color: rgb(62, 127, 165);
+.form-header{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-content: center;
     width: 80%;
-    margin: 0 auto;
-    margin-top: 30px;
-    height:175px;
+    height:200px;
+    background-color: rgb(62, 127, 165);
+}
+
+.form-header h2{
+    font-size: 60px;
+    font-family: "Malgun Gothic";
 }
